@@ -11,6 +11,7 @@ struct Command {
   std::string * _inFile;
   std::string * _errFile;
   bool _background;
+  bool _append;
 
   Command();
   void insertSimpleCommand( SimpleCommand * simpleCommand );
@@ -18,6 +19,7 @@ struct Command {
   void clear();
   void print();
   void execute();
+  void prompt();
 
   static SimpleCommand *_currentSimpleCommand;
 };
