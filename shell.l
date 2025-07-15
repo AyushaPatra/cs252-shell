@@ -99,3 +99,5 @@ void myunputc(int c) {
   /* Handle any other character */
   return NOTOKEN;
 }
+
+%%
