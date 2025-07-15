@@ -1,4 +1,3 @@
-
 /*
  * CS-252
  * shell.y: parser for shell
@@ -28,7 +27,7 @@
 }
 
 %token <cpp_string> WORD
-%token NOTOKEN GREAT NEWLINE
+%token NOTOKEN GREAT NEWLINE LESS PIPE AMPERSAND GREATGREAT TWOGREAT GREATAMPERSAND GREATGREATAMPERSAND TWOGREATGREAT GREATGREATGREAT
 
 %{
 //#define yylex yylex
@@ -55,12 +54,19 @@ command: simple_command
        ;
 
 simple_command:	
-  command_and_args iomodifier_opt NEWLINE {
+  pipe_list iomodifier_list background_opt NEWLINE {
     printf("   Yacc: Execute command\n");
     Shell::_currentCommand.execute();
   }
-  | NEWLINE 
+  | NEWLINE {
+    Shell::_currentCommand.prompt();
+  }
   | error NEWLINE { yyerrok; }
+  ;
+
+pipe_list:
+  pipe_list PIPE command_and_args
+  | command_and_args
   ;
 
 command_and_args:
@@ -78,7 +84,7 @@ argument_list:
 argument:
   WORD {
     printf("   Yacc: insert argument \"%s\"\n", $1->c_str());
-    Command::_currentSimpleCommand->insertArgument( $1 );\
+    Command::_currentSimpleCommand->insertArgument( $1 );
   }
   ;
 
@@ -90,12 +96,49 @@ command_word:
   }
   ;
 
+iomodifier_list:
+  iomodifier_list iomodifier_opt
+  | /* can be empty */
+  ;
+
 iomodifier_opt:
   GREAT WORD {
     printf("   Yacc: insert output \"%s\"\n", $2->c_str());
     Shell::_currentCommand._outFile = $2;
   }
+  | LESS WORD {
+    printf("   Yacc: insert input \"%s\"\n", $2->c_str());
+    Shell::_currentCommand._inFile = $2;
+  }
+  | TWOGREAT WORD {
+    printf("   Yacc: insert error \"%s\"\n", $2->c_str());
+    Shell::_currentCommand._errFile = $2;
+  }
+  | GREATAMPERSAND WORD {
+    printf("   Yacc: insert output and error \"%s\"\n", $2->c_str());
+    Shell::_currentCommand._outFile = $2;
+    Shell::_currentCommand._errFile = $2;
+  }
+  | GREATGREAT WORD {
+    printf("   Yacc: insert output append \"%s\"\n", $2->c_str());
+    Shell::_currentCommand._outFile = $2;
+    Shell::_currentCommand._append = true;
+  }
+  | GREATGREATAMPERSAND WORD {
+    printf("   Yacc: insert output and error append \"%s\"\n", $2->c_str());
+    Shell::_currentCommand._outFile = $2;
+    Shell::_currentCommand._errFile = $2;
+    Shell::_currentCommand._append = true;
+  }
   | /* can be empty */ 
+  ;
+
+background_opt:
+  AMPERSAND {
+    printf("   Yacc: background process\n");
+    Shell::_currentCommand._background = true;
+  }
+  | /* can be empty */
   ;
 
 %%
