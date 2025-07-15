@@ -27,7 +27,7 @@
 }
 
 %token <cpp_string> WORD
-%token NOTOKEN GREAT NEWLINE LESS PIPE AMPERSAND GREATGREAT TWOGREAT GREATAMPERSAND GREATGREATAMPERSAND TWOGREATGREAT GREATGREATGREAT
+%token NOTOKEN GREAT NEWLINE LESS PIPE AMPERSAND GREATGREAT TWOGREAT GREATAMPERSAND GREATGREATAMPERSAND
 
 %{
 //#define yylex yylex
@@ -50,8 +50,9 @@ commands:
   | commands command
   ;
 
-command: simple_command
-       ;
+command: 
+  simple_command
+  ;
 
 simple_command:	
   pipe_list iomodifier_list background_opt NEWLINE {
@@ -71,8 +72,7 @@ pipe_list:
 
 command_and_args:
   command_word argument_list {
-    Shell::_currentCommand.
-    insertSimpleCommand( Command::_currentSimpleCommand );
+    Shell::_currentCommand.insertSimpleCommand( Command::_currentSimpleCommand );
   }
   ;
 
@@ -130,7 +130,6 @@ iomodifier_opt:
     Shell::_currentCommand._errFile = $2;
     Shell::_currentCommand._append = true;
   }
-  | /* can be empty */ 
   ;
 
 background_opt:
