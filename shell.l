@@ -57,22 +57,6 @@ void myunputc(int c) {
   return GREATAMPERSAND;
 }
 
-">>>" {
-  return GREATGREATGREAT;
-}
-
-">>>" {
-  return GREATGREATGREAT;
-}
-
-"2>>" {
-  return TWOGREATGREAT;
-}
-
-">>>" {
-  return GREATGREATGREAT;
-}
-
 ">>>&" {
   return GREATGREATAMPERSAND;
 }
