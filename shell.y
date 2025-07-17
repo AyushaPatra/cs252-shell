@@ -28,7 +28,10 @@
 }
 
 %token <cpp_string> WORD
-%token NOTOKEN GREAT NEWLINE
+%token GREAT GREATGREAT GREATAMPERSAND GREATGREATAMPERSAND
+%token LESS TWOGREAT TWOGREATGREAT
+%token PIPE AMPERSAND
+%token NEWLINE NOTOKEN
 
 %{
 //#define yylex yylex
@@ -68,6 +71,10 @@ command_and_args:
     Shell::_currentCommand.
     insertSimpleCommand( Command::_currentSimpleCommand );
   }
+  | command_and_args PIPE command_word argument_list {
+    printf("   Yacc: pipe to next command\n");
+    Shell::_currentCommand.insertSimpleCommand(Command::_currentSimpleCommand);
+  }
   ;
 
 argument_list:
@@ -91,11 +98,45 @@ command_word:
   ;
 
 iomodifier_opt:
-  GREAT WORD {
-    printf("   Yacc: insert output \"%s\"\n", $2->c_str());
-    Shell::_currentCommand._outFile = $2;
-  }
+  iomodifier_opt io_modifier
   | /* can be empty */ 
+  ;
+
+io_modifier:
+    GREAT WORD {
+      printf("   Yacc: insert output \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._outFile = $2;
+    }
+  | GREATGREAT WORD {
+      printf("   Yacc: insert output append \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._outFile = $2;
+    }
+  | GREATAMPERSAND WORD {
+      printf("   Yacc: insert stdout+stderr \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._outFile = $2;
+      Shell::_currentCommand._errFile = $2;
+    }
+  | GREATGREATAMPERSAND WORD {
+      printf("   Yacc: insert append stdout+stderr \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._outFile = $2;
+      Shell::_currentCommand._errFile = $2;
+    }
+  | LESS WORD {
+      printf("   Yacc: insert input \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._inFile = $2;
+    }
+  | TWOGREAT WORD {
+      printf("   Yacc: insert stderr \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._errFile = $2;
+    }
+  ;
+
+background_opt:
+    AMPERSAND {
+      printf("   Yacc: Background flag set\n");
+      Shell::_currentCommand._background = true;
+    }
+  | /* empty */
   ;
 
 %%
