@@ -150,8 +150,6 @@ void Command::execute() {
         close(fdout);
 
         // Fork and exec
-        fprintf(stderr, "Forking command %d: %s\n", i, argv[0]);
-
         pid = fork();
         if (pid == 0) {
             // In child: build argv and exec
@@ -163,6 +161,9 @@ void Command::execute() {
                 argv[j] = (char *)sc->_arguments[j]->c_str();
             }
             argv[argc] = nullptr;
+            
+            // DEBUG
+            fprintf(stderr, "Forking command %d: %s\n", i, argv[0]);
 
             execvp(argv[0], argv);
             perror("execvp failed");
