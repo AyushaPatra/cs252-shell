@@ -99,9 +99,19 @@ void Command::print() {
 }
 
 void Command::execute() {
+
+    // Don't do anything if there are no simple commands
     if (_simpleCommands.size() == 0) {
         Shell::prompt();
         return;
+    }
+
+    // Handle built-in "exit" command
+    if (_simpleCommands.size() == 1 &&
+        _simpleCommands[0]->_arguments.size() == 1 &&
+        *_simpleCommands[0]->_arguments[0] == "exit") {
+        printf("Biee!\n");
+        exit(0);
     }
 
     // Save default FDs
@@ -162,10 +172,10 @@ void Command::execute() {
 
             //execvp(argv[0], argv);
             if (strchr(argv[0], '/')) {
-    execv(argv[0], argv);  // If path includes '/', run directly
-} else {
-    execvp(argv[0], argv); // Otherwise search $PATH
-}
+                execv(argv[0], argv);  // If path includes '/', run directly
+            } else {
+                execvp(argv[0], argv); // Otherwise search $PATH
+            }
 
             perror("execvp failed");
             exit(1);
