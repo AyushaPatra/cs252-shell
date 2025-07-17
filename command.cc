@@ -96,6 +96,8 @@ void Command::print() {
 }
 
 void Command::execute() {
+    std::vector<int> pids;
+
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {
         Shell::prompt();
@@ -134,9 +136,10 @@ void Command::execute() {
         // Setup output
         int fdout;
         if (i == numCommands - 1) {
-            // Last command
+            // Last command: set up output file or use default
             fdout = _outFile ? open(_outFile->c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666) : dup(defaultout);
         } else {
+            // Intermediate command: create a pipe
             int fdpipe[2];
             pipe(fdpipe);
             fdout = fdpipe[1];
@@ -149,6 +152,7 @@ void Command::execute() {
         // Fork and exec
         pid = fork();
         if (pid == 0) {
+            // In child: build argv and exec
             // Convert arguments to char* array
             SimpleCommand *sc = _simpleCommands[i];
             int argc = sc->_arguments.size();
@@ -167,7 +171,7 @@ void Command::execute() {
         }
     }
 
-    // Restore file descriptors
+    // Restore original file descriptors
     dup2(defaultin, 0);
     dup2(defaultout, 1);
     dup2(defaulterr, 2);
@@ -175,6 +179,7 @@ void Command::execute() {
     close(defaultout);
     close(defaulterr);
 
+    // Wait for all children (unless backgrounded)
     if (!_background) {
         for (int p : pids) waitpid(p, nullptr, 0);
     }
