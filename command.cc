@@ -218,8 +218,14 @@ void Command::execute() {
     close(tmpout);
     close(tmperr);
 
-    // Wait for last command only - changes in later part of the lab
-    wait(NULL);
+    // Wait for the last child process to finish
+    if (!_background) {
+        int status;
+        waitpid(pid, &status, 0);
+    } else {
+        // allow background PID tracking
+        printf("Backgrounded process: %d\n", pid);
+    }
 
     // Clear command
     clear();
