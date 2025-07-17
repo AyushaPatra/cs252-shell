@@ -100,21 +100,10 @@ void Command::print() {
 void Command::execute() {
     std::vector<int> pids;
 
-    // Don't do anything if there are no simple commands
-    if ( _simpleCommands.size() == 0 ) {
+    if (_simpleCommands.size() == 0) {
         Shell::prompt();
         return;
     }
-
-    //fprintf(stderr, "DEBUG: Executing command: %s\n", _simpleCommands[0]->_arguments[0]->c_str());
-
-    // Print contents of Command data structure
-    // print();
-
-    // Add execution here
-    // For every simple command fork a new process
-    // Setup i/o redirection
-    // and call exec
 
     // Save original file descriptors
     int defaultin = dup(0);
@@ -124,40 +113,41 @@ void Command::execute() {
     // Setup input file if specified
     int fdin = _inFile ? open(_inFile->c_str(), O_RDONLY) : dup(defaultin);
 
-    // Setup error file
+    // Setup error redirection
     int fderr = _errFile ? open(_errFile->c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666) : dup(defaulterr);
     dup2(fderr, 2);
-    close(fderr);
+    close(fderr);  // Close after dup2
 
     int numCommands = _simpleCommands.size();
-    int i;
-    int pid;
-    for (i = 0; i < numCommands; ++i) {
-        // Redirect input
-        dup2(fdin, 0);
-        close(fdin);
+    int fdpipe[2];
 
-        // Setup output
+    for (int i = 0; i < numCommands; ++i) {
+        // Set up input
+        dup2(fdin, 0);
+        close(fdin); // Close original fdin
+
+        // Set up output
         int fdout;
         if (i == numCommands - 1) {
-            // Last command: set up output file or use default
+            // Last command
             fdout = _outFile ? open(_outFile->c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666) : dup(defaultout);
         } else {
-            // Intermediate command: create a pipe
-            int fdpipe[2];
-            pipe(fdpipe);
-            fdout = fdpipe[1];
-            fdin = fdpipe[0];
+            // Middle command: create pipe
+            if (pipe(fdpipe) < 0) {
+                perror("pipe failed");
+                exit(2);
+            }
+            fdout = fdpipe[1];     // Write end
+            fdin = fdpipe[0];      // Save read end for next iteration
         }
 
         dup2(fdout, 1);
-        close(fdout);
+        close(fdout); // Done with original write end
 
-        // Fork and exec
-        pid = fork();
+        // Fork
+        int pid = fork();
         if (pid == 0) {
-            // In child: build argv and exec
-            // Convert arguments to char* array
+            // In child: build argv
             SimpleCommand *sc = _simpleCommands[i];
             int argc = sc->_arguments.size();
             char **argv = new char *[argc + 1];
@@ -165,9 +155,6 @@ void Command::execute() {
                 argv[j] = (char *)sc->_arguments[j]->c_str();
             }
             argv[argc] = nullptr;
-            
-            // DEBUG
-            //fprintf(stderr, "Forking command %d: %s\n", i, argv[0]);
 
             execvp(argv[0], argv);
             perror("execvp failed");
@@ -176,11 +163,11 @@ void Command::execute() {
             perror("fork failed");
             exit(2);
         } else {
-            pids.push_back(pid);   // Track PID
+            pids.push_back(pid);
         }
     }
 
-    // Restore original file descriptors
+    // Restore file descriptors
     dup2(defaultin, 0);
     dup2(defaultout, 1);
     dup2(defaulterr, 2);
@@ -188,19 +175,17 @@ void Command::execute() {
     close(defaultout);
     close(defaulterr);
 
-    // Wait for all children (unless backgrounded)
+    // Wait for children unless background
     if (!_background) {
-    for (int pid : pids) {
-        waitpid(pid, nullptr, 0);
+        for (int pid : pids) {
+            waitpid(pid, nullptr, 0);
         }
     }
 
-    // Clear to prepare for next command
     clear();
-
-    // Print new prompt
     Shell::prompt();
 }
+
 
 void Command::prompt() {
     if (isatty(0)) {
