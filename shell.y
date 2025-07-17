@@ -97,6 +97,11 @@ command_word:
   }
   ;
 
+iomodifier_opt:
+  iomodifier_opt io_modifier
+  | /* can be empty */ 
+  ;
+
 io_modifier:
     GREAT WORD {
       Shell::_currentCommand._append = false;
