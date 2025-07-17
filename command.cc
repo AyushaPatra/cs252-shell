@@ -111,7 +111,7 @@ void Command::execute() {
 
     // Converting arguments to char* array for execvp
     int argc = sc->_arguments.size();
-    const char **argv = new char *[argc + 1]; // +1 for NULL terminator
+    char **argv = new char *[argc + 1]; // +1 for NULL terminator
     for (int i = 0; i < argc; ++i) {
         argv[i] = (char *) sc->_arguments[i]->c_str(); // Use c_str() to get const char*
     }
