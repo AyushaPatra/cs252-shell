@@ -137,6 +137,7 @@ void Command::execute() {
 
     int fdout;
     int fderr;
+    int ret = -1;
 
     // Loop through each simple command
     for (size_t i = 0; i < _simpleCommands.size(); ++i) {
@@ -190,7 +191,7 @@ void Command::execute() {
         close(fdout);
 
         // Fork child
-        int ret = fork();
+        ret = fork();
         if (ret == 0) {
             // Build argv array
             const char* command = _simpleCommands[i]->_arguments[0]->c_str();
@@ -207,8 +208,6 @@ void Command::execute() {
         } else if (ret < 0) {
             perror("fork");
             return;
-        } else {
-            lastPid = ret;
         }
     }
 
