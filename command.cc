@@ -99,120 +99,132 @@ void Command::print() {
 }
 
 void Command::execute() {
-
     // Don't do anything if there are no simple commands
     if (_simpleCommands.size() == 0) {
         Shell::prompt();
         return;
     }
 
-    // Handle built-in "exit" command
-    if (_simpleCommands.size() == 1 &&
-        _simpleCommands[0]->_arguments.size() == 1 &&
-        *_simpleCommands[0]->_arguments[0] == "exit") {
-        printf("Biee!\n");
-        exit(0);
+    // Print contents of Command data structure
+    //print();
+
+    // exit myshell
+    std::string* cmd = _simpleCommands[0]->_arguments[0];
+    if ( !strcmp(cmd->c_str(),"exit") ) {
+            printf( "Good bye :)\n");
+        exit(1);
     }
 
-    // Save default FDs: stdin, stdout, stderr so we can restore later
-    int defaultin = dup(0);
-    int defaultout = dup(1);
-    int defaulterr = dup(2);
+    // Save default stdin, stdout, stderr
+    int tmpin = dup(0);
+    int tmpout = dup(1);
+    int tmperr = dup(2);
 
-    // Set up input redirection or default stdin: : use input file if provided
-    int fdin = _inFile ? open(_inFile->c_str(), O_RDONLY) : dup(defaultin);
+    // Set up input redirection or use default
+    int fdin;
+    if (_inFile) {
+        const char* infile = _inFile->c_str();
+        fdin = open(infile, O_RDONLY);
+        if (fdin < 0) {
+            fprintf(stderr, "/bin/sh: 1: cannot open %s: No such file\n", infile);
+            Shell::prompt();
+            clear();
+            return;
+        }
+    } else {
+        fdin = dup(tmpin);
+    }
 
-    // Set up error redirection or default stderr: to error file if provided
-    int fderr = _errFile ? open(_errFile->c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666) : dup(defaulterr);
-    dup2(fderr, 2);
-    if (fderr != 2) close(fderr); // prevent fd leak
+    int fdout;
+    int fderr;
 
-    std::vector<pid_t> pids; // To track all child process IDs
-    int numCmds = _simpleCommands.size();
-    int fdpipe[2]; // Pipe array: used between commands
-
-    for (int i = 0; i < numCmds; ++i) {
-        // stdin is taken from current fdin (may be file or pipe)
+    // Loop through each simple command
+    for (int i = 0; i < _simpleCommands.size(); ++i) {
+        // Redirect input
         dup2(fdin, 0);
-        if (fdin != 0) close(fdin); // Close after duping to prevent leak
+        close(fdin);
 
-        // Setup output for the last command or pipe
-        int fdout;
-        if (i == numCmds - 1) {
-            // Last command: write to file or stdout
+        // Setup output
+        if (i == _simpleCommands.size() - 1) {
+            // Last command: handle output redirection
             if (_outFile) {
-                fdout = open(_outFile->c_str(),
-                             _append ? O_WRONLY | O_CREAT | O_APPEND
-                                     : O_WRONLY | O_CREAT | O_TRUNC,
-                             0666);
+                const char* outfile = _outFile->c_str();
+                if (_append) {
+                    fdout = open(outfile, O_CREAT | O_WRONLY | O_APPEND, 0664);
+                } else {
+                    fdout = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+                }
             } else {
-                fdout = dup(defaultout);
+                fdout = dup(tmpout);
             }
+
+            // Handle error redirection
+            if (_errFile) {
+                const char* errfile = _errFile->c_str();
+                if (_append) {
+                    fderr = open(errfile, O_CREAT | O_WRONLY | O_APPEND, 0664);
+                } else {
+                    fderr = open(errfile, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+                }
+            } else {
+                fderr = dup(tmperr);
+            }
+
+            dup2(fderr, 2);
+            close(fderr);
+
+            // Set $_ to last argument
+            int n = _simpleCommands[i]->_arguments.size();
+            char* c = strdup(_simpleCommands[i]->_arguments[n - 1]->c_str());
+            setenv("_", c, 1);
         } else {
-            // Not last command: setup pipe to next
+            // Intermediate command: set up pipe
+            int fdpipe[2];
             pipe(fdpipe);
-            fdout = fdpipe[1];  // This command writes to pipe
-            fdin = fdpipe[0];   // Next command reads from pipe
+            fdout = fdpipe[1];
+            fdin = fdpipe[0]; // used in next iteration
         }
 
-        dup2(fdout, 1);  // stdout to output file/pipe
-        if (fdout != 1) close(fdout);
+        // Redirect output
+        dup2(fdout, 1);
+        close(fdout);
 
-        // Fork child  process to run the command
-        pid_t pid = fork();
-        if (pid == 0) {
-            // In child process: build argv and exec
-            // Convert arguments to char*[]
-            SimpleCommand *sc = _simpleCommands[i];
-            int argc = sc->_arguments.size();
-            char **argv = new char *[argc + 1];
-            for (int j = 0; j < argc; ++j) {
-                argv[j] = (char *)sc->_arguments[j]->c_str();
+        // Fork child
+        int ret = fork();
+        if (ret == 0) {
+            // Build argv array
+            const char* command = _simpleCommands[i]->_arguments[0]->c_str();
+            int argnum = _simpleCommands[i]->_arguments.size();
+            char** args = new char*[argnum + 1];
+            for (int j = 0; j < argnum; ++j) {
+                args[j] = (char*)_simpleCommands[i]->_arguments[j]->c_str();
             }
-            argv[argc] = nullptr;
+            args[argnum] = NULL;
 
-            //execvp(argv[0], argv);
-            if (strchr(argv[0], '/')) {
-                execv(argv[0], argv);  // execv: full path command like ./script.sh
-            } else {
-                execvp(argv[0], argv); // execvp: normal shell commands like ls, grep
-            }
-            //  If exec fails
-            perror("execvp failed");
+            execvp(command, args);
+            perror("execvp");
             exit(1);
-        } else if (pid < 0) {
-            perror("fork failed");
-            exit(2);
-        } else {
-            //  Parent process: track the child's PID
-            pids.push_back(pid);
-        }
-
-        // Parent: close pipe write end if it's not the last command
-        if (i != numCmds - 1) {
-            close(fdpipe[1]);
+        } else if (ret < 0) {
+            perror("fork");
+            return;
         }
     }
 
-    // Restore defaults: stdin, stdout, stderr
-    dup2(defaultin, 0);
-    dup2(defaultout, 1);
-    dup2(defaulterr, 2);
-    close(defaultin);
-    close(defaultout);
-    close(defaulterr);
+    // Restore stdin, stdout, stderr
+    dup2(tmpin, 0);
+    dup2(tmpout, 1);
+    dup2(tmperr, 2);
+    close(tmpin);
+    close(tmpout);
+    close(tmperr);
 
-    // Wait for children unless background (&)
-    if (!_background) {
-        for (pid_t pid : pids) {
-            waitpid(pid, nullptr, 0);
-        }
-    }
+    // Wait for last command only - changes in later part of the lab
+    wait(NULL);
 
-    // Reset the command data structure
+    // Clear command
     clear();
 
-    // Prompt again for the next command
+    // Show next prompt
     Shell::prompt();
 }
 
