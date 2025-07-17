@@ -106,6 +106,38 @@ void Command::execute() {
     // Setup i/o redirection
     // and call exec
 
+    // Run the first simple command
+    SimpleCommand * sc = _simpleCommands[0];
+
+    // Converting arguments to char* array for execvp
+    int argc = sc->_arguments.size();
+    const char **argv = new char *[argc + 1]; // +1 for NULL terminator
+    for (int i = 0; i < argc; ++i) {
+        argv[i] = (char *) sc->_arguments[i]->c_str(); // Use c_str() to get const char*
+    }
+    argv[argc] = nullptr; // NULL-terminate the array
+
+    // Fork and exec
+    int pid = fork();
+    if (pid == 0) {
+        // Child process: replace process image with the command
+        execvp(argv[0], argv);
+        perror("execvp failed");
+        exit(1);
+    } else if (pid < 0) {
+        // Fork failed
+        perror("fork failed");
+        exit(2);
+    }
+
+    // Wait if not running in background
+    if (!_background) {
+        waitpid(pid, nullptr, 0);
+    }
+
+    // clean up
+    delete[] argv; // Free the char* array
+
     // Clear to prepare for next command
     clear();
 
