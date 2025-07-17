@@ -118,8 +118,8 @@ io_modifier:
     }
   | GREATGREATAMPERSAND WORD {
       //printf("   Yacc: insert append stdout+stderr \"%s\"\n", $2->c_str());
-      Shell::_currentCommand.redirect(1,$2);
-      Shell::_currentCommand.redirect(2, new std::string($2->c_str()));
+      Shell::_currentCommand._outFile = $2;
+      Shell::_currentCommand._errFile = $2;
       Shell::_currentCommand._append = true;
 
     }
