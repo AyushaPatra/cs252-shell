@@ -10,6 +10,7 @@
 %{
 
 #include <cstring>
+#include <string>
 #include "y.tab.hh"
 
 static  void yyunput (int c,char *buf_ptr  );
@@ -36,8 +37,41 @@ void myunputc(int c) {
   return GREAT;
 }
 
+"<" {
+  return LESS; 
+}
+
+"|" {
+  return PIPE;
+}
+
+"&" {
+  return AMPERSAND; 
+}
+
+"2>>" {
+  return TWOGREATGREAT;
+}
+
+">>&" {
+  return GREATGREATAMPERSAND; 
+}
+">>" {
+  return GREATGREAT;
+}
+"2>" {
+  return TWOGREAT; 
+}
+">&" {
+  return GREATAMPERSAND;
+}
+
 [^ \t\n][^ \t\n]*  {
   /* Assume that file names have only alpha chars */
   yylval.cpp_string = new std::string(yytext);
   return WORD;
 }
+
+.            { /* ignore unknown character */ }
+
+%%
