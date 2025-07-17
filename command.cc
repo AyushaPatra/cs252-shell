@@ -98,56 +98,59 @@ void Command::print() {
 }
 
 void Command::execute() {
-    std::vector<int> pids;
-
     if (_simpleCommands.size() == 0) {
         Shell::prompt();
         return;
     }
 
-    // Save original file descriptors
+    // Save default FDs
     int defaultin = dup(0);
     int defaultout = dup(1);
     int defaulterr = dup(2);
 
-    // Setup input file if specified
+    // Set up input redirection or default stdin
     int fdin = _inFile ? open(_inFile->c_str(), O_RDONLY) : dup(defaultin);
 
-    // Setup error redirection
+    // Set up error redirection or default stderr
     int fderr = _errFile ? open(_errFile->c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666) : dup(defaulterr);
     dup2(fderr, 2);
-    close(fderr);  // Close after dup2
+    if (fderr != 2) close(fderr);
 
-    int numCommands = _simpleCommands.size();
+    std::vector<pid_t> pids;
+    int numCmds = _simpleCommands.size();
     int fdpipe[2];
 
-    for (int i = 0; i < numCommands; ++i) {
-        // Set up input
+    for (int i = 0; i < numCmds; ++i) {
+        // Set stdin to current fdin
         dup2(fdin, 0);
-        close(fdin); // Close original fdin
+        if (fdin != 0) close(fdin); // Close original
 
-        // Set up output
+        // Setup output for the last command or pipe
         int fdout;
-        if (i == numCommands - 1) {
-            // Last command
-            fdout = _outFile ? open(_outFile->c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666) : dup(defaultout);
-        } else {
-            // Middle command: create pipe
-            if (pipe(fdpipe) < 0) {
-                perror("pipe failed");
-                exit(2);
+        if (i == numCmds - 1) {
+            // Last command: output redirection or default
+            if (_outFile) {
+                fdout = open(_outFile->c_str(),
+                             _append ? O_WRONLY | O_CREAT | O_APPEND
+                                     : O_WRONLY | O_CREAT | O_TRUNC,
+                             0666);
+            } else {
+                fdout = dup(defaultout);
             }
-            fdout = fdpipe[1];     // Write end
-            fdin = fdpipe[0];      // Save read end for next iteration
+        } else {
+            // Not last command: create pipe
+            pipe(fdpipe);
+            fdout = fdpipe[1];  // write end for current
+            fdin = fdpipe[0];   // read end for next
         }
 
         dup2(fdout, 1);
-        close(fdout); // Done with original write end
+        if (fdout != 1) close(fdout);
 
-        // Fork
-        int pid = fork();
+        // Fork child
+        pid_t pid = fork();
         if (pid == 0) {
-            // In child: build argv
+            // Convert arguments to char*[]
             SimpleCommand *sc = _simpleCommands[i];
             int argc = sc->_arguments.size();
             char **argv = new char *[argc + 1];
@@ -156,7 +159,13 @@ void Command::execute() {
             }
             argv[argc] = nullptr;
 
-            execvp(argv[0], argv);
+            //execvp(argv[0], argv);
+            if (strchr(argv[0], '/')) {
+    execv(argv[0], argv);  // If path includes '/', run directly
+} else {
+    execvp(argv[0], argv); // Otherwise search $PATH
+}
+
             perror("execvp failed");
             exit(1);
         } else if (pid < 0) {
@@ -165,9 +174,15 @@ void Command::execute() {
         } else {
             pids.push_back(pid);
         }
+
+        // Parent: close pipe write end if it's not the last command
+        if (i != numCmds - 1) {
+            close(fdpipe[1]);
+            // Note: fdin will be used in next iteration and closed then
+        }
     }
 
-    // Restore file descriptors
+    // Restore defaults
     dup2(defaultin, 0);
     dup2(defaultout, 1);
     dup2(defaulterr, 2);
@@ -177,7 +192,7 @@ void Command::execute() {
 
     // Wait for children unless background
     if (!_background) {
-        for (int pid : pids) {
+        for (pid_t pid : pids) {
             waitpid(pid, nullptr, 0);
         }
     }
@@ -185,6 +200,7 @@ void Command::execute() {
     clear();
     Shell::prompt();
 }
+
 
 
 void Command::prompt() {
