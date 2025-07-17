@@ -138,9 +138,10 @@ void Command::execute() {
     // exit myshell
     std::string* cmd = _simpleCommands[0]->_arguments[0];
     if ( !strcmp(cmd->c_str(),"exit") ) {
-            printf( "Good bye :)\n");
+            printf( "Byeeee :)\n");
         exit(1);
     }
+
 
     // Save default stdin, stdout, stderr
     int tmpin = dup(0);
