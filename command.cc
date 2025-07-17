@@ -19,6 +19,7 @@
 
 #include <unistd.h>     // for fork(), execvp()
 #include <sys/wait.h>   // for waitpid()
+#include <fcntl.h>      // for open(), O_CREAT, O_WRONLY, etc.
 
 #include <iostream>
 
