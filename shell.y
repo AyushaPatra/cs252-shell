@@ -120,6 +120,8 @@ io_modifier:
       //printf("   Yacc: insert append stdout+stderr \"%s\"\n", $2->c_str());
       Shell::_currentCommand._outFile = $2;
       Shell::_currentCommand._errFile = $2;
+      Shell::_currentCommand._append = true;
+
     }
   | LESS WORD {
       //printf("   Yacc: insert input \"%s\"\n", $2->c_str());
