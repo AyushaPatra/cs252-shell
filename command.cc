@@ -221,7 +221,7 @@ void Command::execute() {
     // Wait for the last child process to finish
     if (!_background) {
         int status;
-        waitpid(pid, &status, 0);
+        waitpid(ret, &status, 0);
     } else {
         // allow background PID tracking
         printf("Backgrounded process: %d\n", pid);
