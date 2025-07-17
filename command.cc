@@ -179,9 +179,6 @@ void Command::execute() {
         waitpid(pid, nullptr, 0);
     }
 
-    // clean up
-    delete[] argv; // Free the char* array
-
     // Clear to prepare for next command
     clear();
 
