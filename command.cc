@@ -109,31 +109,71 @@ void Command::execute() {
     // Setup i/o redirection
     // and call exec
 
-    // Run the first simple command
-    SimpleCommand * sc = _simpleCommands[0];
+    // Save original file descriptors
+    int defaultin = dup(0);
+    int defaultout = dup(1);
+    int defaulterr = dup(2);
 
-    // Converting arguments to char* array for execvp
-    int argc = sc->_arguments.size();
-    char **argv = new char *[argc + 1]; // +1 for NULL terminator
-    for (int i = 0; i < argc; ++i) {
-        argv[i] = (char *) sc->_arguments[i]->c_str(); // Use c_str() to get const char*
+    // Setup input file if specified
+    int fdin = _inFile ? open(_inFile->c_str(), O_RDONLY) : dup(defaultin);
+
+    // Setup error file
+    int fderr = _errFile ? open(_errFile->c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666) : dup(defaulterr);
+    dup2(fderr, 2);
+    close(fderr);
+
+    int numCommands = _simpleCommands.size();
+    int i;
+    int pid;
+    for (i = 0; i < numCommands; ++i) {
+        // Redirect input
+        dup2(fdin, 0);
+        close(fdin);
+
+        // Setup output
+        int fdout;
+        if (i == numCommands - 1) {
+            // Last command
+            fdout = _outFile ? open(_outFile->c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666) : dup(defaultout);
+        } else {
+            int fdpipe[2];
+            pipe(fdpipe);
+            fdout = fdpipe[1];
+            fdin = fdpipe[0];
+        }
+
+        dup2(fdout, 1);
+        close(fdout);
+
+        // Fork and exec
+        pid = fork();
+        if (pid == 0) {
+            // Convert arguments to char* array
+            SimpleCommand *sc = _simpleCommands[i];
+            int argc = sc->_arguments.size();
+            char **argv = new char *[argc + 1];
+            for (int j = 0; j < argc; ++j) {
+                argv[j] = (char *)sc->_arguments[j]->c_str();
+            }
+            argv[argc] = nullptr;
+
+            execvp(argv[0], argv);
+            perror("execvp failed");
+            exit(1);
+        } else if (pid < 0) {
+            perror("fork failed");
+            exit(2);
+        }
     }
-    argv[argc] = nullptr; // NULL-terminate the array
 
-    // Fork and exec
-    int pid = fork();
-    if (pid == 0) {
-        // Child process: replace process image with the command
-        execvp(argv[0], argv);
-        perror("execvp failed");
-        exit(1);
-    } else if (pid < 0) {
-        // Fork failed
-        perror("fork failed");
-        exit(2);
-    }
+    // Restore file descriptors
+    dup2(defaultin, 0);
+    dup2(defaultout, 1);
+    dup2(defaulterr, 2);
+    close(defaultin);
+    close(defaultout);
+    close(defaulterr);
 
-    // Wait if not running in background
     if (!_background) {
         waitpid(pid, nullptr, 0);
     }
