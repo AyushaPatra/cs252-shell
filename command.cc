@@ -176,7 +176,7 @@ void Command::execute() {
     close(defaulterr);
 
     if (!_background) {
-        waitpid(pid, nullptr, 0);
+        for (int p : pids) waitpid(p, nullptr, 0);
     }
 
     // Clear to prepare for next command
