@@ -97,11 +97,6 @@ command_word:
   }
   ;
 
-iomodifier_opt:
-  iomodifier_opt io_modifier
-  | /* can be empty */ 
-  ;
-
 io_modifier:
     GREAT WORD {
       Shell::_currentCommand._append = false;
@@ -128,6 +123,14 @@ io_modifier:
       Shell::_currentCommand._append = false;
       Shell::_currentCommand.redirect(2, $2);
     }
+  ;
+
+background_opt:
+    AMPERSAND {
+      //printf("   Yacc: Background flag set\n");
+      Shell::_currentCommand._background = true;
+    }
+  | /* empty */
   ;
 
 %%
