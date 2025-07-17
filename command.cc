@@ -98,6 +98,11 @@ void Command::print() {
     printf( "\n\n" );
 }
 
+// Ambiquity checking for redirection
+// If a redirection is already set for the given type, print an error and exit
+// i=0 for input, i=1 for output, i=2 for error
+// curr is the string to be redirected to
+// If the redirection is not set, set it to curr
 void Command::redirect(int i, std::string * curr) {
     if (i==0) {
         if ( _inFile ) {
@@ -165,15 +170,15 @@ void Command::execute() {
 
     int fdout;
     int fderr;
-    int ret = -1;
+    int ret = -1; //child pid
 
-    // Loop through each simple command
+    // Loop through each simple command in the pipeline
     for (size_t i = 0; i < _simpleCommands.size(); ++i) {
-        // Redirect input
+        // Redirect input to stdin
         dup2(fdin, 0);
         close(fdin);
 
-        // Setup output
+        // Setup output for last command
         if (i == _simpleCommands.size() - 1) {
             // Last command: handle output redirection
             if (_outFile) {
@@ -202,7 +207,7 @@ void Command::execute() {
             dup2(fderr, 2);
             close(fderr);
 
-            // Set $_ to last argument
+            // Set $_ env variable to last argument
             int n = _simpleCommands[i]->_arguments.size();
             char* c = strdup(_simpleCommands[i]->_arguments[n - 1]->c_str());
             setenv("_", c, 1);
@@ -214,11 +219,11 @@ void Command::execute() {
             fdin = fdpipe[0]; // used in next iteration
         }
 
-        // Redirect output
+        // Redirect current output to stdout
         dup2(fdout, 1);
         close(fdout);
 
-        // Fork child
+        // Fork a new child process to execute the command
         ret = fork();
         if (ret == 0) {
             // Build argv array
@@ -230,6 +235,7 @@ void Command::execute() {
             }
             args[argnum] = NULL;
 
+            // Execute the command
             execvp(command, args);
             perror("execvp");
             exit(1);
