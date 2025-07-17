@@ -35,6 +35,7 @@ Command::Command() {
     _inFile = NULL;
     _errFile = NULL;
     _background = false;
+    _append = false;
 }
 
 void Command::insertSimpleCommand( SimpleCommand * simpleCommand ) {
@@ -68,6 +69,7 @@ void Command::clear() {
     _errFile = NULL;
 
     _background = false;
+    _append = false;
 }
 
 void Command::print() {
@@ -105,7 +107,7 @@ void Command::execute() {
     }
 
     // Print contents of Command data structure
-    print();
+    // print();
 
     // Add execution here
     // For every simple command fork a new process
@@ -163,7 +165,7 @@ void Command::execute() {
             argv[argc] = nullptr;
             
             // DEBUG
-            fprintf(stderr, "Forking command %d: %s\n", i, argv[0]);
+            //fprintf(stderr, "Forking command %d: %s\n", i, argv[0]);
 
             execvp(argv[0], argv);
             perror("execvp failed");
@@ -196,6 +198,13 @@ void Command::execute() {
 
     // Print new prompt
     Shell::prompt();
+}
+
+void Command::prompt() {
+    if (isatty(0)) {
+        printf("myshell>");
+        fflush(stdout);
+    }
 }
 
 SimpleCommand * Command::_currentSimpleCommand;
