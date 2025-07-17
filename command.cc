@@ -168,6 +168,8 @@ void Command::execute() {
         } else if (pid < 0) {
             perror("fork failed");
             exit(2);
+        } else {
+            pids.push_back(pid);   // Track PID
         }
     }
 
@@ -181,7 +183,9 @@ void Command::execute() {
 
     // Wait for all children (unless backgrounded)
     if (!_background) {
-        for (int p : pids) waitpid(p, nullptr, 0);
+    for (int pid : pids) {
+        waitpid(pid, nullptr, 0);
+        }
     }
 
     // Clear to prepare for next command

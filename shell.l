@@ -72,6 +72,12 @@ void myunputc(int c) {
   return WORD;
 }
 
+<<EOF>> {
+  // Exit cleanly on EOF
+  exit(0);
+}
+
+
 .            { /* ignore unknown character */ }
 
 %%
