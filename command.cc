@@ -139,7 +139,7 @@ void Command::execute() {
     int fderr;
 
     // Loop through each simple command
-    for (int i = 0; i < _simpleCommands.size(); ++i) {
+    for (size_t i = 0; i < _simpleCommands.size(); ++i) {
         // Redirect input
         dup2(fdin, 0);
         close(fdin);
