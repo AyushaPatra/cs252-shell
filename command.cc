@@ -106,16 +106,7 @@ void Command::execute() {
         return;
     }
 
-    // SAFETY CHECK: Prevent infinite recursion
-    if (_simpleCommands.size() > 0) {
-        std::string cmdName = *(_simpleCommands[0]->_arguments[0]);
-        if (cmdName == "shell" || cmdName == "./shell") {
-            fprintf(stderr, "Error: Cannot execute shell recursively\n");
-            clear();
-            prompt();
-            return;
-        }
-    }
+    fprintf(stderr, "DEBUG: Executing command: %s\n", _simpleCommands[0]->_arguments[0]->c_str());
 
     // Print contents of Command data structure
     // print();
