@@ -98,6 +98,33 @@ void Command::print() {
     printf( "\n\n" );
 }
 
+void Command::redirect(int i, std::string * curr) {
+    if (i==0) {
+        if ( _inFile ) {
+            printf("Ambiguous input redirect.\n");
+            exit(1);
+        } else {
+            _inFile = curr;
+        }
+    }
+    if (i==2) {
+        if ( _errFile ) {
+            printf("Ambiguous error redirect.\n");
+            exit(1);
+        } else {
+            _errFile = curr;
+        }
+    }
+    if (i==1) {
+        if ( _outFile ) {
+            printf("Ambiguous output redirect.\n");
+            exit(1);
+        } else {
+            _outFile = curr;
+        }
+    }
+}
+
 void Command::execute() {
     // Don't do anything if there are no simple commands
     if (_simpleCommands.size() == 0) {
@@ -235,12 +262,5 @@ void Command::execute() {
     //Shell::prompt();
 }
 
-
-/*void Command::prompt() {
-    if (isatty(0)) {
-        printf("myshell>");
-        fflush(stdout);
-    }
-}*/
 
 SimpleCommand * Command::_currentSimpleCommand;
