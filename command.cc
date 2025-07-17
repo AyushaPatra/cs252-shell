@@ -16,6 +16,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 
 #include <unistd.h>     // for fork(), execvp()
 #include <sys/wait.h>   // for waitpid()
