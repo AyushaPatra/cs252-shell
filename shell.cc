@@ -1,6 +1,7 @@
 #include <cstdio>
 
 #include "shell.hh"
+#include <unistd.h>
 
 int yyparse(void);
 
