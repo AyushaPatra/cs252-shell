@@ -16,7 +16,6 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <unistd.h>
 
 #include <iostream>
 
@@ -32,7 +31,6 @@ Command::Command() {
     _inFile = NULL;
     _errFile = NULL;
     _background = false;
-    _append = false;
 }
 
 void Command::insertSimpleCommand( SimpleCommand * simpleCommand ) {
@@ -66,7 +64,6 @@ void Command::clear() {
     _errFile = NULL;
 
     _background = false;
-    _append = false;
 }
 
 void Command::print() {
@@ -114,13 +111,6 @@ void Command::execute() {
 
     // Print new prompt
     Shell::prompt();
-}
-
-void Command::prompt() {
-    if (isatty(0)) {
-        printf("myshell>");
-        fflush(stdout);
-    }
 }
 
 SimpleCommand * Command::_currentSimpleCommand;
