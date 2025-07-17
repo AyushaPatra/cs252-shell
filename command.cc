@@ -225,7 +225,7 @@ void Command::execute() {
         waitpid(ret, &status, 0);
     } else {
         // allow background PID tracking
-        printf("Backgrounded process: %d\n", pid);
+        printf("Backgrounded process: %d\n", ret);
     }
 
     // Clear command
