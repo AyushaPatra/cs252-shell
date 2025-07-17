@@ -114,32 +114,32 @@ void Command::execute() {
         exit(0);
     }
 
-    // Save default FDs
+    // Save default FDs: stdin, stdout, stderr so we can restore later
     int defaultin = dup(0);
     int defaultout = dup(1);
     int defaulterr = dup(2);
 
-    // Set up input redirection or default stdin
+    // Set up input redirection or default stdin: : use input file if provided
     int fdin = _inFile ? open(_inFile->c_str(), O_RDONLY) : dup(defaultin);
 
-    // Set up error redirection or default stderr
+    // Set up error redirection or default stderr: to error file if provided
     int fderr = _errFile ? open(_errFile->c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0666) : dup(defaulterr);
     dup2(fderr, 2);
-    if (fderr != 2) close(fderr);
+    if (fderr != 2) close(fderr); // prevent fd leak
 
-    std::vector<pid_t> pids;
+    std::vector<pid_t> pids; // To track all child process IDs
     int numCmds = _simpleCommands.size();
-    int fdpipe[2];
+    int fdpipe[2]; // Pipe array: used between commands
 
     for (int i = 0; i < numCmds; ++i) {
-        // Set stdin to current fdin
+        // stdin is taken from current fdin (may be file or pipe)
         dup2(fdin, 0);
-        if (fdin != 0) close(fdin); // Close original
+        if (fdin != 0) close(fdin); // Close after duping to prevent leak
 
         // Setup output for the last command or pipe
         int fdout;
         if (i == numCmds - 1) {
-            // Last command: output redirection or default
+            // Last command: write to file or stdout
             if (_outFile) {
                 fdout = open(_outFile->c_str(),
                              _append ? O_WRONLY | O_CREAT | O_APPEND
@@ -149,18 +149,19 @@ void Command::execute() {
                 fdout = dup(defaultout);
             }
         } else {
-            // Not last command: create pipe
+            // Not last command: setup pipe to next
             pipe(fdpipe);
-            fdout = fdpipe[1];  // write end for current
-            fdin = fdpipe[0];   // read end for next
+            fdout = fdpipe[1];  // This command writes to pipe
+            fdin = fdpipe[0];   // Next command reads from pipe
         }
 
-        dup2(fdout, 1);
+        dup2(fdout, 1);  // stdout to output file/pipe
         if (fdout != 1) close(fdout);
 
-        // Fork child
+        // Fork child  process to run the command
         pid_t pid = fork();
         if (pid == 0) {
+            // In child process: build argv and exec
             // Convert arguments to char*[]
             SimpleCommand *sc = _simpleCommands[i];
             int argc = sc->_arguments.size();
@@ -172,28 +173,28 @@ void Command::execute() {
 
             //execvp(argv[0], argv);
             if (strchr(argv[0], '/')) {
-                execv(argv[0], argv);  // If path includes '/', run directly
+                execv(argv[0], argv);  // execv: full path command like ./script.sh
             } else {
-                execvp(argv[0], argv); // Otherwise search $PATH
+                execvp(argv[0], argv); // execvp: normal shell commands like ls, grep
             }
-
+            //  If exec fails
             perror("execvp failed");
             exit(1);
         } else if (pid < 0) {
             perror("fork failed");
             exit(2);
         } else {
+            //  Parent process: track the child's PID
             pids.push_back(pid);
         }
 
         // Parent: close pipe write end if it's not the last command
         if (i != numCmds - 1) {
             close(fdpipe[1]);
-            // Note: fdin will be used in next iteration and closed then
         }
     }
 
-    // Restore defaults
+    // Restore defaults: stdin, stdout, stderr
     dup2(defaultin, 0);
     dup2(defaultout, 1);
     dup2(defaulterr, 2);
@@ -201,17 +202,19 @@ void Command::execute() {
     close(defaultout);
     close(defaulterr);
 
-    // Wait for children unless background
+    // Wait for children unless background (&)
     if (!_background) {
         for (pid_t pid : pids) {
             waitpid(pid, nullptr, 0);
         }
     }
 
+    // Reset the command data structure
     clear();
+
+    // Prompt again for the next command
     Shell::prompt();
 }
-
 
 
 void Command::prompt() {
