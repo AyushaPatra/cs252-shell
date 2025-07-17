@@ -54,26 +54,26 @@ commands:
   | commands command
   ;
 
-command: 
-  pipe_list iomodifier_list background_opt NEWLINE {
+command: simple_command
+       ;
+
+simple_command:	
+  command_and_args iomodifier_opt background_opt NEWLINE {
     //printf("   Yacc: Execute command\n");
     Shell::_currentCommand.execute();
   }
-  | NEWLINE {
-    //printf("   Yacc: Execute command\n");
-    Shell::_currentCommand.execute();
-  }
+  | NEWLINE 
   | error NEWLINE { yyerrok; }
   ;
 
-simple_command:	
-  command_and_args 
-  ;
-
 command_and_args:
-  command_word argument_list {    
+  command_word argument_list {
     Shell::_currentCommand.
     insertSimpleCommand( Command::_currentSimpleCommand );
+  }
+  | command_and_args PIPE command_word argument_list {
+    //printf("   Yacc: pipe to next command\n");
+    Shell::_currentCommand.insertSimpleCommand(Command::_currentSimpleCommand);
   }
   ;
 
@@ -85,77 +85,60 @@ argument_list:
 argument:
   WORD {
     //printf("   Yacc: insert argument \"%s\"\n", $1->c_str());
-    //Command::_currentSimpleCommand->insertArgument( $1 );
-    wildCard = false;
-    char *p = (char *)"";
-    expandWildcard(p, (char *)$1->c_str());
-    std::sort(_sortArgument.begin(), _sortArgument.end(), cmpfunction);
-    for (auto a: _sortArgument) {
-      std::string * argToInsert = new std::string(a);
-      Command::_currentSimpleCommand->insertArgument(argToInsert);
-    }
-    _sortArgument.clear();
-    //if (!wildCard) Command::_currentSimpleCommand->insertArgument($1);
+    Command::_currentSimpleCommand->insertArgument( $1 );\
   }
   ;
 
 command_word:
   WORD {
     //printf("   Yacc: insert command \"%s\"\n", $1->c_str());
-    
     Command::_currentSimpleCommand = new SimpleCommand();
     Command::_currentSimpleCommand->insertArgument( $1 );
   }
   ;
 
-pipe_list:
-  pipe_list PIPE simple_command 
-  | simple_command 
-  ;
-
 iomodifier_opt:
-  GREAT WORD {
-    //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(1,$2);
-  }
-  | GREATGREAT WORD {
-    //printf("   Yacc: append output \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(1,$2);
-    Shell::_currentCommand._append = true;
-  }
-  | GREATAND WORD {
-    //printf("   Yacc: insert output and error \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(1,$2);
-    Shell::_currentCommand.redirect(2, new std::string($2->c_str()));
-    
-  }
-  | GREATGREATAND WORD {
-    //printf("   Yacc: append output and error \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(1,$2);
-    Shell::_currentCommand.redirect(2, new std::string($2->c_str()));
-    Shell::_currentCommand._append = true;
-  }
-  | LESS WORD {
-    //printf("   Yacc: get input \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(0, $2);
-  }
-  | TWOGREAT WORD {
-    //printf("   Yacc: insert error \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(2, $2);
-  }
+  iomodifier_opt io_modifier
+  | /* can be empty */ 
   ;
 
-iomodifier_list:
-  iomodifier_list iomodifier_opt
-  | /*empty*/
+io_modifier:
+    GREAT WORD {
+      //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._outFile = $2;
+    }
+  | GREATGREAT WORD {
+      //printf("   Yacc: insert output append \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._outFile = $2;
+    }
+  | GREATAMPERSAND WORD {
+      //printf("   Yacc: insert stdout+stderr \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._outFile = $2;
+      Shell::_currentCommand._errFile = $2;
+    }
+  | GREATGREATAMPERSAND WORD {
+      //printf("   Yacc: insert append stdout+stderr \"%s\"\n", $2->c_str());
+      Shell::_currentCommand.redirect(1,$2);
+      Shell::_currentCommand.redirect(2, new std::string($2->c_str()));
+      Shell::_currentCommand._append = true;
+
+    }
+  | LESS WORD {
+      //printf("   Yacc: insert input \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._inFile = $2;
+    }
+  | TWOGREAT WORD {
+      //printf("   Yacc: insert stderr \"%s\"\n", $2->c_str());
+      Shell::_currentCommand._errFile = $2;
+    }
   ;
 
 background_opt:
-  AMPERSAND {
-    //printf("   Yacc: run in background\n");
-    Shell::_currentCommand._background = true;
-  }
-  | /*empty*/
+    AMPERSAND {
+      //printf("   Yacc: Background flag set\n");
+      Shell::_currentCommand._background = true;
+    }
+  | /* empty */
   ;
 
 %%
