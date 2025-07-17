@@ -207,6 +207,8 @@ void Command::execute() {
         } else if (ret < 0) {
             perror("fork");
             return;
+        } else {
+            lastPid = ret;
         }
     }
 
