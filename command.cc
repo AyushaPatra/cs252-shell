@@ -106,7 +106,7 @@ void Command::execute() {
         return;
     }
 
-    fprintf(stderr, "DEBUG: Executing command: %s\n", _simpleCommands[0]->_arguments[0]->c_str());
+    //fprintf(stderr, "DEBUG: Executing command: %s\n", _simpleCommands[0]->_arguments[0]->c_str());
 
     // Print contents of Command data structure
     // print();
