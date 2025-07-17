@@ -232,15 +232,15 @@ void Command::execute() {
     clear();
 
     // Show next prompt
-    Shell::prompt();
+    //Shell::prompt();
 }
 
 
-void Command::prompt() {
+/*void Command::prompt() {
     if (isatty(0)) {
         printf("myshell>");
         fflush(stdout);
     }
-}
+}*/
 
 SimpleCommand * Command::_currentSimpleCommand;
