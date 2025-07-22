@@ -39,9 +39,9 @@ void sigchldHandler(int sig) {
   }
 
   // Re-display the prompt if interactive
-  if (isatty(0)) {
+  /*if (isatty(0)) {
     Shell::prompt();
-  }
+  }*/
 }
 
 
