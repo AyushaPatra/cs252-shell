@@ -37,6 +37,11 @@ void sigchldHandler(int sig) {
     int len = snprintf(buffer, sizeof(buffer), "[%d] exited.\n", pid);
     write(1, buffer, len);
   }
+
+  // Re-display the prompt if interactive
+  if (isatty(0)) {
+    Shell::prompt();
+  }
 }
 
 
