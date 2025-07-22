@@ -226,6 +226,10 @@ void Command::execute() {
         // Fork a new child process to execute the command
         ret = fork();
         if (ret == 0) {
+
+            // Let Ctrl-C kill this child
+            signal(SIGINT, SIG_DFL);
+
             // Build argv array
             const char* command = _simpleCommands[i]->_arguments[0]->c_str();
             int argnum = _simpleCommands[i]->_arguments.size();
