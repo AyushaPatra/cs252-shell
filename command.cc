@@ -206,6 +206,7 @@ void Command::execute() {
             return;
         }
     } else {
+        //Use default input
         fdin = dup(tmpin);
     }
 
@@ -268,8 +269,15 @@ void Command::execute() {
         ret = fork();
         if (ret == 0) {
 
-            // Let Ctrl-C kill this child
-            signal(SIGINT, SIG_DFL);
+            // printenv function call
+            if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "printenv")) {
+                char **p = environ;
+                while (*p!=NULL) {
+                    printf("%s\n", *p);
+                    p++;
+                }
+                exit(0);
+            }
 
             // Build argv array
             const char* command = _simpleCommands[i]->_arguments[0]->c_str();
@@ -300,11 +308,17 @@ void Command::execute() {
 
     // Wait for the last child process to finish
     if (!_background) {
+        // Wait for last command
         int status;
         waitpid(ret, &status, 0);
+        std::string s = std::to_string(WEXITSTATUS(status));
+        setenv("?", s.c_str(), 1);
+        char * pError = getenv("ON_ERROR");
+        if (pError != NULL && WEXITSTATUS(status) != 0) printf("%s\n", pError);
     } else {
-        // allow background PID tracking
-        printf("Backgrounded process: %d\n", ret);
+        std::string s = std::to_string(ret);
+        setenv("!", s.c_str(), 1);
+        Shell::_bgPIDs.push_back(ret);
     }
 
     // Clear command
