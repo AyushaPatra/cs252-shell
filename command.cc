@@ -22,6 +22,12 @@
 #include <sys/wait.h>   // for waitpid()
 #include <fcntl.h>      // for open(), O_CREAT, O_WRONLY, etc.
 
+#include <sys/types.h>
+#include <errno.h>
+#include <string.h>
+#include <string>
+#include <stdlib.h>
+
 #include <iostream>
 
 #include "command.hh"
@@ -147,6 +153,41 @@ void Command::execute() {
         exit(1);
     }
 
+    // set the environment variable
+    if ( !strcmp(cmd->c_str(),"setenv") ) {
+        if ( _simpleCommands[0]->_arguments.size() != 3 ) {
+            fprintf(stderr, "setenv should take two arguments\n");
+            return;
+        }
+        const char * A = _simpleCommands[0]->_arguments[1]->c_str();
+        const char * B = _simpleCommands[0]->_arguments[2]->c_str();
+        setenv(A, B, 1);
+        clear();
+        Shell::prompt();
+        return;
+    }
+
+    // unset the environment varibale
+    if ( !strcmp(cmd->c_str(),"unsetenv") ) {
+        const char * A = _simpleCommands[0]->_arguments[1]->c_str();
+        unsetenv(A);
+        clear();
+        Shell::prompt();
+        return;
+    }
+
+    // change directory
+    if ( !strcmp(cmd->c_str(),"cd") ) {
+        if (_simpleCommands[0]->_arguments.size()==1) {
+            chdir(getenv("HOME"));
+        } else {
+            const char * path = _simpleCommands[0]->_arguments[1]->c_str();
+            chdir(path);
+        }
+        clear();
+        Shell::prompt();
+        return;
+    }
 
     // Save default stdin, stdout, stderr
     int tmpin = dup(0);
