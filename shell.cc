@@ -4,66 +4,64 @@
 #include <signal.h>
 #include <sys/wait.h>
 
+#include <string.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include <limits.h>
+#include "y.tab.hh"
+
 int yyparse(void);
 
 void Shell::prompt() {
-  //printf("myshell>");
-  if (isatty(0) ) {
-    printf("myshell>");
+  if ( isatty(0) & !_srcCmd ){
+    char * pPrompt = getenv("PROMPT");
+    if (pPrompt != NULL) printf("%s ", pPrompt);
+  	else printf("myshell>");
     fflush(stdout);
   }
 }
 
-// Signal handler for SIGINT (Ctrl-C)
-void sigintHandler(int sig) {
+extern "C" void sigIntHandler(int sig)
+{
   if (sig == SIGINT) {
-    write(1, "\n", 1);
-    Shell::_currentCommand.clear();
-    Shell::prompt();
-    fflush(stdout);
-  }
-}
-
-
-// Signal handler for SIGCHLD (Zombie cleanup)
-void sigchldHandler(int sig) {
-  int status;
-  pid_t pid;
-
-  // Getting all children that have exited
-  while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
-    // Safe signal output using write()
-    char buffer[64];
-    int len = snprintf(buffer, sizeof(buffer), "[%d] exited.\n", pid);
-    write(1, buffer, len);
+  	Shell::_currentCommand.clear();
+  	printf("\n");
+  	Shell::prompt();
   }
 
-  // Re-display the prompt if interactive
-  /*if (isatty(0)) {
-    Shell::prompt();
-  }*/
+  if (sig == SIGCHLD) {
+  	pid_t pid = waitpid(-1, NULL, WNOHANG);
+  	for (unsigned i=0; i<Shell::_bgPIDs.size(); i++) {
+  		if (pid == Shell::_bgPIDs[i]) {
+  			printf("[%d] exited\n", pid);
+  			Shell::_bgPIDs.erase(Shell::_bgPIDs.begin()+i);
+  			break;
+  		}
+  	}
+  }
 }
 
 
 int main() {
 
-  // Set up SIGINT handler (Ctrl-C)
-
   struct sigaction sa;
-  sa.sa_handler = sigintHandler;
+  sa.sa_handler = sigIntHandler;
   sigemptyset(&sa.sa_mask);
   sa.sa_flags = SA_RESTART;
-  sigaction(SIGINT, &sa, NULL);
-
-  // Set up SIGCHLD handler (Zombie cleanup)
-  struct sigaction sa_chld;
-  sa_chld.sa_handler = sigchldHandler;
-  sigemptyset(&sa_chld.sa_mask);
-  sa_chld.sa_flags = SA_RESTART | SA_NOCLDSTOP;
-  sigaction(SIGCHLD, &sa_chld, NULL);
 
   Shell::prompt();
+
+  if (sigaction(SIGINT, &sa, NULL)) {
+    perror("sigaction");
+    exit(2);
+  }
+  if (sigaction(SIGCHLD, &sa, NULL)) {
+    perror("sigaction");
+    exit(2);
+  }
+
   yyparse();
 }
 
 Command Shell::_currentCommand;
+std::vector<int> Shell::_bgPIDs;
