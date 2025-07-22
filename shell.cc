@@ -45,7 +45,7 @@ int main() {
   // Set up SIGINT handler (Ctrl-C)
 
   struct sigaction sa;
-  sa.sa_handler = ctrlCHandler;
+  sa.sa_handler = sigintHandler;
   sigemptyset(&sa.sa_mask);
   sa.sa_flags = SA_RESTART;
   sigaction(SIGINT, &sa, NULL);
