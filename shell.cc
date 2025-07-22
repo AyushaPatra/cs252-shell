@@ -15,13 +15,17 @@ void Shell::prompt() {
 }
 
 // Signal handler for SIGINT (Ctrl-C)
-void ctrlCHandler(int sig) {
-  write(1, "\n", 1);
-  Shell::prompt();
-  fflush(stdout);
+void sigintHandler(int sig) {
+  if (sig == SIGINT) {
+    write(1, "\n", 1);
+    Shell::_currentCommand.clear();
+    Shell::prompt();
+    fflush(stdout);
+  }
 }
 
-// Signal handler for SIGCHLD (Zombie processes)
+
+// Signal handler for SIGCHLD (Zombie cleanup)
 void sigchldHandler(int sig) {
   int status;
   pid_t pid;
@@ -38,12 +42,20 @@ void sigchldHandler(int sig) {
 
 int main() {
 
+  // Set up SIGINT handler (Ctrl-C)
+
   struct sigaction sa;
   sa.sa_handler = ctrlCHandler;
   sigemptyset(&sa.sa_mask);
-  sa.sa_flags = SA_RESTART | SA_NOCLDSTOP;
-
+  sa.sa_flags = SA_RESTART;
   sigaction(SIGINT, &sa, NULL);
+
+  // Set up SIGCHLD handler (Zombie cleanup)
+  struct sigaction sa_chld;
+  sa_chld.sa_handler = sigchldHandler;
+  sigemptyset(&sa_chld.sa_mask);
+  sa_chld.sa_flags = SA_RESTART | SA_NOCLDSTOP;
+  sigaction(SIGCHLD, &sa_chld, NULL);
 
   Shell::prompt();
   yyparse();
