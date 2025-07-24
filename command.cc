@@ -21,6 +21,7 @@
 #include <unistd.h>     // for fork(), execvp()
 #include <sys/wait.h>   // for waitpid()
 #include <fcntl.h>      // for open(), O_CREAT, O_WRONLY, etc.
+#include <limits.h>  // For PATH_MAX
 
 #include <sys/types.h>
 #include <errno.h>
