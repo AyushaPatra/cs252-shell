@@ -212,7 +212,7 @@ void Command::execute() {
         getcwd(cwd, PATH_MAX);  // save current dir
         //fprintf(stderr, "[DEBUG] cd attempting path: %s\n", path);
         if (!path || chdir(path) == -1) {
-            perror("cd");
+            perror("cd: can't cd to notfound");
         } else {
             setenv("OLDPWD", cwd, 1); // update OLDPWD
         }
