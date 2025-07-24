@@ -80,19 +80,14 @@ void myunputc(int c) {
   return WORD;
 }
 
-([^\ \t\n\"\'\\><|&;()]+|\\.)+ {
-  std::string *s = new std::string();
-
-  for (int i = 0; i < yyleng; i++) {
-    if (yytext[i] == '\\' && i + 1 < yyleng) {
-      i++; //skip backslash
-      s->push_back(yytext[i]); // add literal character
-    } else {
-      s->push_back(yytext[i]);
-    }
+([^ \\\t\n]*(\\[^nt])((\\[^nt])|[^ \\\t\n])*) {
+  std::string str = std::string(yytext);
+  std::size_t found = str.find('\\');
+  while (found != std::string::npos) {
+    str = str.substr(0, found) + str.substr(found + 1);
+    found = str.find('\\', found + 1);
   }
-
-  yylval.cpp_string = s;
+  yylval.cpp_string = new std::string(str);
   return WORD;
 }
 
