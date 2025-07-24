@@ -80,7 +80,7 @@ void myunputc(int c) {
   return WORD;
 }
 
-// Words containing escaped characters like \>, \ , \(
+/* Words containing escaped characters like \>, \ , \( */
 ([^\ \t\n\"\'\\><|&;()]*\\[^\n])([^\ \t\n\"\'\\><|&;()]*)+ {
   std::string *s = new std::string();
 
