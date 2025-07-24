@@ -66,6 +66,7 @@ void myunputc(int c) {
   return GREATAMPERSAND;
 }
 
+/*
 \"([^\\"]|\\.)*\" {
   std::string *s = new std::string(yytext + 1, yyleng - 2);
   yylval.cpp_string = s;
@@ -80,6 +81,23 @@ void myunputc(int c) {
 
 \\[^\n] {
   std::string *s = new std::string(1, yytext[1]);
+  yylval.cpp_string = s;
+  return WORD;
+}
+*/
+
+([^\ \t\n\"\'\\><|&;()]*\\[^\n])([^\ \t\n\"\'\\><|&;()]*)+ {
+  std::string *s = new std::string();
+
+  for (int i = 0; i < yyleng; i++) {
+    if (yytext[i] == '\\' && i + 1 < yyleng) {
+      i++;  // skip the backslash
+      s->push_back(yytext[i]);  // add the escaped char literally
+    } else {
+      s->push_back(yytext[i]);
+    }
+  }
+
   yylval.cpp_string = s;
   return WORD;
 }
