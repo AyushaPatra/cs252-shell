@@ -80,7 +80,7 @@ void myunputc(int c) {
   return WORD;
 }
 
-([^ \t\n\"\'\\><|&;()\\]+|\\.)+ {
+([^\ \t\n\"\'\\><|&;()]+|\\.)+ {
   std::string *s = new std::string();
 
   for (int i = 0; i < yyleng; i++) {
