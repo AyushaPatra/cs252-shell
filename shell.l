@@ -66,6 +66,25 @@ void myunputc(int c) {
   return GREATAMPERSAND;
 }
 
+\"([^\\"]|\\.)*\" {
+  std::string *s = new std::string(yytext + 1, yyleng - 2);
+  yylval.cpp_string = s;
+  return WORD;
+}
+
+\'([^\\']|\\.)*\' {
+  std::string *s = new std::string(yytext + 1, yyleng - 2);
+  yylval.cpp_string = s;
+  return WORD;
+}
+
+\\[^\n] {
+  std::string *s = new std::string(1, yytext[1]);
+  yylval.cpp_string = s;
+  return WORD;
+}
+
+
 [^ \t\n][^ \t\n]*  {
   /* Assume that file names have only alpha chars */
   yylval.cpp_string = new std::string(yytext);
