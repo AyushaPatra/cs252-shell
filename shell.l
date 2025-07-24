@@ -80,13 +80,12 @@ void myunputc(int c) {
   return WORD;
 }
 
-/* Words containing escaped characters like \>, \ , \( */
-([^\ \t\n\"\'\\><|&;()]*\\[^\n])([^\ \t\n\"\'\\><|&;()]*)+ {
+([^ \t\n\"\'\\><|&;()\\]+|\\.)+ {
   std::string *s = new std::string();
 
   for (int i = 0; i < yyleng; i++) {
     if (yytext[i] == '\\' && i + 1 < yyleng) {
-      i++;  // skip backslash
+      i++;
       s->push_back(yytext[i]);
     } else {
       s->push_back(yytext[i]);
@@ -96,6 +95,7 @@ void myunputc(int c) {
   yylval.cpp_string = s;
   return WORD;
 }
+
 
 [^ \t\n][^ \t\n]*  {
   /* Assume that file names have only alpha chars */
