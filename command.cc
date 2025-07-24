@@ -210,7 +210,7 @@ void Command::execute() {
 
         char cwd[PATH_MAX];
         getcwd(cwd, PATH_MAX);  // save current dir
-        fprintf(stderr, "[DEBUG] cd attempting path: %s\n", path);
+        //fprintf(stderr, "[DEBUG] cd attempting path: %s\n", path);
         if (!path || chdir(path) == -1) {
             perror("cd");
         } else {
