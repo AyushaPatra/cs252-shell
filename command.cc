@@ -178,12 +178,27 @@ void Command::execute() {
 
     // change directory
     if ( !strcmp(cmd->c_str(),"cd") ) {
+        const char *path;
+
         if (_simpleCommands[0]->_arguments.size()==1) {
-            chdir(getenv("HOME"));
+            path = getenv("HOME");
+        } else if (*_simpleCommands[0]->_arguments[1] == "-") {
+            path = getenv("OLDPWD");
+            if (path) {
+              printf("%s\n", path);
+            }
         } else {
-            const char * path = _simpleCommands[0]->_arguments[1]->c_str();
-            chdir(path);
+            path = _simpleCommands[0]->_arguments[1]->c_str();
         }
+
+        char cwd[PATH_MAX];
+        getcwd(cwd, PATH_MAX);  // save current dir
+        if (chdir(path) == -1) {
+            perror("cd");
+        } else {
+            setenv("OLDPWD", cwd, 1); // update OLDPWD
+        }
+
         clear();
         Shell::prompt();
         return;
