@@ -189,12 +189,28 @@ void Command::execute() {
               printf("%s\n", path);
             }
         } else {
-            path = _simpleCommands[0]->_arguments[1]->c_str();
+            //path = _simpleCommands[0]->_arguments[1]->c_str();
+            std::string raw = *_simpleCommands[0]->_arguments[1];
+            path = raw.c_str();
+
+            // Expand ${VAR}
+            if (raw[0] == '$' && raw[1] == '{') {
+         std::string varname = raw.substr(2);
+    size_t close = varname.find('}');
+    if (close != std::string::npos) {
+        varname = varname.substr(0, close);
+        char *val = getenv(varname.c_str());
+        if (val) {
+            path = val;
+        }
+    }
+}
+
         }
 
         char cwd[PATH_MAX];
         getcwd(cwd, PATH_MAX);  // save current dir
-        fprintf(stderr, "[DEBUG] cd attempting path: %s\n", path);
+        //fprintf(stderr, "[DEBUG] cd attempting path: %s\n", path);
         if (chdir(path) == -1) {
             perror("cd");
         } else {
