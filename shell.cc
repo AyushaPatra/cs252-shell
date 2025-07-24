@@ -51,14 +51,18 @@ extern "C" void sigIntHandler(int sig)
   }
 
   if (sig == SIGCHLD) {
-  	pid_t pid = waitpid(-1, NULL, WNOHANG);
-  	for (unsigned i=0; i<Shell::_bgPIDs.size(); i++) {
-  		if (pid == Shell::_bgPIDs[i]) {
-  			printf("[%d] exited\n", pid);
-  			Shell::_bgPIDs.erase(Shell::_bgPIDs.begin()+i);
-  			break;
-  		}
-  	}
+    pid_t pid;
+	  int status;
+
+    while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
+      for (unsigned i = 0; i < Shell::_bgPIDs.size(); i++) {
+        if (pid == Shell::_bgPIDs[i]) {
+            printf("[%d] exited\n", pid);
+            Shell::_bgPIDs.erase(Shell::_bgPIDs.begin() + i);
+            break;
+        }
+      }
+    }
   }
 }
 
