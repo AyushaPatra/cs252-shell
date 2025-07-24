@@ -183,7 +183,7 @@ void Command::execute() {
 
         if (_simpleCommands[0]->_arguments.size()==1) {
             path = getenv("HOME");
-        } else if (*_simpleCommands[0]->_arguments[1] == "-") {
+        } else if (_simpleCommands[0]->_arguments[1]->compare("-") == 0) {
             path = getenv("OLDPWD");
             if (path) {
               printf("%s\n", path);
