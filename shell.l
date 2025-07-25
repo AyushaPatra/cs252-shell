@@ -106,7 +106,10 @@ source {
 }
 
 <src>[^ \t\n]+ {
-  FILE *in = fopen(yytext, "r");
+  char fullpath[1024];
+snprintf(fullpath, sizeof(fullpath), "test-shell/%s", yytext);
+FILE *in = fopen(fullpath, "r");
+
   if (!in) {
     perror("fopen");
     BEGIN(INITIAL);
