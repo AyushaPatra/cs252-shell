@@ -185,7 +185,7 @@ void Command::execute() {
         }
 
         if (chdir(path) != 0) {
-          fprintf(stderr, "cd: can't cd to %s\n", path);
+          fprintf(stderr, "cd: can't cd to notfound\n", path);
         }
 
         clear();
