@@ -12,7 +12,6 @@ README
 shell-in
 shell-out
 sh-in
-sh-out
 testall
 testall.out
 test_append_output
