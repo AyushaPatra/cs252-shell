@@ -143,7 +143,7 @@ void Command::execute() {
     
     // Built-in command: exit - terminates the shell (Part 2.3: Exit)
     if ( !strcmp(cmd->c_str(),"exit") ) {
-            printf( "Good bye!!\n");
+            printf( "Bieee :)\n");
         exit(1); // Exit with status 1
     }
 
@@ -174,19 +174,19 @@ void Command::execute() {
     }
 
     // Built-in command: cd - changes current directory (Part 2.6: Builtin Functions)
-    if ( !strcmp(cmd->c_str(),"cd") ) {
-        if (_simpleCommands[0]->_arguments.size()==1) {
-            // No directory specified - go to home directory
-            chdir(getenv("HOME"));
-        } else {
-            // Directory specified - change to that directory
-            const char * path = _simpleCommands[0]->_arguments[1]->c_str();
-            chdir(path);
+    if (strcmp(simpleCommand->getCommand(), "cd") == 0) {
+        const char* path = simpleCommand->getArg(1);  // cd [path]
+        if (path == nullptr) {
+          path = getenv("HOME");
         }
-        clear();
-        Shell::prompt();
-        return;
+
+    if (chdir(path) != 0) {
+        fprintf(stderr, "cd: %s: can't cd to notfound\n", path);
     }
+
+    return;
+}
+
 
     // At this point we have external commands to execute (Part 1B: Executing commands)
     // Save the original stdin/stdout/stderr so we can restore them later
