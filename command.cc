@@ -34,14 +34,13 @@
 #include "command.hh"
 #include "shell.hh"
 
-#ifndef YY_BUF_SIZE
-#define YY_BUF_SIZE 16384
-#endif
-
-extern int yyparse();
-    extern void yypush_buffer_state(YY_BUFFER_STATE);
-    extern void yypop_buffer_state();
-    extern YY_BUFFER_STATE yy_create_buffer(FILE*, int);
+extern "C" {
+  #include "y.tab.hh"
+  int yyparse();
+  void yypush_buffer_state(YY_BUFFER_STATE);
+  void yypop_buffer_state();
+  YY_BUFFER_STATE yy_create_buffer(FILE *, int);
+}
 
 Command::Command() {
     // Initialize a new vector of Simple Commands
@@ -229,35 +228,6 @@ void Command::execute() {
         Shell::prompt();
         return;
     }
-
-    if (!strcmp(cmd->c_str(), "source")) {
-    if (_simpleCommands[0]->_arguments.size() != 2) {
-        fprintf(stderr, "source: missing filename\n");
-        clear();
-        Shell::prompt();
-        return;
-    }
-
-    const char* filename = _simpleCommands[0]->_arguments[1]->c_str();
-    FILE* in = fopen(filename, "r");
-    if (!in) {
-        perror("source");
-        clear();
-        Shell::prompt();
-        return;
-    }
-
-    yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
-    Shell::_srcCmd = true;
-    yyparse();
-    yypop_buffer_state();
-    fclose(in);
-    Shell::_srcCmd = false;
-
-    clear();
-    Shell::prompt();
-    return;
-}
 
 
     // Save default stdin, stdout, stderr
