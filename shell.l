@@ -121,7 +121,7 @@ source {
     fclose(in);
     Shell::_srcCmd = false;
   }
-}*/
+} */
 
 <src>[^ \t\n]+ {
   FILE *in = fopen(yytext, "r");
