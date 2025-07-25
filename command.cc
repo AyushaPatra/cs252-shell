@@ -34,6 +34,17 @@
 #include "command.hh"
 #include "shell.hh"
 
+extern "C" {
+  void yypush_buffer_state(YY_BUFFER_STATE);
+  void yypop_buffer_state();
+  YY_BUFFER_STATE yy_create_buffer(FILE *, int);
+  int yyparse();
+}
+
+#ifndef YY_BUF_SIZE
+#define YY_BUF_SIZE 16384
+#endif
+
 
 Command::Command() {
     // Initialize a new vector of Simple Commands
