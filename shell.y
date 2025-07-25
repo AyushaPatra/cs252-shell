@@ -414,13 +414,11 @@ void expandWildcard(char * prefix, char * suffix) {
     (strchr(component, '*') || strchr(component, '?'))) {
 
     // Only allow fallback for actual command-line words, not intermediate path segments
-    // This fixes test_wildcards7 while preventing test_wildcards6 failure
-
-    snprintf(newPrefix, MAXFILENAME, "%s%s%s",
-             (Prefix[0] ? prefix : ""),
-             (Prefix[0] ? "/" : ""),
-             component);
-
+    // fallback: treat as literal if no matches
+    if (Prefix[0] == 0)
+        strcpy(newPrefix, component);
+    else
+        sprintf(newPrefix, "%s/%s", prefix, component);
     _sortArgument.push_back(strdup(newPrefix));
 }
 
