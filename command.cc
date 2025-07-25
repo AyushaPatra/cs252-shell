@@ -173,23 +173,28 @@ void Command::execute() {
         return;
     }
 
-    // Built-in command: cd - changes current directory (Part 2.6: Builtin Functions)
-    if (strcmp(simpleCommand->getCommand(), "cd") == 0) {
-        const char* path = simpleCommand->getArg(1);
-        if (path == nullptr) {
+    // Built-in command: cd - changes the current directory (Part 2.6)
+    if (!strcmp(cmd->c_str(), "cd")) {
+        const char * path;
+
+        // If no argument, default to HOME
+        if (_simpleCommands[0]->_arguments.size() == 1) {
           path = getenv("HOME");
+        } else {
+          path = _simpleCommands[0]->_arguments[1]->c_str();
         }
 
         if (chdir(path) != 0) {
           fprintf(stderr, "cd: can't cd to %s\n", path);
         }
 
+        clear();
+        Shell::prompt();
         return;
     }
 
 
-
-    // At this point we have external commands to execute (Part 1B: Executing commands)
+    // Atp we have external commands to execute (Part 1B: Executing commands)
     // Save the original stdin/stdout/stderr so we can restore them later
 
     int tmpin = dup(0);   // Save original stdin
