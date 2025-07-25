@@ -3,6 +3,7 @@
 
 #include "command.hh"
 #include <vector>
+#include <stdio.h> // For FILE*
 
 // === Flex buffer-related declarations and macros ===
 #ifndef YY_BUF_SIZE
@@ -18,12 +19,20 @@
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern void yyrestart(FILE * input_file);
 extern int yyparse(void);
 extern void yypush_buffer_state(YY_BUFFER_STATE buffer);
 extern void yypop_buffer_state(void);
 extern YY_BUFFER_STATE yy_create_buffer(FILE * file, int size);
-// =====================================================
+
+#ifdef __cplusplus
+}
+#endif
+// =======================
 
 struct Shell {
 
