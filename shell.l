@@ -228,9 +228,9 @@ $\{[^ \}\n]*\}([^ \n]*|$\{[^ \}\n]*\})* {
     close(pout[0]);
 
     //printf("output is %d, %d, %s", BUFSIZE, rd, c);
-    for (int i = rd - 12; i >= 0; --i ) {
+    for (int i = rd - 1; i >= 0; --i ) {
       if (c[i] == '\n') {
-        c[i] = '\t';
+        c[i] = ' ';
       }
       myunputc( c[i] );
     }
