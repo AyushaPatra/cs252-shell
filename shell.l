@@ -7,7 +7,6 @@
  *
  */
 
-%x src
 
 %{
 
@@ -100,46 +99,6 @@ void myunputc(int c) {
   yylval.cpp_string = new std::string(str);
   return WORD;
 }
-
-source {
-  BEGIN(src);
-}
-
-<src>[^ \t\n]+ {
-  char *path = yytext + 6;  // skip "source"
-  while (*path == ' ' || *path == '\t') path++;  // skip extra spaces
-
-  std::string filepath = std::string("test-shell/") + path;
-  FILE *in = fopen(filepath.c_str(), "r");
-
-  if (!in) {
-    perror("fopen");
-    BEGIN(INITIAL);
-    return NEWLINE;  // prevent further parsing
-  }
-
-  Shell::_srcCmd = true;
-  yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
-  yyparse();
-  yypop_buffer_state();
-  fclose(in);
-  Shell::_srcCmd = false;
-
-  BEGIN(INITIAL);
-  return NEWLINE;  // prevent fallthrough
-}
-
-\$\{[^ \t\n\}]+\} {
-    std::string raw = std::string(yytext);
-    std::string varname = raw.substr(2, raw.size() - 3);
-    const char* val = getenv(varname.c_str());
-    if (val)
-        yylval.cpp_string = new std::string(val);
-    else
-        yylval.cpp_string = new std::string("");
-    return WORD;
-}
-
 
 [^ \|>\t\n][^ \|>\t\n]*  {
   /* Assume that file names have only alpha chars */
