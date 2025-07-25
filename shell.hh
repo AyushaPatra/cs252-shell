@@ -13,6 +13,8 @@ struct Shell {
   static std::vector<int> _bgPIDs;
 
   static bool _srcCmd;
+
+  static bool _isSubshell;
 };
 
 #endif

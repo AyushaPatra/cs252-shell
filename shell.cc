@@ -140,4 +140,5 @@ int main(int argc, char **argv) {
 /* Global shell state variables */
 Command Shell::_currentCommand;    // Current command being parsed/executed
 std::vector<int> Shell::_bgPIDs;   // List of background process PIDs for zombie cleanup (Part 2.2)
-bool Shell::_srcCmd;               // Flag indicating if currently sourcing a file (Part 2.6/2.7)
+bool Shell::_srcCmd;           // Flag indicating if currently sourcing a file (Part 2.6/2.7)
+bool Shell::_isSubshell = false;

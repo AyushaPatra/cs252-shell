@@ -172,11 +172,6 @@ $\{[^ \}\n]*\}([^ \n]*|$\{[^ \}\n]*\})* {
     found = str.find('$');
   }
   result += str;
-  /*result = result + str.substr(2,str.size()-3);
-  if (getenv(str.c_str()))
-    yylval.cpp_string = new std::string(getenv(str.c_str()));
-  else
-    yylval.cpp_string = new std::string(str);*/
   yylval.cpp_string = new std::string(result);
   return WORD;
 }
@@ -204,6 +199,7 @@ $\{[^ \}\n]*\}([^ \n]*|$\{[^ \}\n]*\})* {
 
   int ret = fork();
   if (ret==0) {
+    Shell::_isSubshell = true;
     char ** args = new char*[2];
     args[0] = (char*)"/proc/self/exe";
     args[1] = NULL;

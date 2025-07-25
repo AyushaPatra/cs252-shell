@@ -143,7 +143,9 @@ void Command::execute() {
     
     // Built-in command: exit - terminates the shell (Part 2.3: Exit)
     if ( !strcmp(cmd->c_str(),"exit") ) {
-            printf( "Bieee :)\n");
+        if (!Shell::_isSubshell) {
+           printf("Bieee :)\n");
+        }
         exit(1); // Exit with status 1
     }
 
