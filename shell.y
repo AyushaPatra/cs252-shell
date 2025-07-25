@@ -313,7 +313,15 @@ void expandWildcardsIfNecessary(std::string * arg) {
 void expandWildcard(char * prefix, char * suffix) {
   // Base case: no more path components to process
   if (suffix[0] == 0) {
-    _sortArgument.push_back(strdup(prefix));
+    //_sortArgument.push_back(strdup(prefix));
+    // Normalize to remove trailing slash
+  char cleaned[MAXFILENAME];
+  strcpy(cleaned, prefix);
+  int len = strlen(cleaned);
+  if (len > 1 && cleaned[len - 1] == '/') {
+    cleaned[len - 1] = '\0';
+  }
+  _sortArgument.push_back(strdup(cleaned));
     return;
   }
   
