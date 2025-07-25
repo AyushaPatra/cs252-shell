@@ -402,11 +402,11 @@ void expandWildcard(char * prefix, char * suffix) {
   }
   
   // If no matches found, keep the original component (literal interpretation)
-  /*if (!find) {
+  if (!find && suffix[0] == '\0') {
     if (Prefix[0] == 0) strcpy(newPrefix, component);
     else sprintf(newPrefix, "%s/%s", prefix, component);
     expandWildcard(newPrefix, suffix);
-  }*/
+  }
   
   // Cleanup
   closedir(d);
