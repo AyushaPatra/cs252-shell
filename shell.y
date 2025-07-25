@@ -408,18 +408,22 @@ void expandWildcard(char * prefix, char * suffix) {
     expandWildcard(newPrefix, suffix);
   }*/
 
-  if (!find) {
-    // Only fallback if this is the last component (suffix is empty)
-    // and directory exists — allow /usr/lib/libopenblasp-??.a to fallback
-    if (suffix[0] == '\0') {
-        if (Prefix[0] == 0) strcpy(newPrefix, component);
-        else sprintf(newPrefix, "%s/%s", prefix, component);
-        // Don't fallback if it's a partial path (prevents breaking test_wildcards6)
-        if (opendir(Prefix)) {
-            _sortArgument.push_back(strdup(newPrefix));
-        }
+  // Final fallback: only for the last component if no match
+if (!find && suffix[0] == '\0') {
+    // Build full literal path for fallback
+    if (Prefix[0] == 0) {
+        sprintf(newPrefix, "%s", component);
+    } else {
+        sprintf(newPrefix, "%s/%s", prefix, component);
+    }
+
+    // Only fallback if file actually exists or full path doesn't contain *
+    struct stat st;
+    if (stat(newPrefix, &st) == 0 || strchr(component, '*') || strchr(component, '?')) {
+        _sortArgument.push_back(strdup(newPrefix));
     }
 }
+
 
   
   // Cleanup
