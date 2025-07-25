@@ -124,6 +124,17 @@ source {
   return NEWLINE;  // prevent fallthrough
 }
 
+\$\{[^ \t\n\}]+\} {
+    std::string raw = std::string(yytext);
+    std::string varname = raw.substr(2, raw.size() - 3);
+    const char* val = getenv(varname.c_str());
+    if (val)
+        yylval.cpp_string = new std::string(val);
+    else
+        yylval.cpp_string = new std::string("");
+    return WORD;
+}
+
 
 [^ \|>\t\n][^ \|>\t\n]*  {
   /* Assume that file names have only alpha chars */
