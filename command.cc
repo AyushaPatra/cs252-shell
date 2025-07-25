@@ -36,10 +36,11 @@
 
 extern "C" {
   #include "y.tab.hh"
-  int yyparse();
-  void yypush_buffer_state(YY_BUFFER_STATE);
-  void yypop_buffer_state();
-  YY_BUFFER_STATE yy_create_buffer(FILE *, int);
+  typedef struct yy_buffer_state *YY_BUFFER_STATE;
+  YY_BUFFER_STATE yy_create_buffer(FILE *file, int size);
+  void yypush_buffer_state(YY_BUFFER_STATE buffer);
+  void yypop_buffer_state(void);
+  int yyparse(void);
 }
 
 Command::Command() {
