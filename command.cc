@@ -174,18 +174,19 @@ void Command::execute() {
     }
 
     // Built-in command: cd - changes current directory (Part 2.6: Builtin Functions)
-    if (strcmp(SimpleCommand->getCommand(), "cd") == 0) {
-        const char* path = SimpleCommand->getArg(1);  // cd [path]
+    if (strcmp(simpleCommand->getCommand(), "cd") == 0) {
+        const char* path = simpleCommand->getArg(1);
         if (path == nullptr) {
           path = getenv("HOME");
         }
 
-    if (chdir(path) != 0) {
-        fprintf(stderr, "cd: %s: can't cd to notfound\n", path);
+        if (chdir(path) != 0) {
+          fprintf(stderr, "cd: can't cd to %s\n", path);
+        }
+
+        return;
     }
 
-    return;
-}
 
 
     // At this point we have external commands to execute (Part 1B: Executing commands)
