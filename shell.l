@@ -107,8 +107,8 @@ source {
 
 <src>[^ \t\n]+ {
   char fullpath[1024];
-snprintf(fullpath, sizeof(fullpath), "test-shell/%s", yytext);
-FILE *in = fopen(fullpath, "r");
+  snprintf(fullpath, sizeof(fullpath) - 1, "test-shell/%.*s", 1000, yytext);
+  fullpath[sizeof(fullpath) - 1] = '\0';  // Just in case
 
   if (!in) {
     perror("fopen");
