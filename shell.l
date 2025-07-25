@@ -105,7 +105,7 @@ source {
   BEGIN(src);
 }
 
-<src>[^ \t\n][^ \t\n]* {
+/*<src>[^ \t\n][^ \t\n]* {
   FILE * in = fopen(yytext, "r+");
 
   if (!in) {
@@ -121,7 +121,27 @@ source {
     fclose(in);
     Shell::_srcCmd = false;
   }
+}*/
+
+<src>[^ \t\n]+ {
+  FILE *in = fopen(yytext, "r");
+  if (!in) {
+    perror("fopen");
+    BEGIN(INITIAL);
+    return NEWLINE;  // prevent further parsing
+  }
+
+  Shell::_srcCmd = true;
+  yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
+  yyparse();
+  yypop_buffer_state();
+  fclose(in);
+  Shell::_srcCmd = false;
+
+  BEGIN(INITIAL);
+  return NEWLINE;  // prevent fallthrough
 }
+
 
 [^ \|>\t\n][^ \|>\t\n]*  {
   /* Assume that file names have only alpha chars */
