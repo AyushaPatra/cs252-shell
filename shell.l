@@ -19,6 +19,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <pwd.h>
 
 static  void yyunput (int c,char *buf_ptr  );
 
