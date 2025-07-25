@@ -7,7 +7,7 @@
  *
  */
 
-%x src
+// %x src
 
 %{
 
@@ -75,7 +75,7 @@ void myunputc(int c) {
   return GREATAMPERSAND;
 }
 
-source {
+/*source {
   BEGIN(src);
 }
 
@@ -95,7 +95,7 @@ source {
     BEGIN(INITIAL);
   }
 }
-
+*/
 
 
 \"([^\\"]|\\.)*\"   {
