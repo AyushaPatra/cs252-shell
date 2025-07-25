@@ -109,7 +109,7 @@ source {
   char *path = yytext + 6;  // skip "source"
   while (*path == ' ' || *path == '\t') path++;  // skip extra spaces
 
-  FILE *in = fopen(fullpath, "r");
+  FILE *in = fopen(path, "r");
 
   if (!in) {
     perror("fopen");
