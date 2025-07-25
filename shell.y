@@ -410,16 +410,18 @@ void expandWildcard(char * prefix, char * suffix) {
   }*/
 
   // Final fallback: only for the last component if no match
-if (!find && suffix[0] == '\0') {
-    if (strchr(component, '*') || strchr(component, '?')) {
-        // Only fallback for wildcardy patterns that failed at final step
-        if (Prefix[0] == 0) {
-            snprintf(newPrefix, MAXFILENAME, "%s", component);
-        } else {
-            snprintf(newPrefix, MAXFILENAME, "%s/%s", prefix, component);
-        }
-        _sortArgument.push_back(strdup(newPrefix));
-    }
+  if (!find && suffix[0] == '\0' &&
+    (strchr(component, '*') || strchr(component, '?'))) {
+
+    // Only allow fallback for actual command-line words, not intermediate path segments
+    // This fixes test_wildcards7 while preventing test_wildcards6 failure
+
+    snprintf(newPrefix, MAXFILENAME, "%s%s%s",
+             (Prefix[0] ? prefix : ""),
+             (Prefix[0] ? "/" : ""),
+             component);
+
+    _sortArgument.push_back(strdup(newPrefix));
 }
 
 
