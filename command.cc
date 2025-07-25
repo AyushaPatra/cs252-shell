@@ -230,6 +230,31 @@ void Command::execute() {
         return;
     }
 
+        // run a file line-by-line as if typed by user
+    if ( !strcmp(cmd->c_str(), "source") ) {
+        if (_simpleCommands[0]->_arguments.size() < 2) {
+            fprintf(stderr, "source: missing filename\n");
+        } else {
+            const char *filename = _simpleCommands[0]->_arguments[1]->c_str();
+            FILE *in = fopen(filename, "r");
+            if (!in) {
+                perror("source: cannot open file");
+            } else {
+                YY_BUFFER_STATE buf = yy_create_buffer(in, YY_BUF_SIZE);
+                yypush_buffer_state(buf);
+                Shell::_srcCmd = true;
+                yyparse(); // recursively parse the file!
+                yypop_buffer_state();
+                fclose(in);
+                Shell::_srcCmd = false;
+            }
+        }
+        clear();
+        Shell::prompt();
+        return;
+    }
+
+
 
     // Save default stdin, stdout, stderr
     int tmpin = dup(0);
