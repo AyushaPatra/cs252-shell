@@ -42,7 +42,7 @@ extern "C" {
   YY_BUFFER_STATE yy_create_buffer(FILE *, int);
   void yypush_buffer_state(YY_BUFFER_STATE);
   void yypop_buffer_state(void);
-  int yyparse();
+  //int yyparse();
 }
 
 #ifndef YY_BUF_SIZE
