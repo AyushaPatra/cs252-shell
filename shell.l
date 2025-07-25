@@ -7,11 +7,20 @@
  *
  */
 
+%x src
+
 %{
 
 #include <cstring>
 #include <string>
 #include "y.tab.hh"
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "shell.hh"
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <string.h>
 
 static  void yyunput (int c,char *buf_ptr  );
 
@@ -65,6 +74,29 @@ void myunputc(int c) {
 ">&" {
   return GREATAMPERSAND;
 }
+
+source {
+  BEGIN(src);
+}
+
+<src>[^ \t\n][^ \t\n]* {
+  FILE * in = fopen(yytext, "r");
+
+  if (!in) {
+    perror("fopen");
+    BEGIN(INITIAL);
+  } else {
+    yypush_buffer_state(yy_create_buffer(in, 16384));
+    Shell::_srcCmd = true;
+    yyparse();
+    yypop_buffer_state();
+    fclose(in);
+    Shell::_srcCmd = false;
+    BEGIN(INITIAL);
+  }
+}
+
+
 
 \"([^\\"]|\\.)*\"   {
   // Double-quoted string, strip the quotes

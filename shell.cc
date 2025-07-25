@@ -133,4 +133,4 @@ int main(int argc, char **argv) {
 
 Command Shell::_currentCommand;
 std::vector<int> Shell::_bgPIDs;
-bool Shell::_srcCmd;
+bool Shell::_srcCmd = false;
