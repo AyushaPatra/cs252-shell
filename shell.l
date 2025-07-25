@@ -181,7 +181,7 @@ source {
     yylval.cpp_string = new std::string(str);
   }
   return WORD;
-
+}
 
 \"[^\n\"]*\" {
   std::string str = std::string(yytext);
