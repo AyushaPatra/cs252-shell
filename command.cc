@@ -173,21 +173,16 @@ void Command::execute() {
         return;
     }
 
-    // Built-in command: cd - changes the current directory (Part 2.6)
-    if (!strcmp(cmd->c_str(), "cd")) {
-        const char * path;
-
-        // If no argument, default to HOME
-        if (_simpleCommands[0]->_arguments.size() == 1) {
-          path = getenv("HOME");
+    // Built-in command: cd - changes current directory (Part 2.6: Builtin Functions)
+    if ( !strcmp(cmd->c_str(),"cd") ) {
+        if (_simpleCommands[0]->_arguments.size()==1) {
+            // No directory specified - go to home directory
+            chdir(getenv("HOME"));
         } else {
-          path = _simpleCommands[0]->_arguments[1]->c_str();
+            // Directory specified - change to that directory
+            const char * path = _simpleCommands[0]->_arguments[1]->c_str();
+            chdir(path);
         }
-
-        if (chdir(path) != 0) {
-          fprintf(stderr, "cd: can't cd to notfound\n", path);
-        }
-
         clear();
         Shell::prompt();
         return;
