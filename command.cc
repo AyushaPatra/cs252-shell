@@ -129,6 +129,7 @@ void Command::redirect(int i, std::string * curr) {
 
 void Command::execute() {
     // Don't do anything if there are no simple commands
+    // This handles the case where user just presses enter with no command
     if ( _simpleCommands.size() == 0 ) {
         Shell::prompt();
         return;
@@ -139,39 +140,46 @@ void Command::execute() {
 
     // exit myshell
     std::string* cmd = _simpleCommands[0]->_arguments[0];
+    
+    // Built-in command: exit - terminates the shell (Part 2.3: Exit)
     if ( !strcmp(cmd->c_str(),"exit") ) {
             printf( "Good bye!!\n");
-        exit(1);
+        exit(1); // Exit with status 1
     }
 
-    // set the environment variable
+    // Built-in command: setenv - sets environment variables (Part 2.6: Builtin Functions)
+    // Format: setenv VARIABLE_NAME VALUE
     if ( !strcmp(cmd->c_str(),"setenv") ) {
+        // Validate argument count - setenv needs exactly 2 arguments plus command name
         if ( _simpleCommands[0]->_arguments.size() != 3 ) {
             fprintf(stderr, "setenv should take two arguments\n");
             return;
         }
-        const char * A = _simpleCommands[0]->_arguments[1]->c_str();
-        const char * B = _simpleCommands[0]->_arguments[2]->c_str();
-        setenv(A, B, 1);
-        clear();
-        Shell::prompt();
+        // Extract variable name and value from arguments
+        const char * A = _simpleCommands[0]->_arguments[1]->c_str(); // Variable name
+        const char * B = _simpleCommands[0]->_arguments[2]->c_str(); // Variable value
+        setenv(A, B, 1); // Set environment variable (1 means overwrite if exists)
+        clear(); // Clean up command structure
+        Shell::prompt(); // Show next prompt
         return;
     }
 
-    // unset the environment varibale
+    // Built-in command: unsetenv - removes environment variables (Part 2.6: Builtin Functions)
     if ( !strcmp(cmd->c_str(),"unsetenv") ) {
-        const char * A = _simpleCommands[0]->_arguments[1]->c_str();
-        unsetenv(A);
+        const char * A = _simpleCommands[0]->_arguments[1]->c_str(); // Variable to unset
+        unsetenv(A); // Remove the environment variable
         clear();
         Shell::prompt();
         return;
     }
 
-    // change directory
+    // Built-in command: cd - changes current directory (Part 2.6: Builtin Functions)
     if ( !strcmp(cmd->c_str(),"cd") ) {
         if (_simpleCommands[0]->_arguments.size()==1) {
+            // No directory specified - go to home directory
             chdir(getenv("HOME"));
         } else {
+            // Directory specified - change to that directory
             const char * path = _simpleCommands[0]->_arguments[1]->c_str();
             chdir(path);
         }
@@ -180,18 +188,23 @@ void Command::execute() {
         return;
     }
 
-    //save in/out
-    int tmpin = dup(0);
-    int tmpout = dup(1);
-    int tmperr = dup(2);
-    int numsimplecommands = _simpleCommands.size();
+    // At this point we have external commands to execute (Part 1B: Executing commands)
+    // Save the original stdin/stdout/stderr so we can restore them later
+
+    int tmpin = dup(0);   // Save original stdin
+    int tmpout = dup(1);  // Save original stdout
+    int tmperr = dup(2);  // Save original stderr
+    int numsimplecommands = _simpleCommands.size(); // Number of commands in pipeline
     
-    // set the initial input
+    // Set up initial input for the pipeline (Part 1B.2: File redirection)
+    // If input redirection is specified, open that file; otherwise use stdin
     int fdin;
     if ( _inFile ) {
+        // Input redirection specified (< filename)
         const char* infile = _inFile->c_str();
-        fdin = open(infile, O_RDONLY);
+        fdin = open(infile, O_RDONLY); // Open file for reading only
         if (fdin < 0) {
+            // File doesn't exist or can't be opened
             fprintf(stderr, "/bin/sh: 1: cannot open %s: No such file\n", infile);
             Shell::prompt();
             clear();
@@ -199,36 +212,45 @@ void Command::execute() {
         }
     } 
     else {
-        //Use default input
+        // No input redirection - use default input (stdin)
         fdin = dup(tmpin);
     }
-    // Add execution here
-    int ret;
-    int fdout;
-    int fderr;
+    // Main execution loop - process each command in the pipeline (Part 1B.1 & 1B.3: Process creation and Pipes)
+    // Each iteration handles one simple command and sets up pipes for the next
+
+    int ret; // Will store the PID of the last process created
+    int fdout; // Output file descriptor for current command
+    int fderr; // Error file descriptor for current command
+    
     for (int i=0; i<numsimplecommands; i++) {
-        //redirect input
-        // Setup i/o redirection
-        dup2(fdin, 0);
-        close(fdin);
-        //setup output
+        
+        dup2(fdin, 0); // Redirect stdin to fdin
+        close(fdin);  
+        
+        // Set up output redirection for current command (Part 1B.2: File redirection)
         if (i == numsimplecommands-1) {
-            //Last simple command
+            // This is the LAST command in the pipeline
+            // Handle output redirection to files if specified
             if ( _outFile ) {
+                // Output redirection specified (> or >> filename)
                 const char* outfile = _outFile->c_str();
                 if ( _append ){
+                    // Append mode (>>) - Part 1B.2 supports >> and >>& 
                     fdout = open(outfile, O_CREAT|O_WRONLY|O_APPEND, 0664);
                 }
                 else {
+                    // Overwrite mode (>) - Part 1B.2 supports > and >&
                     fdout = open(outfile, O_CREAT|O_WRONLY|O_TRUNC, 0664);
                 }
             } 
             else {
-                //Use default output
+                // No output redirection - use default output (stdout)
                 fdout = dup(tmpout);
             }
 
+            // Handle error redirection for last command (Part 1B.2: stderr redirection 2>, >&, >>& )
             if ( _errFile ) {
+                // Error redirection specified (2> or 2>> filename)
                 const char* errfile = _errFile->c_str();
                 if ( _append ){
                     fderr = open(errfile, O_CREAT|O_WRONLY|O_APPEND, 0664);
@@ -238,83 +260,115 @@ void Command::execute() {
                 }
             }
             else {
+                // No error redirection - use default stderr
                 fderr = dup(tmperr);
             }
-            dup2(fderr, 2);
+            dup2(fderr, 2); // Redirect stderr
             close(fderr);
+            
+            // Set the $_ environment variable to the last argument of last command (Part 3.1: Environment variable expansion)
+           
             int n = _simpleCommands[i]->_arguments.size();
             char * c = strdup(_simpleCommands[i]->_arguments[n-1]->c_str());
             setenv("_", c, 1);
         }
         else {
-            //Not last simple command
-            //create pipe
-            int fdpipe[2];
-            pipe(fdpipe);
-            fdout = fdpipe[1];
-            fdin = fdpipe[0];
-        }
-        //Redirect output
-        dup2(fdout, 1);
-        close(fdout);
+            // This is NOT the last command - create a pipe to next command (Part 1B.3: Pipes)
+            // The output of this command becomes input for the next command
 
-        //Create child process
-        // For every simple command fork a new process
+            int fdpipe[2];
+            pipe(fdpipe);    
+            fdout = fdpipe[1]; 
+            fdin = fdpipe[0]; 
+        }
+        
+        
+        dup2(fdout, 1); // Redirect stdout to fdout
+        close(fdout);   // Close original descriptor
+
+        // Create child process to execute the command (Part 1B.1: Simple command process creation and execution)
+
         ret = fork();
         if (ret==0) {
-            // printenv function call
+            // CHILD PROCESS 
+            
+            // Handle special built-in command: printenv (Part 2.6: Builtin Functions)
+
             if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "printenv")) {
-                char **p = environ;
+                // Print all environment variables
+                char **p = environ; // environ is global array of environment strings
                 while (*p!=NULL) {
                     printf("%s\n", *p);
                     p++;
                 }
-                exit(0);
+                exit(0); // Child exits after printing environment
             }
-            // and call exec
+            
+            // Prepare arguments for execvp() (Part 1B.1: Simple command process creation and execution)
+            
             const char * command = _simpleCommands[i]->_arguments[0]->c_str();
             int argnum = _simpleCommands[i]->_arguments.size();
-            char ** args = new char*[argnum+1];
+            char ** args = new char*[argnum+1]; // +1 for NULL terminator
+            
+            // Copy all arguments to the args array
             for (int j=0; j<argnum; j++) {
                 args[j] = (char *)_simpleCommands[i]->_arguments[j]->c_str();
             }
-            args[argnum] = NULL;
+            args[argnum] = NULL; // NULL-terminate the array
+            
+            // Execute the command - this replaces the child process image
             execvp(command, args);
+            // If we reach here, execvp failed!
             perror("execvp");
-            exit(1);
+            exit(1); // Exit child with error status
         } 
         else if (ret < 0) {
+            // FORK FAILED 
             perror("fork");
             return;
-        }   
+        }
+        // PARENT PROCESS continues here (ret > 0, ret = child PID)
+        // The parent continues to set up the next command in the pipeline
     }
     
-    //restore in/out defaults
-    dup2(tmpin,0);
-    dup2(tmpout,1);
-    dup2(tmperr,2);
-    close(tmpin);
+    // Restore original file descriptors
+
+    dup2(tmpin,0);  // Restore original stdin
+    dup2(tmpout,1); // Restore original stdout
+    dup2(tmperr,2); // Restore original stderr
+    close(tmpin);   // Close the saved descriptors
     close(tmpout);
     close(tmperr);
 
+    //Handle process completion based on background flag
     if (!_background) {
-        // Wait for last command
+        // FOREGROUND EXECUTION - wait for the last command to finish (Part 1B.1: Simple command process creation and execution)
+        
         int status;
-        waitpid(ret, &status, 0);
+        waitpid(ret, &status, 0); // Wait for last child process
+        
+        // Set $? environment variable to exit status of last command (Part 3.1: Environment variable expansion)
+        
         std::string s = std::to_string(WEXITSTATUS(status));
         setenv("?", s.c_str(), 1);
+        
+        // Handle ON_ERROR environment variable (Part 3.7: Variable prompt)
+        
         char * pError = getenv("ON_ERROR");
         if (pError != NULL && WEXITSTATUS(status) != 0) printf("%s\n", pError);
     } else {
+        // BACKGROUND EXECUTION - don't wait, just track the PID (Part 1A: Grammar supports & for background)
+        // Set $! environment variable to PID of background process (Part 3.1: Environment variable expansion)
         std::string s = std::to_string(ret);
         setenv("!", s.c_str(), 1);
+        // Add to list of background processes for zombie cleanup (Part 2.2: Zombie Elimination)
         Shell::_bgPIDs.push_back(ret);
     }
 
-    // Clear to prepare for next command
-    clear();
+    // Clean up and prepare for next command
+    clear(); // Free memory used by current command structure
 
-    // Print new prompt
+    // Print new prompt for next command
     Shell::prompt();
 }
 

@@ -34,29 +34,40 @@ YY_BUFFER_STATE yy_create_buffer(FILE * file, int size);
 
 
 void Shell::prompt() {
+  // Only print prompt if input is from a terminal and not sourcing a file (Part 1B.4: isatty())
+
   if ( isatty(0) & !_srcCmd ){
+    // Support for variable prompt (Part 3.7: Variable prompt - extra credit 0.5pts)
+    // If PROMPT environment variable is set, use it; otherwise use default
     char * pPrompt = getenv("PROMPT");
     if (pPrompt != NULL) printf("%s ", pPrompt);
-  	else printf("myshell>");
-    fflush(stdout);
+  	else printf("myshell>"); // Default prompt
+    fflush(stdout); // Ensure prompt is displayed immediately
   }
 }
 
 extern "C" void sigIntHandler(int sig)
 {
+  // Handle Ctrl-C signal (Part 2.1: Ctrl-C)
+  // When Ctrl-C is typed and no command is running, discard current prompt and show fresh one
   if (sig == SIGINT) {
-  	Shell::_currentCommand.clear();
+  	Shell::_currentCommand.clear(); 
   	printf("\n");
   	Shell::prompt();
   }
 
+  // Handle child process termination signal (Part 2.2: Zombie Elimination)
+  // This prevents zombie processes by cleaning up background processes when they finish
   if (sig == SIGCHLD) {
     pid_t pid;
 	  int status;
 
+    // Use WNOHANG to avoid blocking - check all finished children
     while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
+      // Search through our list of background processes
       for (unsigned i = 0; i < Shell::_bgPIDs.size(); i++) {
         if (pid == Shell::_bgPIDs[i]) {
+            // Found the finished process - notify user and remove from list
             printf("[%d] exited\n", pid);
             Shell::_bgPIDs.erase(Shell::_bgPIDs.begin() + i);
             break;
@@ -66,40 +77,52 @@ extern "C" void sigIntHandler(int sig)
   }
 }
 
-// Part 2.7 extra cred
+// Default source file implementation (Part 2.7: Creating a Default Source File - extra credit 1pt)
+// When shell starts, automatically run .shellrc if it exists
 void source(void) {
-  std::string s = ".shellrc";
+  std::string s = ".shellrc"; // Look for .shellrc in current directory
   FILE * in = fopen(s.c_str(), "r");
 
   if (!in) {
+    // File doesn't exist - just return silently
     return;
   }
 
+  // Switch input buffer to read from .shellrc file (Part 2.6: source command)
+
   yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
-  Shell::_srcCmd = true;
-  yyparse();
-  yypop_buffer_state();
-  fclose(in);
-  Shell::_srcCmd = false;
+  Shell::_srcCmd = true; // Flag to suppress prompts while sourcing
+  yyparse(); // Parse and execute commands from file
+  yypop_buffer_state(); // Restore original input buffer
+  fclose(in); 
+  Shell::_srcCmd = false; 
 }
 
 int main(int argc, char **argv) {
+  // Set up signal handlers for proper shell behavior
   struct sigaction sa;
-  sa.sa_handler = sigIntHandler;
-  sigemptyset(&sa.sa_mask);
-  sa.sa_flags = SA_RESTART;
+  sa.sa_handler = sigIntHandler; // Use my custom signal handler
+  sigemptyset(&sa.sa_mask); // Don't block other signals during handler execution
+  sa.sa_flags = SA_RESTART; // Automatically restart interrupted system calls
   
+  // Run default source file on startup (Part 2.7: Default Source File - extra credit)
   source();
   
+  // Set up special environment variables (Part 3.1: Environment variable expansion)
+  // NOTE FOR SELF: ${$} - The PID of the shell process
   std::string s = std::to_string(getpid());
   setenv("$", s.c_str(), 1);
   
+  // ${SHELL} - The path of the shell executable
   char abs_path[256];
-  realpath(argv[0], abs_path);
+  realpath(argv[0], abs_path); // Convert relative path to absolute path
   setenv("SHELL", abs_path, 1);
 
-  Shell::_srcCmd = false;
-  Shell::prompt();
+  // Initialize shell state
+  Shell::_srcCmd = false; // Not currently sourcing a file
+  Shell::prompt(); 
+  
+  // Install signal handlers (Part 2.1: Ctrl-C and Part 2.2: Zombie Elimination)
   if (sigaction(SIGINT, &sa, NULL)) {
     perror("sigaction");
     exit(2);
@@ -108,10 +131,13 @@ int main(int argc, char **argv) {
     perror("sigaction");
     exit(2);
   }
-  yyrestart(stdin);
-  yyparse();
+  
+  // Start the main parser loop
+  yyrestart(stdin); // Set input source to stdin
+  yyparse(); // Begin parsing and executing commands
 }
 
-Command Shell::_currentCommand;
-std::vector<int> Shell::_bgPIDs;
-bool Shell::_srcCmd;
+/* Global shell state variables */
+Command Shell::_currentCommand;    // Current command being parsed/executed
+std::vector<int> Shell::_bgPIDs;   // List of background process PIDs for zombie cleanup (Part 2.2)
+bool Shell::_srcCmd;               // Flag indicating if currently sourcing a file (Part 2.6/2.7)
