@@ -109,7 +109,8 @@ source {
   char *path = yytext + 6;  // skip "source"
   while (*path == ' ' || *path == '\t') path++;  // skip extra spaces
 
-  FILE *in = fopen(path, "r");
+  std::string filepath = std::string("test-shell/") + path;
+  FILE *in = fopen(filepath.c_str(), "r");
 
   if (!in) {
     perror("fopen");
