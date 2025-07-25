@@ -19,6 +19,7 @@
 #include <regex.h>     // For wildcard expansion (Part 3.3: Wildcarding)
 #include <dirent.h>    // For directory operations in wildcard expansion
 #include <algorithm>   // For sorting wildcard matches
+#include <sys/stat.h>
 
 #if __cplusplus > 199711L
 #define register      // Deprecated in C++11 so remove the keyword
