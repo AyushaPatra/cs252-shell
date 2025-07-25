@@ -34,22 +34,6 @@
 #include "command.hh"
 #include "shell.hh"
 
-#include "y.tab.hh"       // for yyparse()
-
-// For yyparse(), source handling
-extern "C" {
-  typedef struct yy_buffer_state *YY_BUFFER_STATE;
-  YY_BUFFER_STATE yy_create_buffer(FILE *, int);
-  void yypush_buffer_state(YY_BUFFER_STATE);
-  void yypop_buffer_state(void);
-  //int yyparse();
-}
-
-#ifndef YY_BUF_SIZE
-#define YY_BUF_SIZE 16384
-#endif
-
-
 
 Command::Command() {
     // Initialize a new vector of Simple Commands
@@ -236,36 +220,6 @@ void Command::execute() {
         clear();
         Shell::prompt();
         return;
-    }
-
-    // source <filename>
-    if (!strcmp(cmd->c_str(), "source")) {
-      if (_simpleCommands[0]->_arguments.size() != 2) {
-        fprintf(stderr, "source: missing filename\n");
-        clear();
-        Shell::prompt();
-        return;
-      }
-
-      const char* filename = _simpleCommands[0]->_arguments[1]->c_str();
-      FILE* in = fopen(filename, "r");
-      if (!in) {
-        perror("source");
-        clear();
-        Shell::prompt();
-        return;
-      }
-
-      yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
-      Shell::_srcCmd = true;
-      yyparse();
-      yypop_buffer_state();
-      fclose(in);
-      Shell::_srcCmd = false;
-
-      clear();
-      Shell::prompt();
-      return;
     }
 
 
