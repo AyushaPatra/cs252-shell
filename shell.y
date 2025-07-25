@@ -411,16 +411,13 @@ void expandWildcard(char * prefix, char * suffix) {
 
   // Final fallback: only for the last component if no match
 if (!find && suffix[0] == '\0') {
-    // Build full literal path for fallback
-    if (Prefix[0] == 0) {
-        sprintf(newPrefix, "%s", component);
-    } else {
-        sprintf(newPrefix, "%s/%s", prefix, component);
-    }
-
-    // Only fallback if file actually exists or full path doesn't contain *
-    struct stat st;
-    if (stat(newPrefix, &st) == 0 || strchr(component, '*') || strchr(component, '?')) {
+    if (strchr(component, '*') || strchr(component, '?')) {
+        // Only fallback for wildcardy patterns that failed at final step
+        if (Prefix[0] == 0) {
+            snprintf(newPrefix, MAXFILENAME, "%s", component);
+        } else {
+            snprintf(newPrefix, MAXFILENAME, "%s/%s", prefix, component);
+        }
         _sortArgument.push_back(strdup(newPrefix));
     }
 }
