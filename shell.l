@@ -290,8 +290,6 @@ $\{[^ \}\n]*\}([^ \n]*|$\{[^ \}\n]*\})* {
   }
 }
 
-// Default word matching - handles regular arguments and filenames
-// This rule matches any sequence that doesn't contain special shell characters
 [^ \|>\t\n][^ \|>\t\n]*  {
   /* Basic word recognition for commands, arguments, and filenames */
   yylval.cpp_string = new std::string(yytext);
