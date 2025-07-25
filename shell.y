@@ -123,7 +123,7 @@ argument:
       Command::_currentSimpleCommand->insertArgument(argToInsert);
     }
     _sortArgument.clear();  // Clean up for next argument
-    //if (!wildCard) Command::_currentSimpleCommand->insertArgument($1);
+    if (!wildCard) Command::_currentSimpleCommand->insertArgument($1);
   }
   ;
 
@@ -313,7 +313,16 @@ void expandWildcardsIfNecessary(std::string * arg) {
 void expandWildcard(char * prefix, char * suffix) {
   // Base case: no more path components to process
   if (suffix[0] == 0) {
-    _sortArgument.push_back(strdup(prefix));
+    //_sortArgument.push_back(strdup(prefix));
+    char cleaned[MAXFILENAME];
+strcpy(cleaned, prefix);
+// Remove trailing slash if present (except for root)
+int len = strlen(cleaned);
+if (len > 1 && cleaned[len - 1] == '/') {
+    cleaned[len - 1] = '\0';
+}
+_sortArgument.push_back(strdup(cleaned));
+
     return;
   }
   
@@ -380,6 +389,7 @@ void expandWildcard(char * prefix, char * suffix) {
   // Check each directory entry against the pattern
   while ((ent = readdir(d)) != NULL) {
     if(regexec(&re, ent->d_name, 1, NULL, 0) == 0) {
+      wildCard = true;
       find = true;
       if (Prefix[0] == 0) strcpy(newPrefix, ent->d_name);
       else sprintf(newPrefix, "%s/%s", prefix, ent->d_name);
