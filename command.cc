@@ -34,28 +34,6 @@
 #include "command.hh"
 #include "shell.hh"
 
-#ifndef YY_BUF_SIZE
-#ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k.
- * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
- * Ditto for the __ia64__ case accordingly.
- */
-#define YY_BUF_SIZE 32768
-#else
-#define YY_BUF_SIZE 16384
-#endif
-#endif
-
-#ifndef YY_TYPEDEF_YY_BUFFER_STATE
-#define YY_TYPEDEF_YY_BUFFER_STATE
-typedef struct yy_buffer_state *YY_BUFFER_STATE;
-#endif
-
-void yyrestart(FILE * input_file );
-int yyparse(void);
-void yypush_buffer_state(YY_BUFFER_STATE buffer);
-void yypop_buffer_state();
-YY_BUFFER_STATE yy_create_buffer(FILE * file, int size);
 
 Command::Command() {
     // Initialize a new vector of Simple Commands
