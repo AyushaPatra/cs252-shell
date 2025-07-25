@@ -82,7 +82,27 @@ void source(void) {
   Shell::_srcCmd = false;
 }
 
+void sourceShellrc() {
+  const char* filename = ".shellrc";
+  FILE* in = fopen(filename, "r");
+  if (!in) {
+    return;  // Silently ignore if .shellrc doesn't exist
+  }
+
+  yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
+  Shell::_srcCmd = true;
+  yyparse();
+  yypop_buffer_state();
+  fclose(in);
+  Shell::_srcCmd = false;
+}
+
+
+
 int main(int argc, char **argv) {
+
+  sourceShellrc();
+
   struct sigaction sa;
   sa.sa_handler = sigIntHandler;
   sigemptyset(&sa.sa_mask);
