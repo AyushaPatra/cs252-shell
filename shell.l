@@ -163,6 +163,10 @@ source {
   }
   free(user);
 }
+
+~[^ \t\n]* {
+// General tilde expansion (Part 2.7: Tilde expansion for ~ and ~user patterns)
+// Handles "~", "~/path", "~user", and "~user/path" patterns
   std::string str = std::string(yytext);
   std::string home = getenv("HOME");
   if (str.size() == 1) {
