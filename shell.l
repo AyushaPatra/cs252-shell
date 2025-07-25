@@ -109,6 +109,7 @@ source {
   char fullpath[1024];
   snprintf(fullpath, sizeof(fullpath) - 1, "test-shell/%.*s", 1000, yytext);
   fullpath[sizeof(fullpath) - 1] = '\0';  // Just in case
+  FILE *in = fopen(fullpath, "r");
 
   if (!in) {
     perror("fopen");
