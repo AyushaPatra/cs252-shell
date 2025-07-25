@@ -105,7 +105,7 @@ source {
   BEGIN(src);
 }
 
-/*<src>[^ \t\n][^ \t\n]* {
+/* <src>[^ \t\n][^ \t\n]* {
   FILE * in = fopen(yytext, "r+");
 
   if (!in) {
