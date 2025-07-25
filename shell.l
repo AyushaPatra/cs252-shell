@@ -68,7 +68,6 @@ int mygetc(FILE * f) {
   /* Discard spaces and tabs - whitespace separation between tokens */
 }
 
-// Output redirection operators (Part 1A: Lex and Yacc - Grammar expansion)
 ">" {
   // Simple output redirection (Part 1B.2: File redirection)
   return GREAT;
@@ -89,7 +88,6 @@ int mygetc(FILE * f) {
   return AMPERSAND;
 }
 
-// Advanced redirection operators (Part 1A: Complex grammar)
 ">>" {
   // Append output redirection (Part 1B.2: File redirection supports >>)
   return GREATGREAT;
@@ -110,12 +108,10 @@ int mygetc(FILE * f) {
   return GREATGREATAND;
 }
 
-// Built-in source command implementation (Part 2.6: Builtin Functions - source)
 source {
   BEGIN(src); // Switch to source state to read filename
 }
 
-// Handle source command filename (Part 2.6: source A - runs file A line-by-line)
 <src>[^ \t\n][^ \t\n]* {
   FILE * in = fopen(yytext, "r+");
 
@@ -135,9 +131,38 @@ source {
   }
 }
 
-// Tilde expansion implementation (Part 3.2: Tilde expansion)
-
-~[^ \n\t]* {
+~[^ ]*\/[^ ]* {
+// Tilde expansion with explicit path (Part 2.7: "~user/path" expansion)
+// This handles cases like "~someuser/Documents" to expand to "/home/someuser/Documents"
+  char * s = yytext+1; // Skip the '~' character to get username
+  int i = 0;
+  char * user = (char *) malloc(64); // Allocate space for username
+  while (s[i] != '/' && s[i] != '\0') {
+    user[i] = s[i]; // Copy username character by character
+    i++;
+  }
+  user[i] = '\0'; // Null-terminate username
+  
+  // Look up user in password database to get home directory
+  struct passwd * pwent = getpwnam(user);
+  if (pwent) {
+    // User found - construct full path with user's home directory
+    char *result = (char *)malloc(strlen(pwent->pw_dir) + strlen(s+i) + 1);
+    strcpy(result, pwent->pw_dir); // Copy home directory
+    strcat(result, s+i);           // Append the path after username
+    // Insert expanded path back into input stream in reverse order
+    for (int j = strlen(result) - 1; j >= 0; --j) {
+      myunputc(result[j]);
+    }
+    free(result);
+  } else {
+    // User not found - return original text unchanged
+    for (int j = strlen(yytext) - 1; j >= 0; --j) {
+      myunputc(yytext[j]);
+    }
+  }
+  free(user);
+}
   std::string str = std::string(yytext);
   std::string home = getenv("HOME");
   if (str.size() == 1) {
@@ -158,8 +183,6 @@ source {
   return WORD;
 }
 
-// Quoted string handling (Part 2.4: Quotes)
-// Arguments with spaces can be passed if surrounded by quotes
 \"[^\n\"]*\" {
   std::string str = std::string(yytext);
   str = str.substr(1,str.size()-2); // Remove surrounding quotes
@@ -167,8 +190,6 @@ source {
   return WORD;
 }
 
-// Escape character handling (Part 2.5: Escaping)
-// Any character can be part of an argument if it comes after backslash
 [^ \\\t\n]*(\\[^nt])((\\[^nt])|[^ \\\t\n])* {
   std::string str = std::string(yytext);
   std::size_t found = str.find('\\');
@@ -181,8 +202,6 @@ source {
   return WORD;
 }
 
-// Environment variable expansion (Part 3.1: Environment variable expansion)
-// Supports ${var} format and special variables like ${$}, ${?}, ${!}, ${_}, ${SHELL}
 $\{[^ \}\n]*\}([^ \n]*|$\{[^ \}\n]*\})* {
   std::string str = std::string(yytext);
   std::string result = "";
@@ -208,9 +227,6 @@ $\{[^ \}\n]*\}([^ \n]*|$\{[^ \}\n]*\})* {
   return WORD;
 }
 
-// Subshell implementation (Part 2.8: Subshells)
-// Supports both `command` and $(command) formats
-// The output of the subshell command replaces the subshell expression
 \`[^\n\`]*\`|$\([^\n]*\) {
   std::string str = std::string(yytext);
   if (str.at(0) == '$') {
