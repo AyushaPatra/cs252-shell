@@ -46,6 +46,17 @@
 #endif
 #endif
 
+#ifndef YY_TYPEDEF_YY_BUFFER_STATE
+#define YY_TYPEDEF_YY_BUFFER_STATE
+typedef struct yy_buffer_state *YY_BUFFER_STATE;
+#endif
+
+void yyrestart(FILE * input_file );
+int yyparse(void);
+void yypush_buffer_state(YY_BUFFER_STATE buffer);
+void yypop_buffer_state();
+YY_BUFFER_STATE yy_create_buffer(FILE * file, int size);
+
 Command::Command() {
     // Initialize a new vector of Simple Commands
     _simpleCommands = std::vector<SimpleCommand *>();
