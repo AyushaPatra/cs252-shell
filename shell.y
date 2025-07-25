@@ -123,7 +123,7 @@ argument:
       Command::_currentSimpleCommand->insertArgument(argToInsert);
     }
     _sortArgument.clear();  // Clean up for next argument
-    if (!wildCard) Command::_currentSimpleCommand->insertArgument($1);
+    //if (!wildCard) Command::_currentSimpleCommand->insertArgument($1);
   }
   ;
 
