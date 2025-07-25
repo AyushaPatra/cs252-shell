@@ -199,7 +199,8 @@ $\{[^ \}\n]*\}([^ \n]*|$\{[^ \}\n]*\})* {
 
   int ret = fork();
   if (ret==0) {
-    Shell::_isSubshell = true;
+    //Shell::_isSubshell = true;
+    setenv("IS_SUBSHELL", "1", 1);
     char ** args = new char*[2];
     args[0] = (char*)"/proc/self/exe";
     args[1] = NULL;
