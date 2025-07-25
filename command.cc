@@ -35,7 +35,19 @@
 #include "shell.hh"
 
 #include "y.tab.hh"       // for yyparse()
-#include "lex.yy.cc"      // for YY_BUFFER_STATE and yypush_buffer_state etc.
+
+// For yyparse(), source handling
+extern "C" {
+  typedef struct yy_buffer_state *YY_BUFFER_STATE;
+  YY_BUFFER_STATE yy_create_buffer(FILE *, int);
+  void yypush_buffer_state(YY_BUFFER_STATE);
+  void yypop_buffer_state(void);
+  int yyparse();
+}
+
+#ifndef YY_BUF_SIZE
+#define YY_BUF_SIZE 16384
+#endif
 
 
 
