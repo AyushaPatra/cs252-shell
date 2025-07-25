@@ -223,7 +223,7 @@ void Command::execute() {
     }
 
         // run a file line-by-line as if typed by user
-    if ( !strcmp(cmd->c_str(), "source") ) {
+    /*if ( !strcmp(cmd->c_str(), "source") ) {
         if (_simpleCommands[0]->_arguments.size() < 2) {
             fprintf(stderr, "source: missing filename\n");
         } else {
@@ -244,7 +244,7 @@ void Command::execute() {
         clear();
         Shell::prompt();
         return;
-    }
+    }*/
 
 
 
