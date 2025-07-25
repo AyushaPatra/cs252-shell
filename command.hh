@@ -19,7 +19,7 @@ struct Command {
   void clear();
   void print();
   void execute();
-  void prompt();
+  //void prompt();
   void redirect(int i, std::string * curr);
 
   static SimpleCommand *_currentSimpleCommand;
