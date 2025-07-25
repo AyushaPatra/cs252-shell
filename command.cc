@@ -175,7 +175,7 @@ void Command::execute() {
 
     // Built-in command: cd - changes current directory (Part 2.6: Builtin Functions)
     if (strcmp(SimpleCommand->getCommand(), "cd") == 0) {
-        const char* path = simpleCommand->getArg(1);  // cd [path]
+        const char* path = SimpleCommand->getArg(1);  // cd [path]
         if (path == nullptr) {
           path = getenv("HOME");
         }
