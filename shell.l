@@ -106,8 +106,9 @@ source {
 }
 
 <src>[^ \t\n]+ {
-  char fullpath[1024];
-  snprintf(fullpath, sizeof(fullpath), "%s", yytext);
+  char *path = yytext + 6;  // skip "source"
+  while (*path == ' ' || *path == '\t') path++;  // skip extra spaces
+
   FILE *in = fopen(fullpath, "r");
 
   if (!in) {
