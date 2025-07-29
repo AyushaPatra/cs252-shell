@@ -155,7 +155,7 @@ char * read_line() {
       // ctrl-D was typed
 
       // Go back one character
-      if (line_length == right_side_length) continue;
+      if (line_length == right_side_length-1) continue;
 
       for(int i=right_side_length-2; i>=0; i--) {
         char c = right_side_buffer[i];
