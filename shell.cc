@@ -79,7 +79,7 @@ int main() {
   sigemptyset(&sa.sa_mask);    // Don't block other signals during handler execution!
   sa.sa_flags = SA_RESTART;    // Automatically restart interrupted system calls
 
-  source();
+  
 
   // Install the signal handler for SIGINT (Ctrl-C)
   if(sigaction(SIGINT, &sa, NULL)){
@@ -87,6 +87,7 @@ int main() {
     exit(2);
   }
 
+  source();
   Shell::prompt();
   yyparse(); // Start the parser which will read and execute commands
 }
