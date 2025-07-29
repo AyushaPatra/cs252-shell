@@ -428,6 +428,7 @@ void expandWildcard(char * prefix, char * suffix) {
       }
       _sortArgument.push_back(strdup(newPrefix));
     }
+  }
 
 
 
