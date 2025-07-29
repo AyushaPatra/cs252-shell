@@ -27,6 +27,7 @@ int yyparse(void);
 void yypush_buffer_state(YY_BUFFER_STATE buffer);
 void yypop_buffer_state();
 YY_BUFFER_STATE yy_create_buffer(FILE * file, int size);
+void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
 int yyparse(void);
 
