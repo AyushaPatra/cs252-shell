@@ -407,7 +407,7 @@ void expandWildcard(char * prefix, char * suffix) {
     if (Prefix[0] == 0) strcpy(newPrefix, component);
     else sprintf(newPrefix, "%s/%s", prefix, component);
     expandWildcard(newPrefix, suffix);
-  }
+  }*/
 
   // Final fallback: only for the last component if no match
   if (!find && suffix[0] == '\0') {
@@ -420,7 +420,7 @@ void expandWildcard(char * prefix, char * suffix) {
         sprintf(newPrefix, "%s/%s", prefix, component);
     }
     _sortArgument.push_back(strdup(newPrefix));
-  }*/
+  }
 
 
 
