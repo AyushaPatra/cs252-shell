@@ -410,7 +410,8 @@ void expandWildcard(char * prefix, char * suffix) {
   }*/
 
   // Final fallback: only for the last component if no match
-  if (!find && suffix[0] == '\0') {
+  if (!find && suffix[0] == '\0' &&
+    (strchr(component, '*') == NULL && strchr(component, '?') == NULL)) {
 
     // Only allow fallback for actual command-line words, not intermediate path segments
     // fallback: treat as literal if no matches
