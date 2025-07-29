@@ -403,7 +403,7 @@ void expandWildcard(char * prefix, char * suffix) {
   }
   
   // If no matches found, keep the original component (literal interpretation)
-  if (!find && suffix[0] == '\0') {
+  /*if (!find && suffix[0] == '\0') {
     if (Prefix[0] == 0) {
       strcpy(newPrefix, component);
     }
@@ -412,10 +412,12 @@ void expandWildcard(char * prefix, char * suffix) {
     }
     expandWildcard(newPrefix, suffix);
     //_sortArgument.push_back(strdup(newPrefix));
-  }
+  }*/
 
   /* Final fallback: only for the last component if no match
-  if (!find && suffix[0] == '\0'&& !(strchr(component, '*') || strchr(component, '?'))) {
+  if (!find && suffix[0] == '\0') {
+
+    if (strchr(component, '*') || strchr(component, '?')) {
 
     // Only allow fallback for actual command-line words, not intermediate path segments
     // fallback: treat as literal if no matches
@@ -426,6 +428,15 @@ void expandWildcard(char * prefix, char * suffix) {
       }
       _sortArgument.push_back(strdup(newPrefix));
     }*/
+    if (!find && suffix[0] == '\0') {
+      if (strchr(component, '*') || strchr(component, '?')) {
+        if (prefix[0] == '\0' || (strlen(prefix) > 0 && prefix[strlen(prefix)-1] != '/')) {
+            sprintf(newPrefix, "%s%s", prefix, component);
+            _sortArgument.push_back(strdup(newPrefix));
+        }
+      }
+    }
+
 
 
 
