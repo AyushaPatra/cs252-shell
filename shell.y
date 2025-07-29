@@ -410,17 +410,19 @@ void expandWildcard(char * prefix, char * suffix) {
   }*/
 
   // Final fallback: only for the last component if no match
-  if (!find && suffix[0] == '\0' &&
-    (strchr(component, '*') == NULL && strchr(component, '?') == NULL)) {
+  if (!find && suffix[0] == '\0') {
+
+    if (strchr(component, '*') != NULL && strchr(component, '?') != NULL)) {
 
     // Only allow fallback for actual command-line words, not intermediate path segments
     // fallback: treat as literal if no matches
-    if (Prefix[0] == 0) {
+      if (Prefix[0] == 0) {
         strcpy(newPrefix, component);
-    } else {
+      } else {
         sprintf(newPrefix, "%s/%s", prefix, component);
+      }
+      _sortArgument.push_back(strdup(newPrefix));
     }
-    _sortArgument.push_back(strdup(newPrefix));
   }
 
 
