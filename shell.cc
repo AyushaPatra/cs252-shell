@@ -93,3 +93,4 @@ int main() {
 
 // The parser and lexer use this to construct commands as they parse user input
 Command Shell::_currentCommand;
+bool Shell::_srcCmd;
