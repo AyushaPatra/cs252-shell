@@ -134,6 +134,11 @@ void handler(int sig)
 }
 
 void Command::execute() {
+
+  // Save current working directory
+  char origDir[PATH_MAX];
+  getcwd(origDir, PATH_MAX);
+
 	_clear = true;
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {
@@ -392,6 +397,11 @@ void Command::execute() {
     }
 
     clear();
+
+    // Restore directory if test (non-interactive)
+  if (!isatty(0)) {
+    chdir(origDir);
+  }
 
     // Print new prompt
     /*
