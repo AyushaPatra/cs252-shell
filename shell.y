@@ -414,7 +414,7 @@ void expandWildcard(char * prefix, char * suffix) {
     //_sortArgument.push_back(strdup(newPrefix));
   }*/
 
-  /* Final fallback: only for the last component if no match
+  // Final fallback: only for the last component if no match
   if (!find && suffix[0] == '\0') {
 
     if (strchr(component, '*') || strchr(component, '?')) {
@@ -427,16 +427,7 @@ void expandWildcard(char * prefix, char * suffix) {
         sprintf(newPrefix, "%s/%s", prefix, component);
       }
       _sortArgument.push_back(strdup(newPrefix));
-    }*/
-    if (!find && suffix[0] == '\0') {
-      if (strchr(component, '*') || strchr(component, '?')) {
-        if (prefix[0] == '\0' || (strlen(prefix) > 0 && prefix[strlen(prefix)-1] != '/')) {
-            sprintf(newPrefix, "%s%s", prefix, component);
-            _sortArgument.push_back(strdup(newPrefix));
-        }
-      }
     }
-
 
 
 
