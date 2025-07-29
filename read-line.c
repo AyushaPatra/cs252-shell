@@ -155,8 +155,8 @@ char * read_line() {
       // ctrl-D was typed
 
       // Go back one character
-     // printf("%d\n",line_length);
-     // printf("%d\n",right_side_length);
+      printf("\n%d\n",line_length);
+      printf("%d\n",sizeof(line_buffer);
       if (line_length == sizeof(line_buffer)) continue;
 
       for(int i=right_side_length-2; i>=0; i--) {
