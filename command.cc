@@ -197,7 +197,7 @@ void Command::execute() {
             }
             if (!strcmp(simpleCommand->_arguments[0]->c_str(), "cd")) {
                     if (simpleCommand->_arguments[1] == NULL) {
-                            chdir("/homes/ding190");
+                            chdir("/homes/patra10");
                             continue;
 		    }
 		    else if (strcmp(simpleCommand->_arguments[1]->c_str(), "${HOME}") == 0) {
@@ -397,11 +397,6 @@ void Command::execute() {
     }
 
     clear();
-
-    // Restore directory if test (non-interactive)
-  if (!isatty(0)) {
-    chdir(origDir);
-  }
 
     // Print new prompt
     /*
