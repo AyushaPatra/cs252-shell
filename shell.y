@@ -410,8 +410,8 @@ void expandWildcard(char * prefix, char * suffix) {
     else {
       sprintf(newPrefix, "%s/%s", prefix, component);
     }
-    //expandWildcard(newPrefix, suffix);
-    _sortArgument.push_back(strdup(newPrefix));
+    expandWildcard(newPrefix, suffix);
+    //_sortArgument.push_back(strdup(newPrefix));
   }
 
   /* Final fallback: only for the last component if no match
