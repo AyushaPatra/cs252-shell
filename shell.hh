@@ -10,5 +10,7 @@ struct Shell {
   static Command _currentCommand;
 
   static bool _srcCmd;
+
+  static void source();
 };
 #endif
