@@ -98,7 +98,7 @@ int mygetc(FILE * f) {
 source {
   BEGIN(src);
 }
-
+/*
 <src>[^ \t\n][^ \t\n]* {
   FILE * in = fopen(yytext, "r+");
 
@@ -118,7 +118,7 @@ source {
     myunputc('\n');
   }
 }
-
+*/
 ~[^ \n\t]* {
   std::string str = std::string(yytext);
   std::string home = getenv("HOME");
