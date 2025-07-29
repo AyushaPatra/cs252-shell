@@ -160,6 +160,7 @@ char * read_line() {
       if (line_length == right_side_length) continue;
 
       for(int i=right_side_length-2; i>=0; i--) {
+        printf("test");
         char c = right_side_buffer[i];
         write(1,&c,1);
       }
