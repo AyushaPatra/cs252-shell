@@ -32,6 +32,7 @@ int yyparse(void);
 
 // Part 1A: Shell prompt function (displays "myshell>" when running interactively)
 // This function is called after each command execution to show the user prompt
+extern FILE *yyin;
 
 void source(void) {
   std::string s = ".shellrc";
@@ -40,6 +41,8 @@ void source(void) {
   if (!in) {
     return;
   }
+
+  yyin = in;
 
   yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
   Shell::_srcCmd = true;
