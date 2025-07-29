@@ -44,12 +44,16 @@ void source(void) {
 
   yyin = in;
 
-  yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
+  YY_BUFFER_STATE buf = yy_create_buffer(yyin, YY_BUF_SIZE);
+  yypush_buffer_state(buf);
+
   Shell::_srcCmd = true;
   yyparse();
-  yypop_buffer_state();
-  fclose(in);
   Shell::_srcCmd = false;
+
+  yypop_buffer_state();   // <- if nothing was pushed, this can crash
+  yy_delete_buffer(buf);  // <- you MUST delete the buffer you created
+  fclose(in);
 }
 
 void Shell::prompt() {
