@@ -49,7 +49,7 @@ void source(void) {
   yyparse();
   Shell::_srcCmd = false;
 
-  fclose(in);
+  //fclose(in);
 }
 
 void Shell::prompt() {
