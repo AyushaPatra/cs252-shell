@@ -49,8 +49,6 @@ void source(void) {
   yyparse();
   Shell::_srcCmd = false;
 
-  yypop_buffer_state();   
-
   fclose(in);
 }
 
