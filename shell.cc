@@ -75,8 +75,10 @@ int main() {
     exit(2);
   }
 
-  //source();
-  Shell::prompt();
+  if (isatty(0)) {
+    Shell::prompt();
+  }
+  //Shell::prompt();
   yyparse(); // Start the parser which will read and execute commands
 }
 
