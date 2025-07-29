@@ -26,7 +26,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-
+#include <limits.h>  // for PATH_MAX
 #include <signal.h>
 #include <string.h>
 
