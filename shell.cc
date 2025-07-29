@@ -91,7 +91,9 @@ void source(void) {
 
   // Switch input buffer to read from .shellrc file (Part 2.6: source command)
 
-  yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
+  //yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
+  YY_BUFFER_STATE buf = yy_create_buffer(in, YY_BUF_SIZE);
+  yypush_buffer_state(buf);
   Shell::_srcCmd = true; // Flag to suppress prompts while sourcing
   yyparse(); // Parse and execute commands from file
   yypop_buffer_state(); // Restore original input buffer
