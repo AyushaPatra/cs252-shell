@@ -114,6 +114,8 @@ source {
     yypop_buffer_state();
     fclose(in);
     Shell::_srcCmd = false;
+
+    myunputc('\n');
   }
 }
 
