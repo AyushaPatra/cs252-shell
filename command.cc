@@ -316,7 +316,7 @@ void Command::execute() {
         close(tmpin);
         close(tmpout);
 
-        // Read and display output from subshell
+        /* Read and display output from subshell
         char ch;
         char * buf1 = new char[5000];
         char * buf2 = buf1;
@@ -327,8 +327,16 @@ void Command::execute() {
           //}
         }
         *buf2 = '\0';
-        printf("%s", buf1); // Print subshell output
+        printf("%s", buf1); */// Print subshell output
       }
+
+      char buffer[1024];
+ssize_t bytesRead;
+while ((bytesRead = read(fdpipeout[0], buffer, sizeof(buffer))) > 0) {
+    write(1, buffer, bytesRead);  // directly write to stdout
+}
+
+
       fclose(fd);
       Shell::_srcCmd = false;
       continue; // Source command is complete
