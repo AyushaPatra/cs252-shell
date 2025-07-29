@@ -22,6 +22,7 @@
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 #endif
 
+extern void tty_raw_mode();
 void yyrestart(FILE * input_file );
 int yyparse(void);
 void yypush_buffer_state(YY_BUFFER_STATE buffer);
