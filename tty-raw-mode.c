@@ -14,6 +14,8 @@
 void tty_raw_mode(void)
 {
 	struct termios tty_attr;
+
+	tcgetattr(0, &original_tty_attr);
      
 	tcgetattr(0,&tty_attr);
 
