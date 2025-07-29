@@ -33,6 +33,22 @@ int yyparse(void);
 // Part 1A: Shell prompt function (displays "myshell>" when running interactively)
 // This function is called after each command execution to show the user prompt
 
+void source(void) {
+  std::string s = ".shellrc";
+  FILE * in = fopen(s.c_str(), "r");
+
+  if (!in) {
+    return;
+  }
+
+  yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
+  Shell::_srcCmd = true;
+  yyparse();
+  yypop_buffer_state();
+  fclose(in);
+  Shell::_srcCmd = false;
+}
+
 void Shell::prompt() {
   if (isatty(0)) {
     // Only show prompt if input is from a terminal (interactive mode)
@@ -63,31 +79,13 @@ int main() {
   sigemptyset(&sa.sa_mask);    // Don't block other signals during handler execution!
   sa.sa_flags = SA_RESTART;    // Automatically restart interrupted system calls
 
+  source();
+
   // Install the signal handler for SIGINT (Ctrl-C)
   if(sigaction(SIGINT, &sa, NULL)){
     perror("sigaction");
     exit(2);
   }
-
-  // Check if ./.shellrc exists and source it
-  FILE *rcFile = fopen(".shellrc", "r");
-  if (rcFile) {
-    fclose(rcFile);
-
-    // Temporarily redirect stdin to the file
-    FILE *in = fopen(".shellrc", "r");
-    if (in) {
-      extern FILE *yyin;
-      yyin = in;
-
-      // Save current input buffer and parse .shellrc
-      yy_switch_to_buffer(yy_create_buffer(in, YY_BUF_SIZE));
-      yyparse(); // Parse .shellrc just like input
-      yy_delete_buffer(YY_CURRENT_BUFFER);
-      fclose(in);
-    }
-  }
-
 
   Shell::prompt();
   yyparse(); // Start the parser which will read and execute commands
