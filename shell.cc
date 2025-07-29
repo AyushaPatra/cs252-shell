@@ -35,13 +35,10 @@ int yyparse(void);
 // This function is called after each command execution to show the user prompt
 extern FILE *yyin;
 
-void source(void) {
+void Shell::source() {
   std::string s = ".shellrc";
-  FILE * in = fopen(s.c_str(), "r");
-
-  if (!in) {
-    return;
-  }
+  FILE *in = fopen(s.c_str(), "r");
+  if (!in) return;
 
   yyin = in;
 
@@ -52,8 +49,8 @@ void source(void) {
   yyparse();
   Shell::_srcCmd = false;
 
-  yypop_buffer_state();   // <- if nothing was pushed, this can crash
-  yy_delete_buffer(buf);  // <- you MUST delete the buffer you created
+  yypop_buffer_state();   
+
   fclose(in);
 }
 
