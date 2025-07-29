@@ -230,7 +230,7 @@ void Command::execute() {
       continue;
     }
 
-    // Part 2.6: Built-in command: source (execute commands from file)
+    /* Part 2.6: Built-in command: source (execute commands from file)
     if (!strcmp(simpleCommand->_arguments[0]->c_str(), "source")) {
       Shell::_srcCmd = true;
 
@@ -333,7 +333,7 @@ void Command::execute() {
       fclose(fd);
       Shell::_srcCmd = false;
       continue; // Source command is complete
-    }
+    }*/
 
     // Part 1B.3: Set up input for this command from previous command in pipeline
     dup2(fdin, 0); // Redirect stdin to input from previous command or file

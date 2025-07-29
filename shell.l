@@ -70,6 +70,8 @@ void source(char * file) {
 
 %option noyywrap
 
+%x incl
+
 %%
 
 \n {
@@ -246,6 +248,30 @@ void source(char * file) {
 	for (int i = index; i >= 0; i--) {
 		myunputc(buf1[i]);
 	}
+}
+
+source             BEGIN(incl);
+
+
+<incl>[ \t]*      /* eat the whitespace */
+<incl>[^ \t\n]+   { /* got the include file name */
+            yyin = fopen( yytext, "r" );
+
+            if ( ! yyin )
+                error("source error");
+
+			yypush_buffer_state(yy_create_buffer( yyin, YY_BUF_SIZE ));
+
+            BEGIN(INITIAL);
+}
+
+<<EOF>> {
+			yypop_buffer_state();
+
+            if ( !YY_CURRENT_BUFFER )
+                {
+                yyterminate();
+                }
 }
 
 [^ \t\n|><&][^ \t\n|><&]*  {
