@@ -50,7 +50,7 @@ void source(void) {
 }
 
 void Shell::prompt() {
-  if (isatty(0)) {
+  if (isatty(0) && !_srcCmd) {
     // Only show prompt if input is from a terminal (interactive mode)
     printf("myshell>");
   }
@@ -79,7 +79,7 @@ int main() {
   sigemptyset(&sa.sa_mask);    // Don't block other signals during handler execution!
   sa.sa_flags = SA_RESTART;    // Automatically restart interrupted system calls
 
-  //source();
+  source();
 
   // Install the signal handler for SIGINT (Ctrl-C)
   if(sigaction(SIGINT, &sa, NULL)){
