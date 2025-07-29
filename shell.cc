@@ -90,7 +90,7 @@ int main() {
     exit(2);
   }
 
-  source();
+  //source();
   Shell::prompt();
   yyparse(); // Start the parser which will read and execute commands
 }
