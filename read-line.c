@@ -155,9 +155,11 @@ char * read_line() {
       // ctrl-D was typed
 
       // Go back one character
+      printf("%d\n",line_length);
+      printf("%d\n",right_side_length);
       if (line_length == right_side_length) continue;
 
-      for(int i=right_side_length-1; i>=0; i--) {
+      for(int i=right_side_length-2; i>=0; i--) {
         char c = right_side_buffer[i];
         write(1,&c,1);
       }
