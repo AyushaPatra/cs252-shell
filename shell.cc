@@ -60,10 +60,6 @@ extern "C" void disp( int sig )
 // Main function - entry point of the shell
 int main() {
 
-  if (isatty(0)) {
-    tty_raw_mode();  // Only use raw mode in interactive shell
-}
-
   // Part 2.9: Set up signal handling for Ctrl-C (SIGINT)
   // This allows the shell to handle Ctrl-C gracefully instead of terminating
   struct sigaction sa;
