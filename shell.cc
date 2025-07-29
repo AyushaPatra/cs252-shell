@@ -35,22 +35,6 @@ int yyparse(void);
 // This function is called after each command execution to show the user prompt
 extern FILE *yyin;
 
-void source(void) {
-  std::string s = ".shellrc";
-  FILE *in = fopen(s.c_str(), "r");
-  if (!in) return;
-
-  yyin = in;
-
-  YY_BUFFER_STATE buf = yy_create_buffer(yyin, YY_BUF_SIZE);
-  yypush_buffer_state(buf);
-
-  Shell::_srcCmd = true;
-  yyparse();
-  Shell::_srcCmd = false;
-
-  //fclose(in);
-}
 
 void Shell::prompt() {
   if (isatty(0) && !_srcCmd) {
