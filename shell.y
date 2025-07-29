@@ -414,7 +414,7 @@ void expandWildcard(char * prefix, char * suffix) {
     //_sortArgument.push_back(strdup(newPrefix));
   }*/
 
-  /* Final fallback: only for the last component if no match
+  // Final fallback: only for the last component if no match
   if (!find && suffix[0] == '\0' && !(strchr(component, '*') || strchr(component, '?'))) {
 
     // Only allow fallback for actual command-line words, not intermediate path segments
@@ -425,34 +425,7 @@ void expandWildcard(char * prefix, char * suffix) {
         sprintf(newPrefix, "%s/%s", prefix, component);
       }
       _sortArgument.push_back(strdup(newPrefix));
-    }*/
-
-    if (!find && suffix[0] == '\0') {
-  // This component is a wildcard
-  if (strchr(component, '*') || strchr(component, '?')) {
-    // Fallback — treat unmatched final wildcard as literal (like test_wildcards7)
-    char temp[1024];
-    if (prefix[0] == '\0')
-      sprintf(temp, "%s", component);
-    else
-      sprintf(temp, "%s/%s", prefix, component);
-    _sortArgument.push_back(strdup(temp));
-  }
-  // OR fallback for unmatched final non-wildcard literals (very rare case, safe to include)
-  else {
-    char temp[1024];
-    struct stat st;
-    if (prefix[0] == '\0')
-      sprintf(temp, "%s", component);
-    else
-      sprintf(temp, "%s/%s", prefix, component);
-
-    if (lstat(temp, &st) != 0) {
-      // Not a real file → fallback
-      _sortArgument.push_back(strdup(temp));
     }
-  }
-}
 
 
 
