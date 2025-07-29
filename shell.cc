@@ -31,6 +31,7 @@ int yyparse(void);
 void yypush_buffer_state(YY_BUFFER_STATE buffer);
 void yypop_buffer_state();
 YY_BUFFER_STATE yy_create_buffer(FILE * file, int size);
+void yy_delete_buffer(YY_BUFFER_STATE buffer); // Add this declaration
 
 
 void Shell::prompt() {
@@ -94,6 +95,7 @@ void source(void) {
   Shell::_srcCmd = true; // Flag to suppress prompts while sourcing
   yyparse(); // Parse and execute commands from file
   yypop_buffer_state(); // Restore original input buffer
+  yy_delete_buffer(buf);  // prevent memory leak
   fclose(in); 
   Shell::_srcCmd = false; 
 }
