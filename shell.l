@@ -258,7 +258,7 @@ source             BEGIN(incl);
             yyin = fopen( yytext, "r" );
 
             if ( ! yyin )
-                error("source error");
+                perror("source error");
 
 			yypush_buffer_state(yy_create_buffer( yyin, YY_BUF_SIZE ));
 
