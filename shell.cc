@@ -95,11 +95,14 @@ void source(void) {
   YY_BUFFER_STATE buf = yy_create_buffer(in, YY_BUF_SIZE);
   yypush_buffer_state(buf);
   Shell::_srcCmd = true; // Flag to suppress prompts while sourcing
+
   yyparse(); // Parse and execute commands from file
-  yypop_buffer_state(); // Restore original input buffer
+
+  //yypop_buffer_state(); // Restore original input buffer
   yy_delete_buffer(buf);  // prevent memory leak
-  fclose(in); 
-  Shell::_srcCmd = false; 
+
+  fclose(in);
+  Shell::_srcCmd = false;
 }
 
 int main(int argc, char **argv) {
