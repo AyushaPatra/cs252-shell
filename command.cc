@@ -194,6 +194,31 @@ void Command::execute() {
         return;
     }
 
+    // Handle 'source' command (execute script file in the current shell)
+if (!strcmp(cmd->c_str(), "source")) {
+    if (_simpleCommands[0]->_arguments.size() < 2) {
+        fprintf(stderr, "source: filename argument required\n");
+    } else {
+        const char* filename = _simpleCommands[0]->_arguments[1]->c_str();
+        FILE* file = fopen(filename, "r");
+        if (!file) {
+            perror("source");
+        } else {
+            // Push the file as a new buffer state for the lexer
+            yypush_buffer_state(yy_create_buffer(file, YY_BUF_SIZE));
+            Shell::_srcCmd = true;
+            yyparse();  // Recursively parse the file
+            yypop_buffer_state();
+            fclose(file);
+            Shell::_srcCmd = false;
+        }
+    }
+    clear();
+    Shell::prompt();
+    return;
+}
+
+
 
     // Atp we have external commands to execute (Part 1B: Executing commands)
     // Save the original stdin/stdout/stderr so we can restore them later
