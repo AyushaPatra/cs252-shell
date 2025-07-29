@@ -232,8 +232,11 @@ void Command::execute() {
 
     // Part 2.6: Built-in command: source (execute commands from file)
     if (!strcmp(simpleCommand->_arguments[0]->c_str(), "source")) {
+      Shell::_srcCmd = true;
+
       FILE * fd = fopen(simpleCommand->_arguments[1]->c_str(), "r");
       if (fd == 0) {
+        Shell::_srcCmd = false;
         continue; // Skip if file cannot be opened
       }
 
@@ -327,6 +330,7 @@ void Command::execute() {
         printf("%s", buf1); // Print subshell output
       }
       fclose(fd);
+      Shell::_srcCmd = false;
       continue; // Source command is complete
     }
 
