@@ -11,7 +11,13 @@ struct Command {
   std::string * _inFile;
   std::string * _errFile;
   bool _background;
+
   bool _append;
+
+  bool _clear;
+  int _lastPID;
+  int _lastRT;
+  std::string getLastArg();
 
   Command();
   void insertSimpleCommand( SimpleCommand * simpleCommand );
@@ -19,8 +25,6 @@ struct Command {
   void clear();
   void print();
   void execute();
-  //void prompt();
-  void redirect(int i, std::string * curr);
 
   static SimpleCommand *_currentSimpleCommand;
 };

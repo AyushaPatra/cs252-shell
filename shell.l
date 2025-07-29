@@ -7,25 +7,20 @@
  *
  */
 
-%x src
-
 %{
 
 #include <cstring>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "y.tab.hh"
-#include "shell.hh"
-#include <sys/types.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <limits.h>
 #include <sys/wait.h>
 #include <string.h>
-
-static  void yyunput (int c,char *buf_ptr  );
-
-void myunputc(int c) {
-  unput(c);
-}
+#include <signal.h>
+#include <unistd.h>
+#include "shell.hh"
+#include "y.tab.hh"
+////////////  Start added code ///////////
 
 extern "C" char * read_line();
 
@@ -34,13 +29,16 @@ int mygetc(FILE * f) {
   char ch;
 
   if (!isatty(0)) {
+  // stdin is not a tty. Call real getc
     return getc(f);
   }
 
+  // stdin is a tty. Call our read_line.
   if (p==NULL || *p == 0) {
     char * s = read_line();
-    p =s;
+    p = s;
   }
+
   ch = *p;
   p++;
 
@@ -50,6 +48,24 @@ int mygetc(FILE * f) {
 #undef getc
 #define getc(f) mygetc(f)
 
+/////////// End added code ///////////
+
+static  void yyunput (int c,char *buf_ptr  );
+
+void myunputc(int c) {
+  unput(c);
+}
+/*
+void source(char * file) {
+	FILE* fd = fopen(file, "r");
+	YY_BUFFER_STATE buf = yy_create_buffer(fd, 100);
+	yypush_buffer_state(buf);
+	yyparse();
+	yypop_buffer_state();
+	fclose(fd);
+	yyrestart(stdin);
+}
+*/
 %}
 
 %option noyywrap
@@ -64,14 +80,6 @@ int mygetc(FILE * f) {
   /* Discard spaces and tabs */
 }
 
-">" {
-  return GREAT;
-}
-
-"<" {
-  return LESS;
-}
-
 "|" {
   return PIPE;
 }
@@ -80,164 +88,265 @@ int mygetc(FILE * f) {
   return AMPERSAND;
 }
 
-">>" {
-  return GREATGREAT;
+">" {
+  return GREAT;
 }
 
-">&" {
-  return GREATAND;
+"<" {
+  return LESS;
 }
 
 "2>" {
   return TWOGREAT;
 }
 
+">>" {
+  return GREATGREAT;
+}
+
+">&" {
+  return GREATAMPERSAND;
+}
+
 ">>&" {
-  return GREATGREATAND;
+  return GREATGREATAMPERSAND;
 }
 
-source {
-  BEGIN(src);
+["][^\n\"]*["] { 
+	char * temp = yytext+1;
+	while (*temp != '\"') {
+		temp++;
+	}
+	*temp = '\0';
+	yylval.cpp_string = new std::string(yytext+1);
+
+	return WORD;
+} 
+
+[^ \t\n|><&]*\\[^ \t\n]* {
+	char * arg = (char *)malloc(200);
+	char * temp = yytext;
+	char * a = arg;
+
+	while(*temp){
+		if (*temp == '\\'){
+			temp++;
+			*a = *temp;
+			a++;
+		} else {
+			*a = *temp;
+			a++;
+		}
+		temp++;
+	}
+	*a = '\0';
+
+	char final[100];
+	strcpy(final, arg);
+	free(arg);
+	yylval.cpp_string = new std::string(final);
+	return WORD;
 }
 
-<src>[^ \t\n][^ \t\n]* {
-  FILE * in = fopen(yytext, "r+");
-
-  if (!in) {
-    perror("fopen");
-    BEGIN(INITIAL);
-  } else {
-    fputc('\n', in);
-    yypush_buffer_state(yy_create_buffer(in, YY_BUF_SIZE));
-    BEGIN(INITIAL);
-    Shell::_srcCmd = true;
-    yyparse();
-    yypop_buffer_state();
-    fclose(in);
-    Shell::_srcCmd = false;
-  }
+[~][^ \n]* {
+	char * temp = yytext;
+	if (strlen(temp) == 1) {
+		char * out = getenv("HOME");
+        	yylval.cpp_string = new std::string(out);
+        	return WORD;
+	}
+	else {
+		char out[100];
+		strcpy (out, "/homes/");
+		temp++;
+		strcat(out, temp);
+                yylval.cpp_string = new std::string(out);
+                return WORD;
+	}
 }
 
-~[^ \n\t]* {
-  std::string str = std::string(yytext);
-  std::string home = getenv("HOME");
-  if (str.size() == 1) {
-    yylval.cpp_string = new std::string(home);
-  } 
-  else {
-    if (str[1] == '/') {
-      str = home + str.substr(1, -1);
-    } 
-    else {
-      str = std::string("/homes/") + str.substr(1,-1);
-    }
-    yylval.cpp_string = new std::string(str);
-  }
-  return WORD;
+[$(][^\n\$]*[)]|`[^\n`]*` {
+	//printf("subshell\n");
+	char * temp = yytext;
+	//printf("temp is %s\n", temp);
+
+	char * cmd = (char *)malloc(200);
+	char * c = cmd;
+	if (strchr(temp, '\'') != NULL) {
+		temp++;
+		while (*temp != '\'') {
+			*c = *temp;
+			c++;
+			temp++;
+		}
+		*c = '\0';
+			
+	}
+	else {
+		temp = temp + 2;
+                while (*temp != ')') { 
+                        *c = *temp;
+			c++;
+			temp++;
+                }
+                *c = '\0';
+			
+	}
+	//printf("after cmd is %s\n", cmd);
+	//printf("len cmd is %ld\n", strlen(cmd));
+	
+	int tmpin = dup(0);
+	int tmpout = dup(1);
+
+	int fdpipein[2];
+	int fdpipeout[2];
+
+	pipe(fdpipein);
+	pipe(fdpipeout);
+
+	write(fdpipein[1], cmd, strlen(cmd));
+	write(fdpipein[1], "\n", 1);
+	write(fdpipein[1], "exit", 4);
+	write(fdpipein[1], "\n", 1);
+	close(fdpipein[1]);
+
+	dup2(fdpipein[0], 0);
+	close(fdpipein[0]);
+	dup2(fdpipeout[1], 1);
+	close(fdpipeout[1]);
+
+	int ret = fork();
+	if (ret == 0) {
+		execvp("/proc/self/exe", NULL);
+		perror("execvp");
+		exit(1);
+	}
+
+	dup2(tmpin, 0);
+	dup2(tmpout, 1);
+	close(tmpin);
+	close(tmpout);
+
+	char ch;
+	char * buf1 = new char[5000];
+	char * buf2 = buf1;
+	while (read(fdpipeout[0], &ch, 1)) {
+		if ( ch == '\n') {
+			 *buf2 = ' ';
+		}
+		else {
+			 *buf2 = ch;
+		}
+		buf2++;
+	}
+	*buf2 = '\0';
+
+
+	int index = strlen(buf1)-1;
+	for (int i = index; i >= 0; i--) {
+		myunputc(buf1[i]);
+	}
 }
 
-\"[^\n\"]*\" {
-  std::string str = std::string(yytext);
-  str = str.substr(1,str.size()-2);
-  yylval.cpp_string = new std::string(str);
-  return WORD;
-}
-
-[^ \\\t\n]*(\\[^nt])((\\[^nt])|[^ \\\t\n])* {
-  std::string str = std::string(yytext);
-  std::size_t found = str.find('\\');
-  while(found!=-1) {
-    str = str.substr(0,found) + str.substr(found+1,std::string::npos);
-    found = str.find('\\', found+1);
-  }
-  yylval.cpp_string = new std::string(str);
-  return WORD;
-}
-
-$\{[^ \}\n]*\}([^ \n]*|$\{[^ \}\n]*\})* {
-  std::string str = std::string(yytext);
-  std::string result = "";
-  std::size_t found = str.find('$');
-  while(found!=-1) {
-    std::string component;
-    result += str.substr(0, found);
-    if (str[found+1] == '{') {
-      std::size_t end = str.find('}');
-      if (end != -1) {
-        component = str.substr(found+2, end-found-2);
-        if (getenv(component.c_str())) result += getenv(component.c_str());
-        else result += component;      
-        str = str.substr(end+1,-1);
-      }
-    }
-    found = str.find('$');
-  }
-  result += str;
-  yylval.cpp_string = new std::string(result);
-  return WORD;
-}
-
-\`[^\n\`]*\`|$\([^\n]*\) {
-  std::string str = std::string(yytext);
-  if (str.at(0) == '$') {
-    str = str.substr(1,str.size()-1);
-  }
-  str = str.substr(1,str.size()-2);
-  str += "\nexit\n";
-  //printf("str : %s",str.c_str());
-
-  int pin[2], pout[2], tmpin, tmpout;
-  tmpin = dup(0); tmpout = dup(1);
-  pipe(pin); pipe(pout);
-
-  dup2(pin[0], 0);
-  dup2(pout[1], 1);
-  close(pin[0]);
-  close(pout[1]);
-
-  write(pin[1], str.c_str(), str.size());
-  close(pin[1]);
-
-  int ret = fork();
-  if (ret==0) {
-    //Shell::_isSubshell = true;
-    setenv("IS_SUBSHELL", "1", 1);
-    char ** args = new char*[2];
-    args[0] = (char*)"/proc/self/exe";
-    args[1] = NULL;
-    execvp(args[0], args);
-    perror("execvp(subshell)");
-    exit(1);
-  } else if (ret < 0) {
-    perror("fork");
-    exit(1);
-  } else {
-
-    waitpid(ret, NULL, 0);
-
-    dup2(tmpin, 0);
-    dup2(tmpout, 1);
-    close(tmpin);
-    close(tmpout);
-  
-    int BUFSIZE = 1024;
-    char* c = new char[BUFSIZE];
-    int rd = read(pout[0], c, BUFSIZE);
-    close(pout[0]);
-
-    //printf("output is %d, %d, %s", BUFSIZE, rd, c);
-    for (int i = rd - 1; i >= 0; --i ) {
-      if (c[i] == '\n') {
-        c[i] = ' ';
-      }
-      myunputc( c[i] );
-    }
-    delete c;
-  }
-}
-
-[^ \|>\t\n][^ \|>\t\n]*  {
+[^ \t\n|><&][^ \t\n|><&]*  {
   /* Assume that file names have only alpha chars */
-  yylval.cpp_string = new std::string(yytext);
+  
+	
+	char * temp = yytext;
+        char * cmd = (char *)malloc(2000);
+        char * c = cmd;
+
+	while (*temp != '\0') {
+		if ((*temp == '$') && (*(temp+1) == '{')) {
+			char * str = (char*)malloc(100);
+			char * str1 = str;
+			temp = temp + 2;
+			while (*temp != '}') {
+				*str1 = *temp;
+				str1++;
+				temp++;
+			}
+			*str1 = '\0';
+			temp++;
+			if (strcmp(str, "$") == 0) {
+				std::string * s = new std::string(std::to_string(getpid()));
+                		char * str2 = (char *)s->c_str();
+                		while (*str2 != '\0') {
+					*c = *str2;
+					c++;
+					str2++;
+				}
+        		}
+        		else if (strcmp(str, "?") == 0) {
+				//printf("return value is %d\n", Shell::_currentCommand._lastRT);
+				std::string * s = new std::string(std::to_string(Shell::_currentCommand._lastRT));
+                                char * str2 = (char *)s->c_str();
+                                while (*str2 != '\0') {
+                                        *c = *str2;
+                                        c++;
+                                        str2++;
+                                }
+        		}
+        		else if (strcmp(str, "!") == 0) {
+				//printf("PID is %d\n", Shell::_currentCommand._lastPID);
+				std::string * s = new std::string(std::to_string(Shell::_currentCommand._lastPID));
+                                char * str2 = (char *)s->c_str();
+				//printf("PID is %s\n", str2);
+                                while (*str2 != '\0') {
+                                        *c = *str2;
+                                        c++;
+                                        str2++;
+                                }
+        		}
+        		else if (strcmp(str, "_") == 0) {
+				std::string * s = new std::string(Shell::_currentCommand.getLastArg());
+				char * str2 = (char *)s->c_str();
+                                while (*str2 != '\0') {
+                                        *c = *str2;
+                                        c++;
+                                        str2++;
+                                }
+			}
+        		else if (strcmp(str, "SHELL") == 0) {
+                		char path[100];
+                		realpath("../shell", path);
+				int index = 0;
+                		while (path[index] != '\0') {
+                                        *c = path[index];
+                                        c++;
+                                        index++;
+                                }
+        		}
+			else {
+        			char * out = getenv(str);
+        			if (out != NULL) {
+                			while (*out != '\0') {
+						*c = *out;
+						c++;
+						out++;
+					}
+        			}
+				else {
+					*c = '-';
+					c++;
+					*c = 'n';
+					c++;
+				}
+			}
+		}
+		else {
+			*c = *temp;
+			c++;
+			temp++;
+		}
+	}
+	*c = '\0';
+//printf("final cmd is %s\n", cmd);
+	char final[1000];
+	strcpy(final, cmd);
+	free(cmd);
+  yylval.cpp_string = new std::string(final);
+  //free(cmd);
   return WORD;
 }
+

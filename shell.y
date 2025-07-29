@@ -13,18 +13,14 @@
 
 %code requires 
 {
-#include <sys/types.h>
 #include <string>
-#include <string.h>
-#include <regex.h>     // For wildcard expansion (Part 3.3: Wildcarding)
-#include <dirent.h>    // For directory operations in wildcard expansion
-#include <algorithm>   // For sorting wildcard matches
-#include <sys/stat.h>
-
+#include <unistd.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include<regex.h>
 #if __cplusplus > 199711L
 #define register      // Deprecated in C++11 so remove the keyword
 #endif
-#define MAXFILENAME 1024
 }
 
 %union
@@ -34,410 +30,411 @@
   std::string *cpp_string;
 }
 
-// Token definitions for shell grammar (Part 1A: Lex and Yacc)
-%token <cpp_string> WORD   // Commands, arguments, filenames
-%token NOTOKEN GREAT NEWLINE LESS PIPE AMPERSAND GREATGREAT GREATAND TWOGREAT GREATGREATAND
+%token <cpp_string> WORD
+%token NOTOKEN GREAT NEWLINE LESS GREATGREAT GREATAMPERSAND GREATGREATAMPERSAND PIPE AMPERSAND TWOGREAT SOURCE
 
 %{
 //#define yylex yylex
 #include <cstdio>
 #include "shell.hh"
-#include <string>
 
+#include <string.h>
+int cmp(const void *a, const void *b);
+void expandWildcardsIfNecessary(char * arg);
+void expandWildcard(char * prefix, char *suffix);
 void yyerror(const char * s);
-void expandWildcardsIfNecessary(std::string * arg);  // Part 3.3: Wildcarding helper
-void expandWildcard(char * prefix, char * suffix);   // Part 3.3: Recursive wildcard expansion
-bool cmpfunction (char * i, char * j);               // Comparison function for sorting
-
 int yylex();
-// Global variables for wildcard processing (Part 3.3: Wildcarding)
-static std::vector<char *> _sortArgument = std::vector<char *>();  // Collects wildcard matches
-static bool wildCard;  // Flag indicating if wildcards were found
 %}
 
 %%
 
-// Top-level grammar rule - shell accepts multiple commands
-goal:
-  commands
-  ;
+goal: command_list;
 
-// Multiple commands can be entered
-commands:
-  command
-  | commands command
-  ;
 
-// Command structure (Part 1A: Extended grammar)
-// Supports: pipes, I/O redirection, and background execution
-command: 
-  pipe_list iomodifier_list background_opt NEWLINE {
-    //printf("   Yacc: Execute command\n");
-    Shell::_currentCommand.execute();  // Execute the parsed command
-  }
-  | NEWLINE {
-    // Empty command line - just show prompt again
-    //printf("   Yacc: Execute command\n");
-    Shell::_currentCommand.execute();
-  }
-  | error NEWLINE { yyerrok; }  // Error recovery - continue parsing after errors
-  ;
+arg_list:
+	arg_list WORD {
+    	  //printf("   Yacc: insert argument \"%s\"\n", $2->c_str());
+	  //Command::_currentSimpleCommand->insertArgument( $2 );
+	  expandWildcardsIfNecessary((char*)($2->c_str()));
+  	}
+	| /*empty string*/
+	;
 
-// Simple command structure - command with arguments
-simple_command:	
-  command_and_args 
-  ;
+cmd_and_args:
+	WORD {
+   	  //printf("   Yacc: insert command \"%s\"\n", $1->c_str());
+    	  if (strcmp($1->c_str(), "exit") == 0) {
+                if (isatty(0)) {
+			printf("\nGood bye!!\n\n");
+		}
+                exit(0);
+          }
+	  Command::_currentSimpleCommand = new SimpleCommand();
+	  Command::_currentSimpleCommand->insertArgument($1);
+  	}  arg_list {
+   	  Shell::_currentCommand.
+    	  insertSimpleCommand( Command::_currentSimpleCommand );
+  	}
+	;
 
-// Build a complete simple command from command word and arguments
-command_and_args:
-  command_word argument_list {    
-    // Add this simple command to the current command's pipeline
-    Shell::_currentCommand.
-    insertSimpleCommand( Command::_currentSimpleCommand );
-  }
-  ;
-
-// Argument list can be empty or contain multiple arguments
-argument_list:
-  argument_list argument
-  | /* can be empty */
-  ;
-
-// Process each argument with wildcard expansion (Part 3.3: Wildcarding)
-argument:
-  WORD {
-    //printf("   Yacc: insert argument \"%s\"\n", $1->c_str());
-    //Command::_currentSimpleCommand->insertArgument( $1 );
-    
-    // Wildcard expansion: * matches 0+ chars, ? matches 1 char
-    // Wildcards don't match . if it's the first character (hidden files)
-    wildCard = false;
-    char *p = (char *)"";  // Empty prefix to start
-    expandWildcard(p, (char *)$1->c_str());  // Recursively expand wildcards
-    
-    // Sort wildcard matches alphabetically as required
-    std::sort(_sortArgument.begin(), _sortArgument.end(), cmpfunction);
-    
-    // Insert all expanded arguments
-    for (auto a: _sortArgument) {
-      std::string * argToInsert = new std::string(a);
-      Command::_currentSimpleCommand->insertArgument(argToInsert);
-    }
-    _sortArgument.clear();  // Clean up for next argument
-    //if (!wildCard) Command::_currentSimpleCommand->insertArgument($1);
-  }
-  ;
-
-// First word of a command - this creates a new SimpleCommand
-command_word:
-  WORD {
-    //printf("   Yacc: insert command \"%s\"\n", $1->c_str());
-    
-    // Create new simple command and insert the command name as first argument
-    Command::_currentSimpleCommand = new SimpleCommand();
-    Command::_currentSimpleCommand->insertArgument( $1 );
-  }
-  ;
-
-// Pipeline support (Part 1B.3: Pipes)
-// Supports multiple commands connected by pipes: cmd1 | cmd2 | cmd3
 pipe_list:
-  pipe_list PIPE simple_command   // Add another command to the pipeline
-  | simple_command               // Start of pipeline (single command)
-  ;
+	pipe_list PIPE cmd_and_args
+	| cmd_and_args
+	;
 
-// I/O redirection options (Part 1B.2: File redirection)
-// Supports all redirection operators from the extended grammar
-iomodifier_opt:
-  GREAT WORD {
-    // Simple output redirection: command > file
-    //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(1,$2);  // 1 = stdout
-  }
-  | GREATGREAT WORD {
-    // Append output redirection: command >> file
-    //printf("   Yacc: append output \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(1,$2);
-    Shell::_currentCommand._append = true;   // Set append flag
-  }
-  | GREATAND WORD {
-    // Redirect both stdout and stderr: command >& file
-    //printf("   Yacc: insert output and error \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(1,$2);  // stdout
-    Shell::_currentCommand.redirect(2, new std::string($2->c_str()));  // stderr
-    
-  }
-  | GREATGREATAND WORD {
-    // Append both stdout and stderr: command >>& file
-    //printf("   Yacc: append output and error \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(1,$2);  // stdout
-    Shell::_currentCommand.redirect(2, new std::string($2->c_str()));  // stderr
-    Shell::_currentCommand._append = true;
-  }
-  | LESS WORD {
-    // Input redirection: command < file
-    //printf("   Yacc: get input \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(0, $2);  // 0 = stdin
-  }
-  | TWOGREAT WORD {
-    // Error redirection: command 2> file
-    //printf("   Yacc: insert error \"%s\"\n", $2->c_str());
-    Shell::_currentCommand.redirect(2, $2);  // 2 = stderr
-  }
-  ;
+io_modifier:
+	GREATGREAT WORD {
+          //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
+          if (Shell::_currentCommand._outFile != NULL) {
+                yyerror("Ambiguous output redirect.\n");
+          }
+	  Shell::_currentCommand._outFile = $2;
+	  Shell::_currentCommand._append = true;
+        }
+	| GREAT WORD {
+    	  //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
+    	  if (Shell::_currentCommand._outFile != NULL) {
+		yyerror("Ambiguous output redirect.\n");
+	  }
+	  Shell::_currentCommand._outFile = $2;
+  	}
+	| GREATGREATAMPERSAND WORD {
+          //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
+	  if (Shell::_currentCommand._outFile != NULL | Shell::_currentCommand._errFile != NULL) {
+                yyerror("Ambiguous output redirect.\n");
+          }
+          Shell::_currentCommand._outFile = $2;
+	  Shell::_currentCommand._errFile = $2;
+	  Shell::_currentCommand._append = true;
+        }
+	| GREATAMPERSAND WORD {
+          //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
+          if (Shell::_currentCommand._outFile != NULL | Shell::_currentCommand._errFile != NULL) {
+                yyerror("Ambiguous output redirect.\n");
+          }
+	  Shell::_currentCommand._outFile = $2;
+	  Shell::_currentCommand._errFile = $2;
+        }
+	| LESS WORD {
+          //printf("   Yacc: insert input \"%s\"\n", $2->c_str());
+          if (Shell::_currentCommand._inFile != NULL) {
+                yyerror("Ambiguous output redirect.\n");
+          }
+	  Shell::_currentCommand._inFile = $2;
+	}
+	| TWOGREAT WORD {
+	  //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
+          if (Shell::_currentCommand._errFile != NULL) {
+                yyerror("Ambiguous output redirect.\n");
+          }
+	  Shell::_currentCommand._errFile = $2;
+	}
+	;
 
-// Multiple I/O redirections are allowed (but checked for ambiguity in redirect())
-iomodifier_list:
-  iomodifier_list iomodifier_opt  // Multiple redirections
-  | /*empty*/                     // No redirections
-  ;
+io_modifier_list:
+	io_modifier_list io_modifier
+	| /*empty*/
+	;
 
-// Background execution support (Part 1A: Grammar supports & for background)
-background_opt:
-  AMPERSAND {
-    // Set background flag - command will run in background
-    //printf("   Yacc: run in background\n");
-    Shell::_currentCommand._background = true;
-  }
-  | /*empty*/  // Foreground execution (default)
-  ;
+background_optional:
+	AMPERSAND {
+          /*printf("   Yacc: insert output \"%s\"\n", $1->c_str());*/
+          Shell::_currentCommand._background = true;
+        }
+	| /*empty*/
+	;
+
+command_line:
+	pipe_list io_modifier_list
+	background_optional NEWLINE {
+    	  //printf("   Yacc: Execute command\n");
+    	  Shell::_currentCommand.execute();
+  	}
+	| NEWLINE {
+          Shell::_currentCommand.execute();
+        } /*accept empty cmd line*/
+	| error NEWLINE{yyerrok;}
+	; /*error recovery*/
+
+command_list :
+	command_line |
+	command_list command_line
+	;/* command loop*/
+
+
 %%
+int maxEntries;
+int nEntries;
+char ** array;
+bool flag = false;
+#define MAXFILENAME 1024
+void expandWildcard(char * prefix, char *suffix) {
+	if (suffix[0]== 0) {
 
-// Helper function for sorting wildcard matches alphabetically
-bool cmpfunction (char * i, char * j) { return strcmp(i,j)<0; }
+		if (nEntries == maxEntries) {
+			maxEntries *=2;
+                        array = (char**)realloc(array, maxEntries*sizeof(char*));
+  	      }
 
-// Error handler for parser errors
+		//array[nEntries] = (char*)malloc(strlen(prefix)+10);
+		prefix++;
+//printf("final prefix is %s\n", prefix);
+		array[nEntries]= strdup(prefix);
+                //array[nEntries] = prefix;
+		/*
+		int m = 0;
+		while (*prefix != '\0') {
+			array[nEntries][m] = *prefix;
+			prefix++;
+			m++;
+		}
+		array[nEntries][m] = '\0';
+		*/
+		nEntries++;
+		//Command::_currentSimpleCommand->insertArgument(new std::string(strdup(prefix)));
+		return;
+	}
+
+	//suffix++;
+	char * s = strchr(suffix, '/');
+	char component[MAXFILENAME];
+	//printf("suffix is %s\n", suffix);
+//printf("s is %s\n", s);
+	if (s!=NULL){
+		int index = 0;
+		component[index] = *s;
+		s++;
+		index++;
+		if (strchr(s, '/') != NULL) {
+			while (*s != '/') {
+				component[index] = *s;
+				s++;
+				index++;
+			}
+		} 
+		else {
+			while (*s != '\0') {
+                                component[index] = *s;
+                                s++;
+                                index++;
+                        }
+		}
+		component[index] = '\0';
+//printf("componet is %s\n", component);
+		//printf("s is %s\n", s);
+		suffix = s;
+	}
+	else {
+		strcpy(component, suffix);
+		suffix = suffix + strlen(suffix);
+	}
+	char newPrefix[MAXFILENAME];
+	if (strchr(component, '*') == NULL && strchr(component, '?') == NULL) {
+		//sprintf(newPrefix,"%s/%s", prefix, component);
+		int i = 0;
+		int j = 0;
+		if (prefix != NULL) {
+			while (*prefix != '\0') {
+				newPrefix[i] = *prefix;
+				i++;
+				prefix++;
+			}
+		}
+		while (component[j] != '\0') {
+			newPrefix[i] = component[j];
+			i++;
+			j++;
+		}
+		newPrefix[i] = '\0';
+//printf("newPrefix is %s\n", newPrefix);
+//printf("suffix is %s\n", suffix);
+		expandWildcard(newPrefix, suffix);
+		return;
+	}
+
+	char * reg = (char*)malloc(2*strlen(component)+10);
+        char * a = component;
+        char * r = reg;
+        *r = '^';
+        r++;
+	a++;
+        while (*a) {
+		if (*a == '*') { *r='.'; r++; *r='*'; r++; }
+                else if (*a == '?') { *r='.'; r++;}
+                else if (*a == '.') { *r='\\'; r++; *r='.'; r++;}
+                else { *r=*a; r++;}
+                a++;
+        }
+        *r='$';
+        r++;
+        *r=0;
+//printf("reg is %s\n", reg);	
+	regex_t re;
+	int expbuf = regcomp(&re, reg, REG_EXTENDED|REG_NOSUB);
+	char * dir;
+	if (prefix == NULL) {
+		//strcpy(dir, ".");
+		dir = (char*)".";
+		//dir++;
+		
+	}
+	else {
+		dir = prefix;
+	}
+
+	DIR * d = opendir(dir);
+	if (d==NULL) {
+		return;
+	}
+//printf("dir is %s\n", dir);
+	struct dirent * ent;
+	regmatch_t match;
+	while ((ent = readdir(d))!= NULL) {
+		if (regexec(&re, ent->d_name, 1, &match, 0) ==0) {
+			//printf("find match\n");
+			if (ent->d_name[0] == '.') {
+                        	if (flag) {
+                                	sprintf(newPrefix,"%s/%s", prefix, ent->d_name);
+                                	expandWildcard(newPrefix,suffix);
+                        	}
+                	}
+			else {
+				sprintf(newPrefix,"%s/%s", prefix, ent->d_name);
+				//printf("newPrefix is %s\n", newPrefix);
+				//printf("newsuffix is %s\n", suffix);
+				expandWildcard(newPrefix,suffix);
+			}
+		}
+	}
+	regfree(&re);
+	free(reg);
+	closedir(d);
+}// expandWildcard
+
+
+int cmp(const void *a, const void *b)
+{
+    return strcmp(*(const char **)a, *(const char **)b);
+}
+void expandWildcardsIfNecessary(char * arg)
+{
+	
+	if (strchr(arg, '*') == NULL && strchr(arg, '?') == NULL) {
+		//printf("no wildcard\n");
+		//printf("arg is %s\n", arg);
+		Command::_currentSimpleCommand->insertArgument(new std::string(arg));
+		return;
+	}
+	else if (strchr(arg, '/') == NULL) {
+		//printf("wildcar case1\n");
+		//printf("arg is %s\n", arg);
+		char * reg = (char*)malloc(2*strlen(arg)+10);
+		char * a = arg;
+		char * r = reg;
+		*r = '^';
+		r++;
+		while (*a) {
+			if (*a == '*') { *r='.'; r++; *r='*'; r++; }
+			else if (*a == '?') { *r='.'; r++;}
+			else if (*a == '.') { *r='\\'; r++; *r='.'; r++;}
+			else { *r=*a; r++;}
+			a++;
+		}
+		*r='$';
+		r++;
+		*r=0;
+
+		regex_t re;
+
+		int expbuf = regcomp(&re, reg, REG_EXTENDED|REG_NOSUB);
+//printf("reg is %s\n", reg);
+		DIR * dir = opendir(".");
+		if (dir == NULL) {
+			perror("opendir");
+			return;
+		}
+
+		regmatch_t match;
+		struct dirent * ent;
+		maxEntries = 20;
+		nEntries = 0;
+		array = (char**) malloc(maxEntries*sizeof(char*));
+
+		while ( (ent = readdir(dir))!= NULL) {
+			if (regexec(&re, ent->d_name, 1, &match, 0) ==0 ) {
+				if (nEntries == maxEntries) {
+					maxEntries *=2;
+					array = (char**)realloc(array, maxEntries*sizeof(char*));
+				}
+
+				if (ent->d_name[0] == '.') {
+					if (arg[0] == '.') {
+						array[nEntries]= strdup(ent->d_name);
+						nEntries++;
+					}
+				}
+				else {
+					array[nEntries]= strdup(ent->d_name);
+                                        nEntries++;
+				}
+				//Command::_currentSimpleCommand->insertArgument(new std::string(strdup(ent->d_name)));
+
+			}
+		}
+		regfree(&re);
+		free(reg);
+		closedir(dir);
+		//sortArrayStrings(array, nEntries);
+	}
+	else {
+		//printf("wildcard case2\n");
+		maxEntries = 20;
+                nEntries = 0;
+                array = (char**) malloc(maxEntries*sizeof(char*));
+
+		if (arg[0] == '.') {
+			flag = true;
+		}
+		expandWildcard((char*)"/", arg); 
+	}
+//printf("successfully get array\n");
+	//char temp[5000];
+//printf("nEntries is %d\n", nEntries);
+	
+	qsort(array, nEntries, sizeof(char *), cmp);
+/*
+        for (int i = 0; i < nEntries-1; i++) {
+                for (int j = i+1; j < nEntries; j++) {
+                        if (strcmp(array[i], array[j]) > 0) {
+                                strcpy(temp, array[i]);
+                                strcpy(array[i], array[j]);
+                                strcpy(array[j], temp);
+                        }
+                }
+        }
+*/
+//printf("sort success\n");
+
+	if (array[0] == NULL) {
+		Command::_currentSimpleCommand->insertArgument(new std::string(arg));
+	}
+        for (int i = 0; i < nEntries; i++) {
+                //printf("array[i] is %s\n", array[i]);
+		Command::_currentSimpleCommand->insertArgument(new std::string(array[i]));
+
+        }
+//printf("insert arg success\n");
+	for (int i = 0; i < nEntries; i++) {
+		free(array[i]);
+	}
+        free(array);
+}
+
 void
 yyerror(const char * s)
 {
   fprintf(stderr,"%s", s);
 }
-
-// Wildcard expansion function (Part 3.3: Wildcarding)
-// This function is currently unused but shows alternative approach to wildcard expansion
-void expandWildcardsIfNecessary(std::string * arg) {
-  char * arg_c = (char *)arg->c_str();
-  char * a;
-  std::string path;
-  
-  // Check if argument contains wildcard characters
-  if (strchr(arg_c,'?')==NULL & strchr(arg_c,'*')==NULL) {
-    //printf("No '?' or '*' was found\n");
-    Command::_currentSimpleCommand->insertArgument(arg);
-    return;
-  }
-  
-  // Handle absolute vs relative paths
-  DIR * dir;
-  if (arg_c[0] == '/') {
-    // Absolute path - find the directory part
-    std::size_t found = arg->find('/');
-    while (arg->find('/',found+1) != -1) 
-      found = arg->find('/', found+1);
-      
-    path = arg->substr(0, found+1);
-    a = (char *)arg->substr(found+1, -1).c_str();
-    dir = opendir(path.c_str());
-    //printf("%s\n", path.c_str());
-  }
-  else {
-    // Relative path - use current directory
-    dir = opendir(".");
-    a = arg_c;
-  }
-  if (dir == NULL) {
-    perror("opendir");
-    return;
-  }
-  
-  // Convert shell wildcards to regular expression
-  // * becomes .* (match any chars), ? becomes . (match one char)
-  char * reg = (char*)malloc(2*strlen(arg_c)+10);
-  char * r = reg;
-  *r = '^'; r++;  // Start of string anchor
-  while (*a) {
-    if (*a == '*') {*r='.'; r++; *r='*'; r++;}      // * -> .*
-    else if (*a == '?') {*r='.'; r++;}              // ? -> .
-    else if (*a == '.') {*r='\\'; r++; *r='.'; r++;} // Escape literal dots
-    else {*r=*a; r++;}                              // Regular characters
-    a++;
-  }
-  *r='$'; r++; *r=0;  // End of string anchor
-
-  // Compile the regular expression
-  regex_t re;
-  int expbuf = regcomp(&re, reg, REG_EXTENDED|REG_NOSUB);
-  if (expbuf != 0) {
-    perror("regcomp");
-    return;
-  }
-
-  // Find all matching files in the directory
-  std::vector<char *> sortArgument = std::vector<char *>();
-  struct dirent * ent;
-  while ( (ent=readdir(dir)) != NULL) {
-    if (regexec(&re, ent->d_name, 1, NULL, 0) == 0) {
-      // Check for hidden files (starting with .)
-      if (reg[1] == '.') {
-        // Pattern starts with . - only match if filename starts with .
-        if (ent->d_name[0] != '.') {
-          std::string name(ent->d_name);
-          name = path + name;
-          sortArgument.push_back(strdup((char *)name.c_str()));
-        }
-      } else {
-        // Pattern doesn't start with . - don't match hidden files
-        std::string name(ent->d_name);
-        name = path + name;
-        sortArgument.push_back(strdup((char *)name.c_str()));
-      }
-    }
-  }
-
-  closedir(dir);
-  regfree(&re);
-
-  // Sort matches alphabetically 
-  std::sort(sortArgument.begin(), sortArgument.end(), cmpfunction);
-  
-  // Add all matches as arguments
-  for (auto a: sortArgument) {
-    std::string * argToInsert = new std::string(a);
-    Command::_currentSimpleCommand->insertArgument(argToInsert);
-  }
-
-  sortArgument.clear();
-}
-
-// Main wildcard expansion function used by parser (Part 3.3: Wildcarding)
-// Recursively processes path components to handle wildcards in any directory level
-void expandWildcard(char * prefix, char * suffix) {
-  // Base case: no more path components to process
-  if (suffix[0] == 0) {
-    //_sortArgument.push_back(strdup(prefix));
-    // Normalize to remove trailing slash
-  char cleaned[MAXFILENAME];
-  strcpy(cleaned, prefix);
-  int len = strlen(cleaned);
-  if (len > 1 && cleaned[len - 1] == '/') {
-    cleaned[len - 1] = '\0';
-  }
-  _sortArgument.push_back(strdup(cleaned));
-    return;
-  }
-  
-  // Build the current directory prefix
-  char Prefix[MAXFILENAME];
-  if (prefix[0] == 0) {
-    if (suffix[0] == '/') {suffix += 1; sprintf(Prefix, "%s/", prefix);}
-    else strcpy(Prefix, prefix);
-  }
-  else
-    sprintf(Prefix, "%s/", prefix);
-
-  // Extract the next path component
-  char * s = strchr(suffix, '/');
-  char component[MAXFILENAME];
-  if (s != NULL) {
-    // More components after this one
-    strncpy(component, suffix, s-suffix);
-    component[s-suffix] = 0;
-    suffix = s + 1;
-  }
-  else {
-    // This is the last component
-    strcpy(component, suffix);
-    suffix = suffix + strlen(suffix);
-  }
-
-  char newPrefix[MAXFILENAME];
-  // If component has no wildcards, just add it to path and continue
-  if (strchr(component,'?')==NULL & strchr(component,'*')==NULL) {
-    if (Prefix[0] == 0) strcpy(newPrefix, component);
-    else sprintf(newPrefix, "%s/%s", prefix, component);
-    expandWildcard(newPrefix, suffix);
-    return;
-  }
-  
-  // Component has wildcards - convert to regex and match against directory entries
-  char * reg = (char*)malloc(2*strlen(component)+10);
-  char * r = reg;
-  *r = '^'; r++;  // Start anchor
-  int i = 0;
-  while (component[i]) {
-    if (component[i] == '*') {*r='.'; r++; *r='*'; r++;}        // * -> .*
-    else if (component[i] == '?') {*r='.'; r++;}               // ? -> .
-    else if (component[i] == '.') {*r='\\'; r++; *r='.'; r++;} // Escape dots
-    else {*r=component[i]; r++;}                               // Regular chars
-    i++;
-  }
-  *r='$'; r++; *r=0;  // End anchor
-
-  // Compile the regex
-  regex_t re;
-  int expbuf = regcomp(&re, reg, REG_EXTENDED|REG_NOSUB);
-  
-  // Open the directory to search
-  char * dir;
-  if (Prefix[0] == 0) dir = (char*)"."; else dir = Prefix;
-  DIR * d = opendir(dir);
-  if (d == NULL) {
-    return;  // Directory doesn't exist
-  }
-  struct dirent * ent;
-  bool find = false;
-  // Check each directory entry against the pattern
-  while ((ent = readdir(d)) != NULL) {
-    if(regexec(&re, ent->d_name, 1, NULL, 0) == 0) {
-      wildCard = true;
-      find = true;
-      if (Prefix[0] == 0) strcpy(newPrefix, ent->d_name);
-      else sprintf(newPrefix, "%s/%s", prefix, ent->d_name);
-
-      // Handle hidden files (starting with .) - only match if pattern explicitly starts with .
-      if (reg[1] == '.') {
-        if (ent->d_name[0] != '.') expandWildcard(newPrefix, suffix);
-      } else 
-        expandWildcard(newPrefix, suffix);
-    }
-  }
-  
-  // If no matches found, keep the original component (literal interpretation)
-  /*if (!find && suffix[0] == '\0') {
-    if (Prefix[0] == 0) {
-      strcpy(newPrefix, component);
-    }
-    else {
-      sprintf(newPrefix, "%s/%s", prefix, component);
-    }
-    expandWildcard(newPrefix, suffix);
-    //_sortArgument.push_back(strdup(newPrefix));
-  }*/
-
-  // Final fallback: only for the last component if no match
-  if (!find && suffix[0] == '\0' && !(strchr(component, '*') || strchr(component, '?'))) {
-
-    // Only allow fallback for actual command-line words, not intermediate path segments
-    // fallback: treat as literal if no matches
-      if (Prefix[0] == 0) {
-        strcpy(newPrefix, component);
-      } else {
-        sprintf(newPrefix, "%s/%s", prefix, component);
-      }
-      _sortArgument.push_back(strdup(newPrefix));
-    }
-
-
-
-
-
-
-  // Cleanup
-  closedir(d);
-  regfree(&re);
-  free(reg);
-}
-
 #if 0
 main()
 {
