@@ -173,6 +173,7 @@ char * read_line() {
 
       // Remove one character from buffer
       right_side_length--;
+      line_length--;
     }
     else if (ch == 8 || ch == 127) {
       // <backspace> was typed. Remove previous character read.
