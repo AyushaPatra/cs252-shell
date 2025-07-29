@@ -324,7 +324,7 @@ void Command::execute() {
           //}
         }
         *buf2 = '\0';
-        printf("%s\n", buf1); // Print subshell output
+        printf("%s", buf1); // Print subshell output
       }
       fclose(fd);
       continue; // Source command is complete
