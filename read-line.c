@@ -155,7 +155,7 @@ char * read_line() {
       // ctrl-D was typed
 
       // Go back one character
-      if (line_length == 0) continue;
+      if (line_length == right_side_length) continue;
 
       for(int i=right_side_length-2; i>=0; i--) {
         char c = right_side_buffer[i];
@@ -173,7 +173,8 @@ char * read_line() {
 
       // Remove one character from buffer
       right_side_length--;
-      line_length--;
+      //line_length--;
+
     }
     else if (ch == 8 || ch == 127) {
       // <backspace> was typed. Remove previous character read.
