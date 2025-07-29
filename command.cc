@@ -318,10 +318,10 @@ void Command::execute() {
         char * buf1 = new char[5000];
         char * buf2 = buf1;
         while (read(fdpipeout[0], &ch, 1)) {
-          if ( ch != '\n') {
+          //if ( ch != '\n') {
             *buf2 = ch;
             buf2++;
-          }
+          //}
         }
         *buf2 = '\0';
         printf("%s\n", buf1); // Print subshell output
