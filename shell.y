@@ -65,7 +65,7 @@ cmd_and_args:
    	  //printf("   Yacc: insert command \"%s\"\n", $1->c_str());
     	  if (strcmp($1->c_str(), "exit") == 0) {
                 if (isatty(0)) {
-			printf("\nGood bye!!\n\n");
+			printf("\nBiee :)\n\n");
 		}
                 exit(0);
           }
