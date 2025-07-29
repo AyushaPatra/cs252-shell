@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include "y.tab.hh"
+#include "lex.yy.hh"
 
 int yyparse(void);
 
