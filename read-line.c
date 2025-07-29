@@ -157,7 +157,7 @@ char * read_line() {
       // Go back one character
       printf("%d\n",line_length);
       printf("%d\n",right_side_length);
-      if (line_length == right_side_length) continue;
+      if (line_length == sizeof(line_buffer)) continue;
 
       for(int i=right_side_length-2; i>=0; i--) {
         printf("test");
