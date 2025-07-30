@@ -219,28 +219,8 @@ void Command::execute() {
     }
 
     // Part 2.2: Built-in command: cd (change directory)
-    /*if (!strcmp(simpleCommand->_arguments[0]->c_str(), "cd")) {
-      if (simpleCommand->_arguments[1] == NULL) {
-        // cd with no arguments - go to home directory
-        chdir("/homes/patra10");
-        continue;
-      }
-      else if (strcmp(simpleCommand->_arguments[1]->c_str(), "${HOME}") == 0) {
-        // Handle ${HOME} expansion in cd command
-        chdir("/homes/patra10");
-        continue;
-      }
-      
-      // cd to specified directory with error handling
-      const char * loc = simpleCommand->_arguments[1]->c_str();
-      char msg[100] = "cd: can't cd to ";
-      strcat(msg, loc);
-      int error = chdir(loc);	    
-      if (error != 0) {
-        perror(msg); // Print error if directory change fails
-      }
-      continue;
-    }*/
+    // Extra credit Tilde expansion
+
     if (!strcmp(simpleCommand->_arguments[0]->c_str(), "cd")) {
   const char* path = nullptr;
   char* freedPath = nullptr;
