@@ -60,11 +60,9 @@ void Shell::prompt() {
       printf("%s", promptStr.c_str());
     } else {
       printf("myshell> ");
-
-
-  }
+    }
   fflush(stdout); // Ensure prompt is displayed immediately
-}
+  }
 }
 
 // Part 2.9: Signal handler for Ctrl-C (SIGINT)
