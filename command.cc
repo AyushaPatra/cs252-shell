@@ -209,75 +209,15 @@ void Command::execute() {
     }
     
     // Part 2.1: Built-in command: unsetenv (remove environment variables)
-    /*if (!strcmp(simpleCommand->_arguments[0]->c_str(), "unsetenv")) {
+    if (!strcmp(simpleCommand->_arguments[0]->c_str(), "unsetenv")) {
       if (simpleCommand->_arguments.size() < 2) {
         fprintf(stderr, "Usage: unsetenv VAR\n");
         continue;
       }
       unsetenv(simpleCommand->_arguments[1]->c_str());
       continue; // Built-ins don't need process creation
-    }*/
-    if (!strcmp(simpleCommand->_arguments[0]->c_str(), "cd")) {
-  const char* path = nullptr;
-
-  if (simpleCommand->_arguments.size() == 1) {
-    // Case: just "cd" → go to HOME
-    path = getenv("HOME");
-    if (!path) {
-      fprintf(stderr, "cd: HOME not set\n");
-      continue;
     }
-  } else {
-    path = simpleCommand->_arguments[1]->c_str();
 
-    // Handle tilde expansion
-    if (path[0] == '~') {
-      std::string expanded;
-
-      if (path[1] == '\0' || path[1] == '/') {
-        // Case: ~ or ~/folder
-        const char* home = getenv("HOME");
-        if (home) {
-          expanded = std::string(home);
-          if (path[1] == '/')
-            expanded += (path + 1);  // Append rest of path
-        } else {
-          fprintf(stderr, "cd: HOME not set\n");
-          continue;
-        }
-      } else {
-        // Case: ~username or ~username/something
-        std::string user;
-        int i = 1;
-        while (path[i] && path[i] != '/') {
-          user += path[i];
-          i++;
-        }
-
-        struct passwd* pw = getpwnam(user.c_str());
-        if (!pw) {
-          fprintf(stderr, "cd: no such user %s\n", user.c_str());
-          continue;
-        }
-
-        expanded = pw->pw_dir;
-        if (path[i] == '/') {
-          expanded += (path + i);  // Append rest of path
-        }
-      }
-
-      path = strdup(expanded.c_str());  // Safe to pass to chdir
-    }
-  }
-
-  if (chdir(path) != 0) {
-    perror("cd");
-  }
-
-  continue;
-}
-
-    
     // Part 2.2: Built-in command: cd (change directory)
     if (!strcmp(simpleCommand->_arguments[0]->c_str(), "cd")) {
       if (simpleCommand->_arguments[1] == NULL) {
