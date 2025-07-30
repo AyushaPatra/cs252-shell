@@ -230,111 +230,6 @@ void Command::execute() {
       continue;
     }
 
-    /* Part 2.6: Built-in command: source (execute commands from file)
-    if (!strcmp(simpleCommand->_arguments[0]->c_str(), "source")) {
-      Shell::_srcCmd = true;
-
-      FILE * fd = fopen(simpleCommand->_arguments[1]->c_str(), "r");
-      if (fd == 0) {
-        Shell::_srcCmd = false;
-        continue; // Skip if file cannot be opened
-      }
-
-      char buf[1000];
-      void * ret;
-      
-      // Read and execute each line from the source file
-      while (true) {
-        memset(buf, 0, sizeof(buf));
-        ret = fgets(buf, 1000, fd);
-        if (ret == NULL) {
-          break; // End of file reached
-        }
-        buf[strlen(buf)-1] = '\0'; // Remove trailing newline
-        
-        // Special handling for setenv commands in source files
-        char set[7] = "setenv";
-        if (strstr(buf, set) != NULL) {
-          // Parse setenv command manually from source file
-          char * name = (char*)malloc(50);
-          char * n = name;
-          char * val = (char*)malloc(50);
-          char * v = val;
-          char * t = strchr(buf, ' ');
-          t++;
-          while (*t != ' ') {
-            *n = *t;
-            n++;
-            t++;
-          }
-          *n = '\0';
-          t++;
-          while (*t != '\0') {
-            *v = *t;
-            v++;
-            t++;
-          }
-          *v = '\0';
-          setenv(name, val, 1); // Set the environment variable
-          free(name);
-          free(val);
-          continue;
-        }
-
-        // For other commands, execute them through subshell
-        int tmpin = dup(0);
-        int tmpout = dup(1);
-
-        int fdpipein[2];
-        int fdpipeout[2];
-
-        pipe(fdpipein);
-        pipe(fdpipeout);
-
-        // Send command to subshell through pipe
-        write(fdpipein[1], buf, strlen(buf));
-        write(fdpipein[1], "\n", 1);
-        close(fdpipein[1]);
-
-        // Set up pipes for subshell communication
-        dup2(fdpipein[0], 0);
-        close(fdpipein[0]);
-        dup2(fdpipeout[1], 1);
-        close(fdpipeout[1]);
-
-        // Create subshell to execute the command
-        int ret = fork();
-        if (ret == 0) {
-          execvp("/proc/self/exe", NULL); // Execute same shell binary
-          perror("execvp");
-          exit(1);
-        }
-
-        // Restore original stdin/stdout
-        dup2(tmpin, 0);
-        dup2(tmpout, 1);
-        close(tmpin);
-        close(tmpout);
-
-        // Read and display output from subshell
-        char ch;
-        char * buf1 = new char[5000];
-        char * buf2 = buf1;
-        while (read(fdpipeout[0], &ch, 1)) {
-          //if ( ch != '\n') {
-            *buf2 = ch;
-            buf2++;
-          //}
-        }
-        *buf2 = '\0';
-        printf("%s", buf1); // Print subshell output
-      }
-
-      fclose(fd);
-      Shell::_srcCmd = false;
-      continue; // Source command is complete
-    }*/
-
     // Part 1B.3: Set up input for this command from previous command in pipeline
     dup2(fdin, 0); // Redirect stdin to input from previous command or file
     close(fdin);
@@ -393,6 +288,14 @@ void Command::execute() {
 
       // Part 1A: Execute the command using execvp (searches PATH)
       execvp(simpleCommand->_arguments[0]->c_str(), ch);
+
+      // If execvp fails, handle on_error
+char *on_error = getenv("on_error");
+if (on_error) {
+  printf("Command failed. Running on_error: %s\n", on_error);
+  execlp("/bin/sh", "sh", "-c", on_error, (char *)NULL);
+}
+
       perror("execvp"); // Only reached if execvp fails
       exit(1);
     }

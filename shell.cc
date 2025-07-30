@@ -74,7 +74,14 @@ int main() {
     perror("sigaction");
     exit(2);
   }
-
+  // Run .shellrc if it exists
+  FILE *fd = fopen(".shellrc", "r");
+  if (fd) {
+    yyin = fd;
+    yyparse();
+    fclose(fd);
+  }
+  
   if (isatty(0)) {
     Shell::prompt();
   }
