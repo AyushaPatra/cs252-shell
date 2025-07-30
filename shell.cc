@@ -98,6 +98,8 @@ int main() {
   }
   //Shell::prompt();
   yyparse(); // Start the parser which will read and execute commands
+  tty_restore_mode();
+  return 0;
 }
 
 // The parser and lexer use this to construct commands as they parse user input
