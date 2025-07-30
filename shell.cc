@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include "y.tab.hh"
-#include "lex.yy.cc"
+
 
 #ifndef YY_BUF_SIZE
 #ifdef __ia64__
@@ -52,9 +52,9 @@ extern "C" void disp( int sig )
   // Print ^C to show that Ctrl-C was detected (mimics bash behavior)
   printf("^C");
   printf("\n");
-  
+
   Shell::_currentCommand.clear();
-  
+
   Shell::prompt();
 }
 
@@ -68,7 +68,7 @@ int main() {
   sigemptyset(&sa.sa_mask);    // Don't block other signals during handler execution!
   sa.sa_flags = SA_RESTART;    // Automatically restart interrupted system calls
 
-  
+
 
   // Install the signal handler for SIGINT (Ctrl-C)
   if(sigaction(SIGINT, &sa, NULL)){
@@ -81,12 +81,16 @@ int main() {
     YY_BUFFER_STATE shellrc_buf = yy_create_buffer(fd, YY_BUF_SIZE);
     yypush_buffer_state(shellrc_buf);
 
+    Shell::_srcCmd = true;
     yyparse();
+    yy_delete_buffer(shellrc_buf);
 
     yypop_buffer_state();
     fclose(fd);
+
+    Shell::_srcCmd = false;
   }
-  
+
   if (isatty(0)) {
     Shell::prompt();
   }
