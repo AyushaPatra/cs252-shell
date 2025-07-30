@@ -83,7 +83,7 @@ void Shell::prompt() {
     //printf("myshell>");
     const char* p = getenv("PROMPT");
     if (p) {
-      std::string promptStr = interpret_escape_sequences(raw);
+      std::string promptStr = interpret_escape_sequences(p);
       printf("%s", p ? p : "myprompt> ");
     } else {
       printf("myshell> ");
