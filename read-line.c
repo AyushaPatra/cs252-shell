@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <dirent.h>
+#include <sys/types.h>
+
 
 #define MAX_BUFFER_LINE 2048
 #define HISTORY_SIZE 16
@@ -206,6 +209,73 @@ char * read_line() {
       // Remove one character from buffer
       line_length--;
     }
+    else if (ch == 9) {
+  // TAB key pressed for autocompletion
+
+  int i = line_length - 1;
+
+  // Find the start of the word
+  while (i >= 0 && line_buffer[i] != ' ' && line_buffer[i] != '/') {
+    i--;
+  }
+
+  int word_start = i + 1;
+  int word_len = line_length - word_start;
+  char prefix[256] = {0};
+  strncpy(prefix, &line_buffer[word_start], word_len);
+  prefix[word_len] = '\0';
+
+  DIR *dir = opendir(".");
+  if (!dir) continue;
+
+  struct dirent *entry;
+  char *match = NULL;
+  int match_count = 0;
+
+  while ((entry = readdir(dir)) != NULL) {
+    if (strncmp(entry->d_name, prefix, word_len) == 0) {
+      if (match_count == 0) {
+        match = strdup(entry->d_name);
+      } else {
+        if (match) free(match);
+        match = NULL;
+      }
+      match_count++;
+    }
+  }
+  closedir(dir);
+
+  if (match_count == 1 && match) {
+    // Complete remaining characters
+    int remaining = strlen(match) - word_len;
+    for (int j = 0; j < remaining; j++) {
+      char c = match[word_len + j];
+      line_buffer[line_length++] = c;
+      write(1, &c, 1);
+    }
+    free(match);
+  } else if (match_count > 1) {
+    // List matching files
+    write(1, "\n", 1);
+    dir = opendir(".");
+    while ((entry = readdir(dir)) != NULL) {
+      if (strncmp(entry->d_name, prefix, word_len) == 0) {
+        write(1, entry->d_name, strlen(entry->d_name));
+        write(1, "\t", 1);
+      }
+    }
+    closedir(dir);
+    write(1, "\n", 1);
+
+    // Reprint the line buffer
+    write(1, line_buffer, line_length);
+    for (int i = 0; i < right_side_length; i++) {
+      char c = 8;
+      write(1, &c, 1);
+    }
+  }
+}
+
     else if (ch==27) {
       // Escape sequence. Read two chars more
       //
