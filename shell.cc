@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include "y.tab.hh"
+#include "lex.yy.cc"
 
 #ifndef YY_BUF_SIZE
 #ifdef __ia64__
