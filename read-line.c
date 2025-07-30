@@ -240,6 +240,8 @@ char * read_line() {
   for (int i = 0; i < right_side_length; i++) write(1, "\b", 1);
 
   // Reset state
+  memset(line_buffer, 0, sizeof(line_buffer));
+  memset(right_side_buffer, 0, sizeof(right_side_buffer));
   line_length = 0;
   right_side_length = 0;
 
