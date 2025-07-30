@@ -196,12 +196,20 @@ void Command::execute() {
 
     // Part 2.1: Built-in command: setenv (set environment variables)
     if (!strcmp(simpleCommand->_arguments[0]->c_str(), "setenv")) {
+      if (simpleCommand->_arguments.size() < 3) {
+        fprintf(stderr, "Usage: setenv VAR VALUE\n");
+        continue;
+      }
       setenv(simpleCommand->_arguments[1]->c_str(), simpleCommand->_arguments[2]->c_str(), 1);
       continue; // Built-ins don't need process creation
     }
     
     // Part 2.1: Built-in command: unsetenv (remove environment variables)
     if (!strcmp(simpleCommand->_arguments[0]->c_str(), "unsetenv")) {
+      if (simpleCommand->_arguments.size() < 2) {
+        fprintf(stderr, "Usage: unsetenv VAR\n");
+        continue;
+      }
       unsetenv(simpleCommand->_arguments[1]->c_str());
       continue; // Built-ins don't need process creation
     }
