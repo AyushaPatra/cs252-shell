@@ -36,6 +36,7 @@ int yyparse(void);
 // This function is called after each command execution to show the user prompt
 extern FILE *yyin;
 
+void tty_restore_mode(void);
 
 void Shell::prompt() {
   if (isatty(0) && !_srcCmd) {
