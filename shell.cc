@@ -50,6 +50,33 @@ extern FILE *yyin;
 
 extern "C" void tty_restore_mode(void);
 
+void sourceShellrc() {
+  FILE *fd = fopen(".shellrc", "r");
+  if (!fd) return;  // nothing to do
+
+  // Prevent prompt while sourcing
+  Shell::_srcCmd = true;
+
+  // Setup new input buffer for the parser
+  YY_BUFFER_STATE buf = yy_create_buffer(fd, YY_BUF_SIZE);
+  yypush_buffer_state(buf);
+
+  // Parse commands
+  yyparse();
+
+  // Cleanup
+  yypop_buffer_state();
+  fclose(fd);
+
+  // Restore prompt
+  Shell::_srcCmd = false;
+
+  // Ensure lexer reads from stdin again
+  yyin = stdin;
+  yyrestart(yyin);
+}
+
+
 void Shell::prompt() {
   if (isatty(0) && !_srcCmd) {
     // Only show prompt if input is from a terminal (interactive mode)
@@ -83,7 +110,7 @@ int main() {
   atexit(tty_restore_mode);  // Always restore terminal even on forced exit
 
   // Part 2.9: Set up signal handling for Ctrl-C (SIGINT)
-  // This allows the shell to handle Ctrl-C gracefully instead of terminating
+  // This allows the shell to handle Ctrl-C nicely instead of terminating
   struct sigaction sa;
   sa.sa_handler = disp;        // Set our custom signal handler function
   sigemptyset(&sa.sa_mask);    // Don't block other signals during handler execution!
@@ -96,23 +123,8 @@ int main() {
     perror("sigaction");
     exit(2);
   }
-  /* Run .shellrc if it exists
-  FILE *fd = fopen(".shellrc", "r");
-  if (fd) {
-    YY_BUFFER_STATE shellrc_buf = yy_create_buffer(fd, YY_BUF_SIZE);
-    yypush_buffer_state(shellrc_buf);
 
-    Shell::_srcCmd = true;
-    yyparse();
-    //yy_delete_buffer(shellrc_buf);
-
-    yypop_buffer_state();
-    fclose(fd);
-
-    Shell::_srcCmd = false;
-
-    yyin = stdin;
-  }*/
+  sourceShellrc();  // source the .shellrc file at startup
 
   if (isatty(0)) {
     Shell::prompt();
