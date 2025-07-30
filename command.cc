@@ -379,6 +379,14 @@ if (on_error) {
     // Foreground process - wait for completion and get exit status
     int temp;
     waitpid(ret, &temp, 0);
+
+    // Check if last simple command exited with non-zero
+if (WIFEXITED(status) && WEXITSTATUS(status) != 0) {
+  const char* err = getenv("ON_ERROR");
+  if (err) {
+    printf("%s\n", err);
+  }
+}
     _lastRT = WEXITSTATUS(temp); // Part 2.4: Store exit status for $? variable
   }
   else {

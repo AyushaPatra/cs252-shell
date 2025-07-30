@@ -81,10 +81,10 @@ void Shell::prompt() {
   if (isatty(0) && !_srcCmd) {
     // Only show prompt if input is from a terminal (interactive mode)
     //printf("myshell>");
-    const char* raw = getenv("PS1");
+    const char* raw = getenv("PROMPT");
     if (raw) {
       std::string promptStr = interpret_escape_sequences(raw);
-      printf("%s", promptStr.c_str());
+      printf("%s", p ? p : "myprompt> ");
     } else {
       printf("myshell> ");
     }
