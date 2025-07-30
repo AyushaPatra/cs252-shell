@@ -89,6 +89,8 @@ int main() {
     fclose(fd);
 
     Shell::_srcCmd = false;
+
+    yyin = stdin;
   }
 
   if (isatty(0)) {
