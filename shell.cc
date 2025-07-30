@@ -77,8 +77,12 @@ int main() {
   // Run .shellrc if it exists
   FILE *fd = fopen(".shellrc", "r");
   if (fd) {
-    yyin = fd;
+    YY_BUFFER_STATE shellrc_buf = yy_create_buffer(fd, YY_BUF_SIZE);
+    yypush_buffer_state(shellrc_buf);
+
     yyparse();
+
+    yypop_buffer_state();
     fclose(fd);
   }
   
