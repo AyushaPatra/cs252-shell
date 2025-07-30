@@ -61,6 +61,7 @@ extern "C" void disp( int sig )
 
 // Main function - entry point of the shell
 int main() {
+  atexit(tty_restore_mode);  // Always restore terminal even on forced exit
 
   // Part 2.9: Set up signal handling for Ctrl-C (SIGINT)
   // This allows the shell to handle Ctrl-C gracefully instead of terminating
