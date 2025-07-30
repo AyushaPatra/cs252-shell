@@ -75,7 +75,7 @@ int main() {
     perror("sigaction");
     exit(2);
   }
-  // Run .shellrc if it exists
+  /* Run .shellrc if it exists
   FILE *fd = fopen(".shellrc", "r");
   if (fd) {
     YY_BUFFER_STATE shellrc_buf = yy_create_buffer(fd, YY_BUF_SIZE);
@@ -91,7 +91,7 @@ int main() {
     Shell::_srcCmd = false;
 
     yyin = stdin;
-  }
+  }*/
 
   if (isatty(0)) {
     Shell::prompt();
