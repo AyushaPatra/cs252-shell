@@ -5,6 +5,18 @@
 #include <signal.h>
 #include "y.tab.hh"
 
+#include <string>
+#include <regex>
+
+// Helper to convert "\033" to real ESC
+std::string interpret_escape_sequences(const char* raw) {
+  std::string str(raw);
+  str = std::regex_replace(str, std::regex(R"(\\033)"), "\033");
+  str = std::regex_replace(str, std::regex(R"(\\e)"), "\033");    // Optional
+  str = std::regex_replace(str, std::regex(R"(\\n)"), "\n");
+  str = std::regex_replace(str, std::regex(R"(\\t)"), "\t");
+  return str;
+}
 
 #ifndef YY_BUF_SIZE
 #ifdef __ia64__
@@ -42,15 +54,17 @@ void Shell::prompt() {
   if (isatty(0) && !_srcCmd) {
     // Only show prompt if input is from a terminal (interactive mode)
     //printf("myshell>");
-    const char* p = getenv("PS1");
-if (p) {
-  printf("%s", p);
-} else {
-  printf("myshell> ");
-}
+    const char* raw = getenv("PS1");
+    if (raw) {
+      std::string promptStr = interpret_escape_sequences(raw);
+      printf("%s", promptStr.c_str());
+    } else {
+      printf("myshell> ");
+
 
   }
   fflush(stdout); // Ensure prompt is displayed immediately
+}
 }
 
 // Part 2.9: Signal handler for Ctrl-C (SIGINT)
