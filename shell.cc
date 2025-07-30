@@ -41,7 +41,14 @@ extern "C" void tty_restore_mode(void);
 void Shell::prompt() {
   if (isatty(0) && !_srcCmd) {
     // Only show prompt if input is from a terminal (interactive mode)
-    printf("myshell>");
+    //printf("myshell>");
+    const char* p = getenv("PS1");
+if (p) {
+  printf("%s", p);
+} else {
+  printf("myshell> ");
+}
+
   }
   fflush(stdout); // Ensure prompt is displayed immediately
 }
