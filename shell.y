@@ -434,7 +434,6 @@ void
 yyerror(const char * s)
 {
   fprintf(stderr,"%s", s);
-  delete yylval;  // <-- Fix memory leak
 }
 #if 0
 main()
