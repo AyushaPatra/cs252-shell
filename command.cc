@@ -299,7 +299,7 @@ void Command::execute() {
   }
 
   if (chdir(path) != 0) {
-    perror("cd: can't cd to notfound"");
+    perror("cd: can't cd to notfound");
   }
 
   if (freedPath) {
