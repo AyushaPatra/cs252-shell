@@ -220,39 +220,36 @@ char * read_line() {
       read(0, &ch1, 1);
       read(0, &ch2, 1);
       if (ch1==91 && (ch2==65 || ch2==66)) {
-	      // Up arrow. Print next line in history.
-       
-	      // Erase old line
-	      // Print backspaces
-	      int i = 0;
-	      for (i =0; i < line_length; i++) {
-	        ch = 8;
-	        write(1,&ch,1);
-	      }
-       
-	      // Print spaces on top
-	      for (i =0; i < line_length+right_side_length; i++) {
-	        ch = ' ';
-	        write(1,&ch,1);
-	      }
-       
-	      // Print backspaces
-	      for (i =0; i < line_length+right_side_length; i++) {
-	        ch = 8;
-	        write(1,&ch,1);
-	      }	
-        right_side_length = 0;
-	      // Copy line from history
-	      strcpy(line_buffer, history[history_index_rev]);
-	      line_length = strlen(line_buffer);
-        int tmp = history_full?history_length:history_index;
-        int up_down = ch2 == 65? -1 : 1;
-	      history_index_rev=(history_index_rev+up_down)%tmp;
-        if (history_index_rev == -1) history_index_rev = tmp-1;
-       
-	      // echo line
-	      write(1, line_buffer, line_length);
-      } 
+	      // Arrow Up = 65, Arrow Down = 66
+  int tmp = history_full ? history_length : history_index;
+
+  if (tmp == 0) continue;  // no history yet
+
+  // Move the index up/down
+  if (ch2 == 65) { // Up
+    history_index_rev = (history_index_rev - 1 + tmp) % tmp;
+  } else { // Down
+    history_index_rev = (history_index_rev + 1) % tmp;
+  }
+
+  if (history[history_index_rev] == NULL) continue;
+
+  // Clear current line from screen
+  for (int i = 0; i < line_length; i++) write(1, "\b \b", 3);
+  for (int i = 0; i < right_side_length; i++) write(1, " ", 1);
+  for (int i = 0; i < right_side_length; i++) write(1, "\b", 1);
+
+  // Reset state
+  line_length = 0;
+  right_side_length = 0;
+
+  // Load from history
+  strcpy(line_buffer, history[history_index_rev]);
+  line_length = strlen(line_buffer);
+
+  // Echo line
+  write(1, line_buffer, line_length);
+      }
       else if (ch1==91 && ch2==68) {
         // Left arrow. 
 
