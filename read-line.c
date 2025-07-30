@@ -211,7 +211,7 @@ char * read_line() {
     }
     else if (ch == 9) {
   // TAB key pressed for autocompletion
-
+  if (line_length == 0) continue; // nothing to complete
   int i = line_length - 1;
 
   // Find the start of the word
@@ -221,6 +221,10 @@ char * read_line() {
 
   int word_start = i + 1;
   int word_len = line_length - word_start;
+
+  // Prevent invalid values
+  if (word_len <= 0 || word_len >= 256 || word_start < 0) continue;
+
   char prefix[256] = {0};
   strncpy(prefix, &line_buffer[word_start], word_len);
   prefix[word_len] = '\0';
