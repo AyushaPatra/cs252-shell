@@ -87,6 +87,7 @@ io_modifier:
           //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
           if (Shell::_currentCommand._outFile != NULL) {
                 yyerror("Ambiguous output redirect.\n");
+                YYABORT;
           }
 	  Shell::_currentCommand._outFile = $2;
 	  Shell::_currentCommand._append = true;
@@ -95,6 +96,7 @@ io_modifier:
     	  //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
     	  if (Shell::_currentCommand._outFile != NULL) {
 		yyerror("Ambiguous output redirect.\n");
+    YYABORT;
 	  }
 	  Shell::_currentCommand._outFile = $2;
   	}
@@ -102,6 +104,7 @@ io_modifier:
           //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
 	  if (Shell::_currentCommand._outFile != NULL | Shell::_currentCommand._errFile != NULL) {
                 yyerror("Ambiguous output redirect.\n");
+                YYABORT;
           }
           Shell::_currentCommand._outFile = $2;
 	  Shell::_currentCommand._errFile = $2;
@@ -111,6 +114,7 @@ io_modifier:
           //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
           if (Shell::_currentCommand._outFile != NULL | Shell::_currentCommand._errFile != NULL) {
                 yyerror("Ambiguous output redirect.\n");
+                YYABORT;
           }
 	  Shell::_currentCommand._outFile = $2;
 	  Shell::_currentCommand._errFile = $2;
@@ -119,6 +123,7 @@ io_modifier:
           //printf("   Yacc: insert input \"%s\"\n", $2->c_str());
           if (Shell::_currentCommand._inFile != NULL) {
                 yyerror("Ambiguous output redirect.\n");
+                YYABORT;
           }
 	  Shell::_currentCommand._inFile = $2;
 	}
@@ -126,6 +131,7 @@ io_modifier:
 	  //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
           if (Shell::_currentCommand._errFile != NULL) {
                 yyerror("Ambiguous output redirect.\n");
+                YYABORT;
           }
 	  Shell::_currentCommand._errFile = $2;
 	}
