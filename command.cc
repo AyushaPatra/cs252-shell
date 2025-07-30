@@ -219,7 +219,7 @@ void Command::execute() {
     }
 
     // Part 2.2: Built-in command: cd (change directory)
-    if (!strcmp(simpleCommand->_arguments[0]->c_str(), "cd")) {
+    /*if (!strcmp(simpleCommand->_arguments[0]->c_str(), "cd")) {
       if (simpleCommand->_arguments[1] == NULL) {
         // cd with no arguments - go to home directory
         chdir("/homes/patra10");
@@ -240,7 +240,71 @@ void Command::execute() {
         perror(msg); // Print error if directory change fails
       }
       continue;
+    }*/
+    if (!strcmp(simpleCommand->_arguments[0]->c_str(), "cd")) {
+  const char* path = nullptr;
+
+  if (simpleCommand->_arguments.size() == 1) {
+    // Just 'cd' → go to $HOME
+    path = getenv("HOME");
+    if (!path) {
+      fprintf(stderr, "cd: HOME not set\n");
+      continue;
     }
+  } else {
+    const char* arg = simpleCommand->_arguments[1]->c_str();
+
+    if (arg[0] == '~') {
+      std::string expanded;
+
+      if (arg[1] == '\0' || arg[1] == '/') {
+        // ~ or ~/subdir
+        const char* home = getenv("HOME");
+        if (!home) {
+          fprintf(stderr, "cd: HOME not set\n");
+          continue;
+        }
+        expanded = std::string(home);
+        if (arg[1] == '/')
+          expanded += (arg + 1);
+      } else {
+        // ~username or ~username/...
+        std::string user;
+        int i = 1;
+        while (arg[i] && arg[i] != '/') {
+          user += arg[i];
+          i++;
+        }
+
+        struct passwd* pw = getpwnam(user.c_str());
+        if (!pw) {
+          fprintf(stderr, "cd: no such user %s\n", user.c_str());
+          continue;
+        }
+
+        expanded = pw->pw_dir;
+        if (arg[i] == '/')
+          expanded += (arg + i);
+      }
+
+      path = strdup(expanded.c_str());  // safe temporary c-string
+    } else {
+      // Regular path
+      path = arg;
+    }
+  }
+
+  if (chdir(path) != 0) {
+    perror("cd");
+  }
+
+  // Clean up if we strdup'ed
+  if (path != simpleCommand->_arguments[1]->c_str())
+    free((void*)path);
+
+  continue;
+}
+
 
     // Part 1B.3: Set up input for this command from previous command in pipeline
     dup2(fdin, 0); // Redirect stdin to input from previous command or file
