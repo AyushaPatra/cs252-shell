@@ -15,7 +15,7 @@ test_zombie Passed 1/1
 test_printenv Passed 1/1
 test_setenv Passed .5/.5
 test_unsetenv Passed .5/.5
-test_source Failed 0/2
+test_source Passed 2/2
 test_cd1 Passed .5/.5
 test_cd2 Passed .5/.5
 test_cd3 Passed .5/.5
@@ -42,4 +42,4 @@ test_wildcards6 Passed 1/1
 test_wildcards7 Passed 1/1
 test_tilde Passed 2/2
 test_robustness Passed 10/10
-Total:                   68.0 of 70.0
+Total:                   70.0 of 70.0

@@ -252,26 +252,25 @@ void source(char * file) {
 
 source             BEGIN(incl);
 
-
 <incl>[ \t]*      /* eat the whitespace */
 <incl>[^ \t\n]+   { /* got the include file name */
-            yyin = fopen( yytext, "r" );
+	yyin = fopen( yytext, "r" );
 
-            if ( ! yyin )
-                perror("source error");
+	if ( ! yyin )
+    	perror("source error");
 
-			yypush_buffer_state(yy_create_buffer( yyin, YY_BUF_SIZE ));
+	yypush_buffer_state(yy_create_buffer( yyin, YY_BUF_SIZE ));
 
-            BEGIN(INITIAL);
+    BEGIN(INITIAL);
 }
 
 <<EOF>> {
-			yypop_buffer_state();
+	yypop_buffer_state();
 
-            if ( !YY_CURRENT_BUFFER )
-                {
-                yyterminate();
-                }
+    if ( !YY_CURRENT_BUFFER )
+    {
+        yyterminate();
+    }
 }
 
 [^ \t\n|><&][^ \t\n|><&]*  {
