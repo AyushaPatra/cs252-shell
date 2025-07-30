@@ -83,7 +83,7 @@ int main() {
 
     Shell::_srcCmd = true;
     yyparse();
-    yy_delete_buffer(shellrc_buf);
+    //yy_delete_buffer(shellrc_buf);
 
     yypop_buffer_state();
     fclose(fd);
