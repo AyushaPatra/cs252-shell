@@ -243,6 +243,7 @@ void Command::execute() {
     }*/
     if (!strcmp(simpleCommand->_arguments[0]->c_str(), "cd")) {
   const char* path = nullptr;
+  char* freedPath = nullptr;
 
   if (simpleCommand->_arguments.size() == 1) {
     // Just 'cd' → go to $HOME
@@ -287,7 +288,10 @@ void Command::execute() {
           expanded += (arg + i);
       }
 
-      path = strdup(expanded.c_str());  // safe temporary c-string
+      freedPath = strdup(expanded.c_str());
+
+
+      path = freedPath;
     } else {
       // Regular path
       path = arg;
@@ -295,12 +299,12 @@ void Command::execute() {
   }
 
   if (chdir(path) != 0) {
-    perror("cd");
+    perror("cd: can't cd to notfound"");
   }
 
-  // Clean up if we strdup'ed
-  if (path != simpleCommand->_arguments[1]->c_str())
-    free((void*)path);
+  if (freedPath) {
+    free(freedPath);
+  }
 
   continue;
 }
