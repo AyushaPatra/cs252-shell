@@ -381,7 +381,7 @@ if (on_error) {
     waitpid(ret, &temp, 0);
 
     // Check if last simple command exited with non-zero
-if (WIFEXITED(status) && WEXITSTATUS(status) != 0) {
+if (WIFEXITED(temp) && WEXITSTATUS(temp) != 0) {
   const char* err = getenv("ON_ERROR");
   if (err) {
     printf("%s\n", err);
