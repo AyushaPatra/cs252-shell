@@ -1,0 +1,1 @@
+setenv PS1 "\\033[1;36m[shellrc]\\033[0m "

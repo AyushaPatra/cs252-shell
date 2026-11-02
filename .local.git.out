@@ -1,0 +1,4451 @@
+Your branch is up to date with 'origin/master'.
+[master a2c07a8] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 y.tab.hh
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master 471e13c] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master 1cd9455] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 3460 insertions(+)
+ create mode 100644 lex.yy.cc
+ create mode 100644 y.tab.cc
+ create mode 100644 y.tab.hh
+D	lex.yy.cc
+M	test-shell/testall.out
+D	y.tab.cc
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master a35d132] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 1 insertion(+), 3461 deletions(-)
+ delete mode 100644 lex.yy.cc
+ delete mode 100644 y.tab.cc
+ delete mode 100644 y.tab.hh
+M	shell.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master c8be3b6] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 18 insertions(+), 2 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 29bb554] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 19 insertions(+), 7 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 86205c1] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 5a09355] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 5 insertions(+)
+M	shell.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 378105a] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 493cade] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 67 insertions(+), 69 deletions(-)
+ rewrite shell.cc (73%)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 35ad2d7] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 3462 insertions(+), 1 deletion(-)
+ create mode 100644 lex.yy.cc
+ create mode 100644 y.tab.cc
+ create mode 100644 y.tab.hh
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 8a2a95f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 50 insertions(+), 6 deletions(-)
+M	shell.hh
+Your branch is up to date with 'origin/master'.
+[master f1fd029] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+D	lex.yy.cc
+D	y.tab.cc
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master caf1f56] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 3460 deletions(-)
+ delete mode 100644 lex.yy.cc
+ delete mode 100644 y.tab.cc
+ delete mode 100644 y.tab.hh
+M	command.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 9cca2b7] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 42 insertions(+), 1 deletion(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master d8e0788] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 18 insertions(+), 4 deletions(-)
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 5375863] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 7feb743] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 13 insertions(+), 9 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	dog
+	err
+	error.txt
+	errors.txt
+	input.txt
+	lab3-src-p1/
+	manual_test.sh
+	out
+	out.txt
+	out2
+	output.txt
+	results.txt
+	sortme.txt
+	test-shell/bgfile
+	test-shell/err2
+	test_append.txt
+	test_out.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	command.cc
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master b7cf840] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 19 insertions(+), 6 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master e80f15d] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master b5cc0f1] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	dog
+	err
+	error.txt
+	errors.txt
+	input.txt
+	lab3-src-p1/
+	manual_test.sh
+	out
+	out.txt
+	out2
+	output.txt
+	results.txt
+	sortme.txt
+	test-shell/bgfile
+	test-shell/err2
+	test_append.txt
+	test_out.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 6cafa4e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 36b9c4c] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 18 insertions(+), 2 deletions(-)
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master d1e9797] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 8da9829] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 3f56876] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master b4c6093] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+M	command.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master a3c7bb0] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 3161c92] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 3e1ab03] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.l
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master a207499] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 21 insertions(+), 2 deletions(-)
+M	shell.l
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master e2d0b06] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 21 insertions(+), 1 deletion(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 991c19c] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 7 insertions(+), 13 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 7f2acf9] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 5405d61] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+M	shell.l
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 772cc88] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 17 insertions(+), 2 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 46a5273] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 17 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master ab65d0f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master aaf6257] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 89ccc45] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 1554 insertions(+), 2 deletions(-)
+ create mode 100644 y.tab.cc
+ create mode 100644 y.tab.hh
+M	shell.l
+D	y.tab.cc
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master 94ae8d0] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 7 insertions(+), 1565 deletions(-)
+ delete mode 100644 y.tab.cc
+ delete mode 100644 y.tab.hh
+M	shell.l
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master d500300] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 3 insertions(+), 63 deletions(-)
+ rewrite test-shell/file-list-2 (100%)
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master c292e54] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 109 insertions(+), 1 deletion(-)
+ rewrite test-shell/testall.out (100%)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master c41af86] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 21 insertions(+), 1 deletion(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.shellrc
+	debug.txt
+	debug_cd4.txt
+	dog
+	err
+	err.txt
+	err1
+	error.txt
+	errors.txt
+	file1.cc>out1
+	input.txt
+	lab3-src-p1/
+	manual_test.sh
+	out
+	out.txt
+	out2
+	output.txt
+	results.txt
+	sortme.txt
+	test-shell/bgfile
+	test-shell/err2
+	test-shell/hello world
+	test-shell/out1
+	test_append.txt
+	test_out.txt
+	testall.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	command.cc
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 62e51fd] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 33 insertions(+), 47 deletions(-)
+ rewrite test-shell/testall.out (100%)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 552ec46] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 11 insertions(+)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.shellrc
+	debug.txt
+	debug_cd4.txt
+	dog
+	err
+	err.txt
+	err1
+	error.txt
+	errors.txt
+	file1.cc>out1
+	input.txt
+	lab3-src-p1/
+	manual_test.sh
+	out
+	out.txt
+	out2
+	output.txt
+	results.txt
+	sortme.txt
+	test-shell/bgfile
+	test-shell/err2
+	test-shell/hello world
+	test-shell/out1
+	test_append.txt
+	test_out.txt
+	testall.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 99cd5d0] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master e834637] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 3608 insertions(+), 1 deletion(-)
+ create mode 100644 lex.yy.cc
+ create mode 100644 y.tab.cc
+ create mode 100644 y.tab.hh
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master b48e11e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 0f0596e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 46 deletions(-)
+D	lex.yy.cc
+M	shell.cc
+M	shell.l
+D	y.tab.cc
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master 2bb72f7] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 5 files changed, 33 insertions(+), 3596 deletions(-)
+ delete mode 100644 lex.yy.cc
+ delete mode 100644 y.tab.cc
+ delete mode 100644 y.tab.hh
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 309f671] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master eb0d310] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 1553 insertions(+), 24 deletions(-)
+ create mode 100644 y.tab.cc
+ create mode 100644 y.tab.hh
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master fde6fd8] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 2085 insertions(+)
+ create mode 100644 lex.yy.cc
+D	lex.yy.cc
+D	y.tab.cc
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master 26f7bd4] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 3602 deletions(-)
+ delete mode 100644 lex.yy.cc
+ delete mode 100644 y.tab.cc
+ delete mode 100644 y.tab.hh
+M	command.cc
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master eeb2478] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 31 insertions(+), 37 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master ccf6510] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 3702 insertions(+), 4 deletions(-)
+ create mode 100644 lex.yy.cc
+ create mode 100644 y.tab.cc
+ create mode 100644 y.tab.hh
+D	lex.yy.cc
+D	y.tab.cc
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master 50773e8] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 3697 deletions(-)
+ delete mode 100644 lex.yy.cc
+ delete mode 100644 y.tab.cc
+ delete mode 100644 y.tab.hh
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 2cfdfe1] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 21 insertions(+), 1 deletion(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master fbae0b5] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 1554 insertions(+), 1 deletion(-)
+ create mode 100644 y.tab.cc
+ create mode 100644 y.tab.hh
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 9eebedc] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master d386a10] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 18 deletions(-)
+M	shell.l
+D	y.tab.cc
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master a7049d1] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 11 insertions(+), 1553 deletions(-)
+ delete mode 100644 y.tab.cc
+ delete mode 100644 y.tab.hh
+M	shell.l
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master a11d5cf] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 51 insertions(+), 2 deletions(-)
+ rewrite test-shell/testall.out (100%)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 11cd9c0] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master cb23791] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	shell.l
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 239761b] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 2 insertions(+), 49 deletions(-)
+ rewrite test-shell/testall.out (100%)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master cff82f9] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master af02783] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 79c5d36] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 77d5b62] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 41 deletions(-)
+M	command.cc
+M	shell.cc
+M	shell.l
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 22f2af5] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 6 files changed, 97 insertions(+), 22 deletions(-)
+ rewrite test-shell/testall.out (100%)
+M	shell.cc
+M	shell.hh
+Your branch is up to date with 'origin/master'.
+[master 8ef1722] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 29 insertions(+), 8 deletions(-)
+M	shell.hh
+Your branch is up to date with 'origin/master'.
+[master e596e10] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+M	shell.hh
+Your branch is up to date with 'origin/master'.
+[master eb4ed1b] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+M	shell.hh
+Your branch is up to date with 'origin/master'.
+[master 86e5304] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 24 insertions(+), 54 deletions(-)
+ rewrite shell.hh (74%)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 888f3e3] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 11 insertions(+), 8 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 34c05d4] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 11 insertions(+)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 16faa70] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 22 deletions(-)
+M	shell.hh
+Your branch is up to date with 'origin/master'.
+[master 3d74c37] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 21 insertions(+)
+M	command.cc
+M	shell.hh
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master dd0099e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 325 insertions(+), 78 deletions(-)
+ rewrite shell.hh (70%)
+ create mode 100644 shell_lex.l
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 7751e70] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 390 insertions(+), 49 deletions(-)
+ create mode 100644 shell_yacc.y
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master c99ec68] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 460 insertions(+), 139 deletions(-)
+ create mode 100644 command_bckup.cc
+M	command.hh
+Your branch is up to date with 'origin/master'.
+[master 6ada3de] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	Makefile
+Your branch is up to date with 'origin/master'.
+[master f3ba6b9] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+M	shell.cc
+M	shell.l
+M	shell.y
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 476cdeb] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 5 files changed, 360 insertions(+), 170 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master ece1518] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 1823 insertions(+), 16 deletions(-)
+ create mode 100644 y.tab.cc
+ create mode 100644 y.tab.hh
+D	y.tab.cc
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master e9ffe84] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 1791 deletions(-)
+ delete mode 100644 y.tab.cc
+ delete mode 100644 y.tab.hh
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master f51fb99] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master cf04313] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master dd3dbeb] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 51c0bd5] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 insertions(+)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 2c56613] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.shellrc
+	debug.txt
+	debug_cd4.txt
+	dog
+	err
+	err.txt
+	err1
+	error.txt
+	errors.txt
+	file1.cc>out1
+	input.txt
+	lab3-src-p1/
+	manual_test.sh
+	out
+	out.txt
+	out2
+	output.txt
+	results.txt
+	sortme.txt
+	test-shell/bgfile
+	test-shell/err2
+	test-shell/hello world
+	test-shell/out1
+	test_append.txt
+	test_out.txt
+	testall.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 9f4f2d9] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master f91f7ac] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 95a7164] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master ed428ad] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master d28a110] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 11 insertions(+), 6 deletions(-)
+M	command.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 9836750] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master a5b5e28] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 8 insertions(+), 13 deletions(-)
+M	shell.l
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master ac878cc] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 38 insertions(+), 93 deletions(-)
+M	shell.l
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+Your branch is up to date with 'origin/master'.
+[master f523c60] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 2 insertions(+), 16 deletions(-)
+M	command.cc
+M	shell.cc
+M	shell.hh
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 9c12110] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 8 insertions(+), 7 deletions(-)
+M	command.cc
+M	shell.l
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+Your branch is up to date with 'origin/master'.
+[master b35d64a] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 17 insertions(+), 2 deletions(-)
+M	command.cc
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master b31a5f0] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 9 insertions(+), 7 deletions(-)
+M	shell.y
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master e7eccdc] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 14 insertions(+), 4 deletions(-)
+M	shell.y
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 01c1d51] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 110 insertions(+), 59 deletions(-)
+ rewrite test-shell/testall.out (63%)
+M	shell.y
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 20d26b8] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 49 insertions(+), 109 deletions(-)
+ rewrite test-shell/testall.out (63%)
+M	shell.y
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 3e4b685] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 108 insertions(+), 48 deletions(-)
+ rewrite test-shell/testall.out (63%)
+M	shell.y
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 622ab19] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 50 insertions(+), 107 deletions(-)
+ rewrite test-shell/testall.out (63%)
+M	shell.y
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master d91ee2a] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+M	shell.y
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 9826935] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 7 insertions(+), 10 deletions(-)
+M	shell.y
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master aa67841] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 17 insertions(+), 9 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 4baf02d] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	shell.y
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 8b7c47f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+M	shell.y
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master e12d94d] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 18 insertions(+), 4 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 7ee0d11] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 14 insertions(+), 10 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 0c527be] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master e9bb895] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 7 insertions(+), 10 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master cc9c9d3] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 12 insertions(+), 10 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 8d49a6e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 5 insertions(+), 7 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.shellrc
+	debug.txt
+	debug_cd4.txt
+	dog
+	err
+	err.txt
+	err1
+	error.txt
+	errors.txt
+	file1.cc>out1
+	input.txt
+	lab3-src-p1/
+	manual_test.sh
+	out
+	out.txt
+	out2
+	output.txt
+	results.txt
+	sortme.txt
+	test-shell/bgfile
+	test-shell/err2
+	test-shell/hello world
+	test-shell/out1
+	test_append.txt
+	test_out.txt
+	testall.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 08d8f57] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 4cdcd89] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master b0cc1c4] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master cd275f6] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master f05ed28] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 9af4c32] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 06f36ed] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master a436960] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 7547296] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master e7d3e67] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master f4dda4c] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 12 insertions(+), 7 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 0f785ca] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master ccaac6f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master f2cdeca] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 10 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 609ae65] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 3f687c7] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master e5cd810] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 9d176a5] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 29 insertions(+), 1 deletion(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 1d0dc39] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 28 deletions(-)
+M	shell.l
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master d3bd6f5] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 9beeb53] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master 07e3337] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 25 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 6a7468a] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 25 insertions(+)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 643293e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 26 insertions(+), 17 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master ff4425d] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 35 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master e3b8e6b] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 23 insertions(+)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 94a1a3e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 162 insertions(+), 40 deletions(-)
+M	tty-raw-mode.c
+Your branch is up to date with 'origin/master'.
+[master b85e0cc] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 10 insertions(+), 11 deletions(-)
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	tty-raw-mode.c
+Your branch is up to date with 'origin/master'.
+[master 9827444] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 5 insertions(+), 2 deletions(-)
+M	tty-raw-mode.c
+Your branch is up to date with 'origin/master'.
+[master b7aa950] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 17 insertions(+), 3 deletions(-)
+M	shell.cc
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+Your branch is up to date with 'origin/master'.
+[master 0df6557] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 9a30041] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 32e6da4] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.shellrc
+	debug.txt
+	debug_cd4.txt
+	dog
+	err
+	err.txt
+	err1
+	error.txt
+	errors.txt
+	file1.cc>out1
+	input.txt
+	lab3-src-p1/
+	manual_test.sh
+	out
+	out.txt
+	out2
+	output.txt
+	results.txt
+	sortme.txt
+	test-shell/bgfile
+	test-shell/err2
+	test-shell/hello world
+	test-shell/out1
+	test_append.txt
+	test_out.txt
+	testall.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+D	command_bckup.cc
+D	shell_lex.l
+D	shell_yacc.y
+Your branch is up to date with 'origin/master'.
+[master 6962958] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 2616 insertions(+), 708 deletions(-)
+ delete mode 100644 command_bckup.cc
+ create mode 100644 lex.yy_bckup.cc
+ delete mode 100644 shell_lex.l
+ delete mode 100644 shell_yacc.y
+M	command.cc
+M	command.hh
+D	lex.yy_bckup.cc
+M	shell.cc
+M	shell.hh
+M	shell.l
+M	shell.y
+M	simpleCommand.cc
+Your branch is up to date with 'origin/master'.
+[master 9dc7382] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 15 files changed, 1328 insertions(+), 3848 deletions(-)
+ rewrite command.cc (78%)
+ copy command.cc => command_bckup.cc (100%)
+ create mode 100644 command_bckup.hh
+ delete mode 100644 lex.yy_bckup.cc
+ rewrite shell.cc (96%)
+ rewrite shell.l (77%)
+ rewrite shell.y (94%)
+ copy shell.cc => shell_bckup.cc (100%)
+ copy shell.l => shell_bckup.l (100%)
+ copy shell.y => shell_bckup.y (100%)
+ create mode 100644 simpleCommand_bckup.cc
+ create mode 100644 simpleCommand_bckup.hh
+M	command.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 4aea123] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 14 insertions(+), 4 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master a6e2b2f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master f955955] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 4 insertions(+), 9 deletions(-)
+M	command.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master eab2578] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 436 insertions(+), 415 deletions(-)
+ rewrite command.cc (68%)
+M	shell.cc
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master a77487f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 75 insertions(+), 45 deletions(-)
+ rewrite shell.cc (63%)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 9b05b39] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 4103 insertions(+)
+ create mode 100644 lex.yy.cc
+ create mode 100644 y.tab.cc
+ create mode 100644 y.tab.hh
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 46988fd] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 23 insertions(+), 1 deletion(-)
+D	lex.yy.cc
+M	shell.cc
+M	tty-raw-mode.c
+D	y.tab.cc
+D	y.tab.hh
+Your branch is up to date with 'origin/master'.
+[master b13bf34] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 5 files changed, 44 insertions(+), 4162 deletions(-)
+ delete mode 100644 lex.yy.cc
+ rewrite tty-raw-mode.c (67%)
+ delete mode 100644 y.tab.cc
+ delete mode 100644 y.tab.hh
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master a4c40e3] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	shell.hh
+Your branch is up to date with 'origin/master'.
+[master 166eff8] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 545ff3f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 0f11de6] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	shell.hh
+M	tty-raw-mode.c
+Your branch is up to date with 'origin/master'.
+[master 000230f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 28 insertions(+), 26 deletions(-)
+ rewrite tty-raw-mode.c (94%)
+M	tty-raw-mode.c
+Your branch is up to date with 'origin/master'.
+[master 9a861f7] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 26 insertions(+), 26 deletions(-)
+ rewrite tty-raw-mode.c (95%)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 5de22ba] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 86762e4] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master bdef99f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 76b46d4] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 318a8b0] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 97d761c] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master a13919f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 253c9aa] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master f2229e9] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+M	tty-raw-mode.c
+Your branch is up to date with 'origin/master'.
+[master a92047f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 7 insertions(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 0eeae40] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	tty-raw-mode.c
+Your branch is up to date with 'origin/master'.
+[master f7b48c7] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+M	tty-raw-mode.c
+Your branch is up to date with 'origin/master'.
+[master d35dca4] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master aee1faa] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 00de6cd] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 16 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 021a5c1] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.shellrc
+	debug.txt
+	debug_cd4.txt
+	dog
+	err
+	err.txt
+	err1
+	error.txt
+	errors.txt
+	file1.cc>out1
+	input.txt
+	lab3-src-p1/
+	manual_test.sh
+	out
+	out.txt
+	out2
+	output.txt
+	results.txt
+	sortme.txt
+	test-shell/bgfile
+	test-shell/err2
+	test-shell/hello world
+	test-shell/out1
+	test_append.txt
+	test_out.txt
+	testall.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 4e3ddb8] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 45 deletions(-)
+ rewrite test-shell/testall.out (97%)
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 2d9a66e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 44 insertions(+)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 1c5cbfa] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 788f262] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master b4f3269] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 insertions(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master d467e57] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master bda0124] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 1af67e0] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+M	command.cc
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master a797ba1] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 28 insertions(+), 2 deletions(-)
+M	shell.l
+Your branch is up to date with 'origin/master'.
+[master f52f562] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 0accce9] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 9ada8fd] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master a486ca4] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 136fe2c] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 4f74df2] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 922f70f] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 9c826c8] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master ebf0e30] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master ef880c3] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master c473fa7] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 56dba61] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+Your branch is up to date with 'origin/master'.
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.local.git.out
+	.shellrc
+	debug.txt
+	debug_cd4.txt
+	dog
+	err
+	err.txt
+	err1
+	error.txt
+	errors.txt
+	file1.cc>out1
+	input.txt
+	lab3-src-p1/
+	manual_test.sh
+	out
+	out.txt
+	out2
+	output.txt
+	results.txt
+	sortme.txt
+	test-shell/bgfile
+	test-shell/err2
+	test-shell/hello world
+	test-shell/out1
+	test_append.txt
+	test_out.txt
+	testall.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+M	shell.l
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master c8644c8] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 12 insertions(+), 13 deletions(-)
+M	command.cc
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master cafc505] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 16 insertions(+), 106 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master 797ff8d] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 8 insertions(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master cf2c52d] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 0f26d46] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 0c57dff] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 740ac13] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 902ee5b] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 1e9f62e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+M	tty-raw-mode.c
+Your branch is up to date with 'origin/master'.
+[master 04e53c9] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 28 insertions(+), 11 deletions(-)
+M	read-line.c
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master c623c3a] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 3 insertions(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 3c67803] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master ee20bff] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 11eb5c1] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 4306e2a] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 70 insertions(+)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master f249584] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 256ed3a] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 71 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master d43f6f1] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 38d1677] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 deletion(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master b54c47d] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master e0f2bf0] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 66 insertions(+), 2 deletions(-)
+M	command.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master cf551f0] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 5 insertions(+), 65 deletions(-)
+M	shell.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 7a7e074] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 11 insertions(+), 4 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master b891131] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 20 insertions(+), 6 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master df373e8] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master 64e96c5] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 30 insertions(+), 33 deletions(-)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master fd3b9e5] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+)
+M	read-line.c
+Your branch is up to date with 'origin/master'.
+[master a4f4e4a] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 336 insertions(+), 290 deletions(-)
+ rewrite read-line.c (68%)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master db3316d] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 29 insertions(+), 17 deletions(-)
+M	shell.y
+Your branch is up to date with 'origin/master'.
+[master 12b2b6e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 6 insertions(+)
+M	command.cc
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 393f013] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 67 insertions(+), 3 deletions(-)
+M	command.cc
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 8224309] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 15 insertions(+), 9 deletions(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master c421b37] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+M	test-shell/file-list-1
+M	test-shell/file-list-2
+M	test-shell/testall.out
+Your branch is up to date with 'origin/master'.
+[master 3fb15a7] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 6 insertions(+), 28 deletions(-)
+M	command.cc
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 0734400] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 10 insertions(+), 2 deletions(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master ab26f0e] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master 7e5ae9d] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	shell.cc
+Your branch is up to date with 'origin/master'.
+[master cdee761] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+M	command.cc
+Your branch is up to date with 'origin/master'.
+[master e7d8afc] Commit
+ Committer: Ayusha Patra <patra10@data.cs.purdue.edu>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)

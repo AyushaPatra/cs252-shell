@@ -1,0 +1,2 @@
+-rw------- 1 patra10 patra10 1080 Jul 15 11:12 output.txt
+-rw------- 1 patra10 patra10    0 Jul 15 11:12 results.txt

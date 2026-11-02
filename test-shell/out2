@@ -1,0 +1,2 @@
+	_arguments = (char **) malloc( _numberOfAvailableArguments * sizeof( char * ) );
+		malloc( _numberOfSimpleCommands * sizeof( SimpleCommand * ) );
